@@ -77,7 +77,15 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kubectl poetry poetry-env z zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(
+  git
+  kubectl
+  poetry
+  poetry-env
+  z
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -106,8 +114,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="/usr/local/bin/nvim"
-alias v="/usr/local/bin/nvim"
+# alias vim="/usr/local/bin/nvim"
+# alias v="/usr/local/bin/nvim"
+alias vim="/opt/homebrew/bin/nvim"
+alias v="/opt/homebrew/bin/nvim"
 alias dj="python manage.py"
 alias djs="python manage.py shell"
 alias djss="python manage.py shell_plus --print-sql"
@@ -120,9 +130,16 @@ alias djr="python manage.py runserver"
 
 bindkey '#' pound-insert
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+eval "$(pyenv virtualenv-init -)"
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
 # [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
-export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
 
 # eval "$(gh copilot alias -- zsh)"
+# source /Users/tranducanh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
