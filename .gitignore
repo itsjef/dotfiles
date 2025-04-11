@@ -1,0 +1,4 @@
+.DS_Store
+nvim/doc/tags
+nvim/temp_dir/*
+nvim/lazy-lock.json
