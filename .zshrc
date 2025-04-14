@@ -7,6 +7,7 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$PATH:$HOME/.local/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -79,6 +80,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  aws
   kubectl
   poetry
   poetry-env
@@ -114,10 +116,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# alias vim="/usr/local/bin/nvim"
-# alias v="/usr/local/bin/nvim"
-alias vim="/opt/homebrew/bin/nvim"
-alias v="/opt/homebrew/bin/nvim"
+alias vim="$HOMEBREW_PREFIX/bin/nvim"
+alias v="$HOMEBREW_PREFIX/bin/nvim"
 alias dj="python manage.py"
 alias djs="python manage.py shell"
 alias djss="python manage.py shell_plus --print-sql"
@@ -140,6 +140,7 @@ eval "$(pyenv virtualenv-init -)"
 # [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 
 # eval "$(gh copilot alias -- zsh)"
-# source /Users/tranducanh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#
+export PATH="$HOMEBREW_CELLAR/postgresql@15/15.12_1/bin:$PATH"
 
-# export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
+[[ -f "$HOME/dotfiles/.zsh_env_vars" ]] && source "$HOME/dotfiles/.zsh_env_vars"

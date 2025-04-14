@@ -1,4 +1,5 @@
 .DS_Store
+.zsh_env_vars
 nvim/doc/tags
 nvim/temp_dir/*
 nvim/lazy-lock.json
