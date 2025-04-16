@@ -1,12 +1,5 @@
 return {
-  'nvim-treesitter/nvim-treesitter',
-  build = ':TSUpdate',
-  dependencies = {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-treesitter/nvim-treesitter-context',
-    'HiPhish/rainbow-delimiters.nvim',
-  },
-  config = function()
+  setup = function()
     require('nvim-treesitter.configs').setup {
       ensure_installed = {
         "bash",

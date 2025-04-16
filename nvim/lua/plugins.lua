@@ -1,4 +1,36 @@
 return {
+  -- common dependencies
+  {
+    'nvim-tree/nvim-web-devicons',
+    lazy = true,
+  },
+  {
+    'nvim-lua/plenary.nvim',
+    lazy = true,
+  },
+
+  -- greeter
+  {
+    'goolord/alpha-nvim',
+    config = function()
+      require('alpha').setup(
+        require 'alpha.themes.startify'.config
+      )
+    end
+  },
+
+  -- Treesitter
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'nvim-treesitter/nvim-treesitter-context',
+      'HiPhish/rainbow-delimiters.nvim',
+    },
+    config = require('conf.treesitter').setup
+  },
+
   -- LSPs: diagnostic, auto-formatting, code actions, and more.
   {
     'williamboman/mason-lspconfig.nvim',
@@ -25,9 +57,6 @@ return {
     keys = {
       { '<leader>nn', '<cmd>NvimTreeToggle<CR>', desc = 'NvimTree' },
     },
-    dependencies = {
-      'nvim-tree/nvim-web-devicons'
-    },
     config = function()
       require('nvim-tree').setup {
         view = {
@@ -42,16 +71,13 @@ return {
   {
     'akinsho/bufferline.nvim',
     version = 'v4.*',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons'
-    },
     config = function()
       require('bufferline').setup()
     end
   },
   {
-    'nvim-tree/nvim-web-devicons',
-    lazy = true
+    'nvim-lualine/lualine.nvim',
+    config = require('conf.lualine').setup,
   },
 
   -- Git
@@ -109,7 +135,6 @@ return {
   },
   {
     'lewis6991/gitsigns.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('gitsigns').setup()
     end
@@ -135,13 +160,16 @@ return {
     'nvim-telescope/telescope.nvim',
     version = '0.1.*',
     dependencies = {
-      'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-live-grep-args.nvim'
     },
   },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
   -- Utils & Helpers
+  {
+    'echasnovski/mini.nvim',
+    config = require('conf.mini').setup,
+  },
   {
     'windwp/nvim-autopairs',
     config = function()
@@ -187,32 +215,30 @@ return {
     },
     build = 'make',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',
       'stevearc/dressing.nvim',
-      'nvim-lua/plenary.nvim',
       'MunifTanjim/nui.nvim',
       --- The below dependencies are optional,
-      {
-        -- support for image pasting
-        'HakonHarnes/img-clip.nvim',
-        event = 'VeryLazy',
-        opts = {
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-          },
-        },
-      },
-      {
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { 'markdown', 'Avante' },
-        },
-        ft = { 'markdown', 'Avante' },
-      },
+      -- {
+      --   -- support for image pasting
+      --   'HakonHarnes/img-clip.nvim',
+      --   event = 'VeryLazy',
+      --   opts = {
+      --     default = {
+      --       embed_image_as_base64 = false,
+      --       prompt_for_file_name = false,
+      --       drag_and_drop = {
+      --         insert_mode = true,
+      --       },
+      --     },
+      --   },
+      -- },
+      -- {
+      --   'MeanderingProgrammer/render-markdown.nvim',
+      --   opts = {
+      --     file_types = { 'markdown', 'Avante' },
+      --   },
+      --   ft = { 'markdown', 'Avante' },
+      -- },
     },
   }
 }

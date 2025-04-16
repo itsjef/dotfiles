@@ -1,6 +1,5 @@
 return {
-  'echasnovski/mini.nvim',
-  config = function()
+  setup = function ()
     local api = vim.api
 
     require('mini.ai').setup()
@@ -32,5 +31,5 @@ return {
         MiniTrailspace.trim_last_lines()
       end,
     })
-  end,
+  end
 }
