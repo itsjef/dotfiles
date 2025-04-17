@@ -186,6 +186,12 @@ return {
 
   -- AI assistants
   {
+    'Exafunction/windsurf.nvim',
+    config = function()
+      require('codeium').setup()
+    end
+  },
+  {
     'yetone/avante.nvim',
     event = 'VeryLazy',
     version = false,
