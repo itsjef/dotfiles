@@ -104,17 +104,17 @@ return {
       require('luasnip.loaders.from_vscode').load()
     end
   },
-  {
-    'zbirenbaum/copilot-cmp',
-    dependencies = { 'zbirenbaum/copilot.lua' },
-    config = function ()
-      require('copilot').setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-      require('copilot_cmp').setup()
-    end
-  },
+  -- {
+  --   'zbirenbaum/copilot-cmp',
+  --   dependencies = { 'zbirenbaum/copilot.lua' },
+  --   config = function ()
+  --     require('copilot').setup({
+  --       suggestion = { enabled = false },
+  --       panel = { enabled = false },
+  --     })
+  --     require('copilot_cmp').setup()
+  --   end
+  -- },
 
   -- Colorscheme & Syntax Highlighting
   {
@@ -176,13 +176,13 @@ return {
       require('nvim-autopairs').setup()
     end
   },
-  {
-    'mistweaverco/kulala.nvim',
-    version = 'v3.*',
-    config = function()
-      require('kulala').setup({})
-    end
-  },
+  -- {
+  --   'mistweaverco/kulala.nvim',
+  --   version = 'v3.*',
+  --   config = function()
+  --     require('kulala').setup({})
+  --   end
+  -- },
 
   -- AI assistants
   {
