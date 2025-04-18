@@ -150,6 +150,22 @@ return {
       })
     end
   },
+  {
+    'nvim-zh/colorful-winsep.nvim',
+    event = { 'WinLeave' },
+    config = function()
+      require('colorful-winsep').setup({
+        no_exec_files = {
+          -- 'NvimTree',
+          'TelescopePrompt',
+          'alpha',
+          'lazy',
+          'mason',
+        },
+        only_line_seq = false,
+      })
+    end,
+  },
 
   -- Navigation
   {
