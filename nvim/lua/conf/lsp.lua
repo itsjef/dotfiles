@@ -56,19 +56,32 @@ end
 local handlers = {
   default_handler,
 
-  ['basedpyright'] = function()
-    lspconfig['basedpyright'].setup {
+  -- ['basedpyright'] = function()
+  --   lspconfig['basedpyright'].setup {
+  --     on_attach = on_attach,
+  --     capabilities = capabilities,
+  --     handlers = handle_lsp_border,
+  --     settings = {
+  --       basedpyright = {
+  --         disableOrganizeImports = true,
+  --         -- typeCheckingMode = 'strict',
+  --         typeCheckingMode = 'standard',
+  --         -- analysis = {
+  --         --   ignore = { '*' }, -- Ignore all files for analysis to exclusively use Ruff for linting
+  --         -- },
+  --       },
+  --     },
+  --   }
+  -- end,
+
+  ['pyright'] = function()
+    lspconfig['pyright'].setup {
       on_attach = on_attach,
       capabilities = capabilities,
       handlers = handle_lsp_border,
       settings = {
-        basedpyright = {
-          disableOrganizeImports = true,
-          -- typeCheckingMode = 'strict',
-          typeCheckingMode = 'standard',
-          -- analysis = {
-          --   ignore = { '*' }, -- Ignore all files for analysis to exclusively use Ruff for linting
-          -- },
+        analysis = {
+          ignore = { '*' },
         },
       },
     }
