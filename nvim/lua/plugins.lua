@@ -71,9 +71,6 @@ return {
   {
     'akinsho/bufferline.nvim',
     version = 'v4.*',
-    config = function()
-      require('bufferline').setup()
-    end
   },
   {
     'nvim-lualine/lualine.nvim',
