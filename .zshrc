@@ -139,8 +139,9 @@ eval "$(pyenv virtualenv-init -)"
 # [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
 # [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 
-# eval "$(gh copilot alias -- zsh)"
-#
+[[ -x gh ]] && eval "$(gh copilot alias -- zsh)"
+[[ -x glab ]] && eval "$(glab completion -s zsh)"
+
 export PATH="$HOMEBREW_CELLAR/postgresql@15/15.12_1/bin:$PATH"
 
 [[ -f "$HOME/dotfiles/.zsh_env_vars" ]] && source "$HOME/dotfiles/.zsh_env_vars"
