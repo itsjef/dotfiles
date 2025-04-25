@@ -34,7 +34,7 @@ end
 local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
 local lspconfig = require('lspconfig')
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 local handle_lsp_border = {
   ["textDocument/hover"] = vim.lsp.with(
@@ -77,7 +77,7 @@ local handlers = {
   ['pyright'] = function()
     lspconfig['pyright'].setup {
       on_attach = on_attach,
-      capabilities = capabilities,
+      -- capabilities = capabilities,
       handlers = handle_lsp_border,
       settings = {
         analysis = {
@@ -93,7 +93,7 @@ local handlers = {
         client.server_capabilities.hoverProvider = false
         on_attach(client, bufnr)
       end,
-      capabilities = capabilities,
+      -- capabilities = capabilities,
       handlers = handle_lsp_border,
     }
   end,

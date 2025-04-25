@@ -82,36 +82,19 @@ return {
 
   -- Autocompletion & snippets
   {
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
+    'saghen/blink.cmp',
     dependencies = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-      'saadparwaiz1/cmp_luasnip',
+      'saghen/blink.compat',
       'onsails/lspkind.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'rafamadriz/friendly-snippets',
+      'folke/noice.nvim',
+      'MunifTanjim/nui.nvim',
     },
+    version = '1.*',
+    opts = require('conf.blink').setup(),
+    opts_extend = { 'sources.default' }
   },
-  {
-    'L3MON4D3/LuaSnip',
-    version = 'v2.*',
-    build = 'make install_jsregexp',
-    dependencies = { 'rafamadriz/friendly-snippets' },
-    config = function()
-      require('luasnip.loaders.from_vscode').load()
-    end
-  },
-  -- {
-  --   'zbirenbaum/copilot-cmp',
-  --   dependencies = { 'zbirenbaum/copilot.lua' },
-  --   config = function ()
-  --     require('copilot').setup({
-  --       suggestion = { enabled = false },
-  --       panel = { enabled = false },
-  --     })
-  --     require('copilot_cmp').setup()
-  --   end
-  -- },
 
   -- Colorscheme & Syntax Highlighting
   {

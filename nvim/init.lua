@@ -38,7 +38,6 @@ require('conf.lsp')
 -- require('conf.dap')
 
 -- Other conf
-require('conf.autocomplete')
 require('conf.hop')
 require('conf.telescope')
 require('conf.themes')
