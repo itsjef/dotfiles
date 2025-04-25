@@ -7,25 +7,12 @@ function M.setup()
       return not vim.tbl_contains(disabled_fts, vim.bo.filetype)
     end,
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'codeium', 'avante' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'avante' },
       providers = {
         avante = {
           module = 'blink-cmp-avante',
           name = 'Avante',
           opts = {},
-        },
-        codeium = {
-          name = 'Codeium',
-          module = 'codeium.blink',
-          async = true,
-          -- not working, debug later
-          -- transform_items = function(_, items)
-          --   for _, item in ipairs(items) do
-          --     item.kind_icon = ''
-          --     item.kind_name = 'Codeium'
-          --   end
-          --   return items
-          -- end
         },
       },
     },
