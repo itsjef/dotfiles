@@ -93,6 +93,9 @@ return {
     },
     version = '1.*',
     opts = {
+      enabled = function()
+        return not vim.tbl_contains({ "AvanteInput" }, vim.bo.filetype)
+      end,
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer', 'codeium' },
         providers = {
