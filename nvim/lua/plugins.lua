@@ -102,8 +102,6 @@ return {
     'catppuccin/nvim',
     name = 'catppuccin'
   },
-  'ful1e5/onedark.nvim',
-  'marko-cerovac/material.nvim',
   {
     'projekt0n/github-nvim-theme',
     version = '*',
@@ -173,13 +171,6 @@ return {
       require('nvim-autopairs').setup()
     end
   },
-  -- {
-  --   'mistweaverco/kulala.nvim',
-  --   version = 'v3.*',
-  --   config = function()
-  --     require('kulala').setup({})
-  --   end
-  -- },
 
   -- AI assistants
   {
