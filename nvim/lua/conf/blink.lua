@@ -3,12 +3,17 @@ local M = {}
 function M.setup()
   return {
     enabled = function()
-      local disabled_fts = { "AvanteInput", "AvantePromptInput" }
+      local disabled_fts = { 'lua', 'markdown' }
       return not vim.tbl_contains(disabled_fts, vim.bo.filetype)
     end,
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'codeium' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'codeium', 'avante' },
       providers = {
+        avante = {
+          module = 'blink-cmp-avante',
+          name = 'Avante',
+          opts = {},
+        },
         codeium = {
           name = 'Codeium',
           module = 'codeium.blink',

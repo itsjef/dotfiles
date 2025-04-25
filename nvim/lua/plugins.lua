@@ -90,6 +90,7 @@ return {
       'rafamadriz/friendly-snippets',
       'folke/noice.nvim',
       'MunifTanjim/nui.nvim',
+      'Kaiser-Yang/blink-cmp-avante',
     },
     version = '1.*',
     opts = require('conf.blink').setup(),
