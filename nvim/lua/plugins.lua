@@ -119,17 +119,6 @@ return {
     end
   },
   {
-    'lukas-reineke/indent-blankline.nvim',
-    version = 'v3.*',
-    main = 'ibl',
-    opts = {},
-    config = function()
-      require('ibl').setup({
-        scope = { enabled = false },
-      })
-    end
-  },
-  {
     'nvim-zh/colorful-winsep.nvim',
     event = { 'WinLeave' },
     config = function()
@@ -170,6 +159,15 @@ return {
     config = function()
       require('nvim-autopairs').setup()
     end
+  },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      indent = { enabled = true }
+    },
   },
 
   -- AI assistants
