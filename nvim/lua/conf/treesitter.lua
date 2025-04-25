@@ -18,7 +18,7 @@ return {
         enable = true,
       },
       indent = {
-        enable = true,
+        enable = false,
       },
       incremental_selection = {
         enable = false,
@@ -70,6 +70,10 @@ return {
           },
         },
       },
+    }
+    require('treesitter-context').setup {
+      max_lines = 7,
+      trim_scope = 'inner'
     }
   end
 }
