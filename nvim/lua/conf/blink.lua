@@ -3,7 +3,8 @@ local M = {}
 function M.setup()
   return {
     enabled = function()
-      return not vim.tbl_contains({ "AvanteInput" }, vim.bo.filetype)
+      local disabled_fts = { "AvanteInput", "AvantePromptInput" }
+      return not vim.tbl_contains(disabled_fts, vim.bo.filetype)
     end,
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer', 'codeium' },
