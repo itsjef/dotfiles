@@ -168,6 +168,9 @@ return {
     opts = {
       indent = { enabled = true }
     },
+    keys = {
+      { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
+    }
   },
 
   -- AI assistants
