@@ -1,6 +1,7 @@
 {
     "diagnostics.globals": [
         "vim",
-        "MiniTrailspace"
+        "MiniTrailspace",
+        "Snacks",
     ]
 }
