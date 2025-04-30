@@ -7,13 +7,9 @@ function M.setup()
       return not vim.tbl_contains(disabled_fts, vim.bo.filetype)
     end,
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'avante' },
-      providers = {
-        avante = {
-          module = 'blink-cmp-avante',
-          name = 'Avante',
-          opts = {},
-        },
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      per_filetype = {
+        codecompanion = { 'codecompanion' },
       },
     },
     keymap = {

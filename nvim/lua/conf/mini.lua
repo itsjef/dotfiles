@@ -20,6 +20,7 @@ return {
       yank       = { suffix = 'y', options = {} },
     })
     require('mini.bufremove').setup()
+    require('mini.pairs').setup()
     require('mini.surround').setup()
     require('mini.trailspace').setup()
 
