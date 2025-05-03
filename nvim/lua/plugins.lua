@@ -24,6 +24,14 @@ return {
       'neovim/nvim-lspconfig'
     },
   },
+  {
+    'nvimdev/lspsaga.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    },
+    event = { 'LspAttach' },
+  },
 
   -- DAP
   -- { 'mfussenegger/nvim-dap',
@@ -111,4 +119,12 @@ return {
   {
     'echasnovski/mini.nvim',
   },
+  {
+    'robitx/gp.nvim',
+  },
+  {
+    'folke/snacks.nvim',
+    priority = 1000,
+    lazy = false,
+  }
 }

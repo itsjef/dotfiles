@@ -306,9 +306,48 @@ telescope.setup {
         ['<C-k>'] = actions.move_selection_previous,
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
       }
-    }
+    },
+    file_ignore_patterns = { 'temp%_dir/.*' },
   },
 }
 telescope.load_extension('frecency')
 telescope.load_extension('fzf')
 telescope.load_extension('live_grep_args')
+
+
+-- gp.nvim
+require('gp').setup {
+  providers = {
+    anthropic = {
+      disable = false,
+    },
+    openai = {
+      disable = true,
+    }
+  },
+}
+
+local function keymapOptions(desc)
+    return {
+        noremap = true,
+        silent = true,
+        nowait = true,
+        desc = 'GPT prompt ' .. desc,
+    }
+end
+
+set_keymap('n', '<leader>ug', '<cmd>GpChatToggle popup<cr>', keymapOptions('Toggle Chat'))
+set_keymap('n', '<leader>ur', '<cmd>GpChatRespond<cr>', keymapOptions('Respond'))
+set_keymap('n', '<leader>un', '<cmd>GpChatNew popup<cr>', keymapOptions('New Chat'))
+
+
+-- snacks.nvim
+require('snacks').setup {
+  bigfile = { enabled = true },
+  indent = { enabled = true },
+  input = { enabled = true },
+  quickfile = { enabled = true },
+  scope = { enabled = true },
+  words = { enabled = true },
+}
+set_keymap('n', '<leader>bd', function() Snacks.bufdelete() end, opts)
