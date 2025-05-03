@@ -1,7 +1,5 @@
--- do not reorder
-require('globals')
-require('general')
-require('keymappings')
+-- Map leader key
+vim.g.mapleader = ','
 
 -- plugins with lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -30,14 +28,11 @@ require('lazy').setup({
   }
 })
 
--- Load configs
--- LSPs
-require('conf.lsp')
+-- Load plugin configs
+require('pluginconfigs')
+require('lspconfigs')
 
--- DAP
--- require('conf.dap')
-
--- Other conf
-require('conf.hop')
-require('conf.telescope')
-require('conf.themes')
+-- Load other configs
+require('general')
+require('themes')
+require('keymappings')
