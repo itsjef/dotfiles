@@ -1,7 +1,3 @@
-local set_keymap = vim.keymap.set
-local opts = { noremap = true, silent = true }
-
-
 -- alpha-nvim
 local startify = require('alpha.themes.startify')
 startify.file_icons.provider = 'devicons'
@@ -223,23 +219,6 @@ require('colorful-winsep').setup({
 
 
 -- hop.nvim
-local hop_prefix = '<leader><leader>'
-local HopChar1CurrentLineAC = '<cmd>HopChar1CurrentLineAC<cr>'
-local HopChar1CurrentLineBC = '<cmd>HopChar1CurrentLineBC<cr>'
-local HopWordCurrentLineAC = '<cmd>HopWordCurrentLineAC<cr>'
-local HopWordCurrentLineBC = '<cmd>HopWordCurrentLineBC<cr>'
-local HopChar1CurrentLineAC_inclusive_jump = '<cmd>lua require\'hop\'.hint_char1({ direction = require\'hop.hint\'.HintDirection.AFTER_CURSOR, inclusive_jump = true })<cr>'
-local HopChar1CurrentLineBC_inclusive_jump = '<cmd>lua require\'hop\'.hint_char1({ direction = require\'hop.hint\'.HintDirection.BEFORE_CURSOR, inclusive_jump = true })<cr>'
-
-set_keymap('', hop_prefix..'t', HopChar1CurrentLineAC, opts)
-set_keymap('', hop_prefix..'T', HopChar1CurrentLineBC, opts)
-set_keymap('n', hop_prefix..'f', HopChar1CurrentLineAC, opts)
-set_keymap('n', hop_prefix..'F', HopChar1CurrentLineBC, opts)
-set_keymap('n', hop_prefix..'w', HopWordCurrentLineAC, opts)
-set_keymap('n', hop_prefix..'W', HopWordCurrentLineBC, opts)
-set_keymap('o', hop_prefix..'f', HopChar1CurrentLineAC_inclusive_jump, opts)
-set_keymap('o', hop_prefix..'F', HopChar1CurrentLineBC_inclusive_jump, opts)
-
 require('hop').setup {}
 
 
@@ -278,16 +257,6 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 
 
 -- telescope.nvim
-set_keymap('n', '<C-p>', '<cmd>Telescope find_files<cr>', opts)
-set_keymap('n', '<leader>/', '<cmd>Telescope live_grep_args<cr>', opts)
-set_keymap('n', '<leader>*', '<cmd>Telescope grep_string<cr>', opts)
-set_keymap('n', '<leader>tT', '<cmd>Telescope tags<cr>', opts)
-set_keymap('n', '<leader>tb', '<cmd>Telescope buffers<cr>', opts)
-set_keymap('n', '<leader>th', '<cmd>Telescope help_tags<cr>', opts)
-set_keymap('n', '<leader>tr', '<cmd>Telescope resume<cr>', opts)
-set_keymap('n', '<leader>tt', '<cmd>Telescope current_buffer_tags<cr>', opts)
-set_keymap('n', '<leader>tf', '<cmd>Telescope oldfiles<cr>', opts)
-
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 
@@ -327,27 +296,14 @@ require('gp').setup {
   },
 }
 
-local function keymapOptions(desc)
-    return {
-        noremap = true,
-        silent = true,
-        nowait = true,
-        desc = 'GPT prompt ' .. desc,
-    }
-end
-
-set_keymap('n', '<leader>ug', '<cmd>GpChatToggle popup<cr>', keymapOptions('Toggle Chat'))
-set_keymap('n', '<leader>ur', '<cmd>GpChatRespond<cr>', keymapOptions('Respond'))
-set_keymap('n', '<leader>un', '<cmd>GpChatNew popup<cr>', keymapOptions('New Chat'))
-
 
 -- snacks.nvim
 require('snacks').setup {
   bigfile = { enabled = true },
   indent = { enabled = true },
   input = { enabled = true },
+  picker = { enabled = true },
   quickfile = { enabled = true },
   scope = { enabled = true },
   words = { enabled = true },
 }
-set_keymap('n', '<leader>bd', function() Snacks.bufdelete() end, opts)

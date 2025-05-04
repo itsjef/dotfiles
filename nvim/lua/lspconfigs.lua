@@ -15,24 +15,8 @@ lspsaga.setup({
   },
 })
 
-local on_attach = function(_, bufnr)
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-
-  vim.keymap.set('n', '<S-k>', '<cmd>Lspsaga hover_doc<cr>', bufopts)
-  vim.keymap.set('n', '<leader>=', vim.lsp.buf.format, bufopts)
-  vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<cr>', bufopts)
-  vim.keymap.set('n', '<leader>e', '<cmd>Lspsaga show_line_diagnostics<cr>', bufopts)
-  vim.keymap.set('n', '<leader>gd', '<cmd>Lspsaga goto_definition<cr>', bufopts)
-  vim.keymap.set('n', '<leader>gr', '<cmd>Lspsaga finder<cr>', bufopts)
-  vim.keymap.set('n', '<leader>q', '<cmd>Lspsaga show_buf_diagnostics<cr>', bufopts)
-  vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<cr>', bufopts)
-  vim.keymap.set('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<cr>', bufopts)
-  vim.keymap.set('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<cr>', bufopts)
-end
-
 local default_handler = function(server_name)
   lspconfig[server_name].setup {
-    on_attach = on_attach,
     capabilities = capabilities,
   }
 end
@@ -42,7 +26,6 @@ local handlers = {
 
   -- ['basedpyright'] = function()
   --   lspconfig['basedpyright'].setup {
-  --     on_attach = on_attach,
   --     capabilities = capabilities,
   --     settings = {
   --       basedpyright = {
@@ -59,8 +42,7 @@ local handlers = {
 
   ['pyright'] = function()
     lspconfig['pyright'].setup {
-      on_attach = on_attach,
-      -- capabilities = capabilities,
+      capabilities = capabilities,
       settings = {
         analysis = {
           ignore = { '*' },
@@ -71,11 +53,10 @@ local handlers = {
 
   ['ruff'] = function()
     lspconfig['ruff'].setup {
+      capabilities = capabilities,
       on_attach = function(client, bufnr)
         client.server_capabilities.hoverProvider = false
-        on_attach(client, bufnr)
       end,
-      -- capabilities = capabilities,
     }
   end,
 
