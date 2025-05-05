@@ -53,15 +53,18 @@ set_keymap('o', hop_prefix..'F', HopChar1CurrentLineBC_inclusive_jump, opts)
 
 
 -- telescope.nvim
-set_keymap('n', '<C-p>', '<cmd>Telescope find_files<cr>', opts)
-set_keymap('n', '<leader>/', '<cmd>Telescope live_grep_args<cr>', opts)
-set_keymap('n', '<leader>*', '<cmd>Telescope grep_string<cr>', opts)
-set_keymap('n', '<leader>tT', '<cmd>Telescope tags<cr>', opts)
-set_keymap('n', '<leader>tb', '<cmd>Telescope buffers<cr>', opts)
-set_keymap('n', '<leader>th', '<cmd>Telescope help_tags<cr>', opts)
-set_keymap('n', '<leader>tr', '<cmd>Telescope resume<cr>', opts)
-set_keymap('n', '<leader>tt', '<cmd>Telescope current_buffer_tags<cr>', opts)
-set_keymap('n', '<leader>tf', '<cmd>Telescope oldfiles<cr>', opts)
+set_keymap('n', '<C-p>', '<cmd>Telescope frecency workspace=CWD<cr>', desc('Find files'))
+set_keymap('n', '<leader>/', '<cmd>Telescope live_grep_args<cr>', desc('Live grep'))
+set_keymap('n', '<leader>*', '<cmd>Telescope grep_string<cr>', desc('Grep string'))
+set_keymap('n', '<leader>tb', '<cmd>Telescope buffers<cr>', desc('Buffers'))
+set_keymap('n', '<leader>tr', '<cmd>Telescope resume<cr>', desc('Resume Telescope'))
+set_keymap('n', '<leader>tF', '<cmd>Telescope frecency<cr>', desc('Previously opened files'))
+set_keymap('n', '<leader>tq', '<cmd>Telescope command_history<cr>', desc('Command history'))
+set_keymap('n', '<leader>t/', '<cmd>Telescope search_history<cr>', desc('Search history'))
+-- git
+set_keymap('n', '<leader>gb', '<cmd>Telescope git_branches<cr>', desc('Git branches'))
+set_keymap('n', '<leader>gs', '<cmd>Telescope git_status<cr>', desc('Git status'))
+set_keymap('n', '<leader>gS', '<cmd>Telescope git_stash<cr>', desc('Git stash'))
 
 
 -- gp.nvim
@@ -73,15 +76,7 @@ set_keymap('n', '<leader>un', '<cmd>GpChatNew popup<cr>', desc('GPT Prompt - New
 -- snacks.nvim
 set_keymap('n', '<leader>bd', function() Snacks.bufdelete() end, desc('Delete Buffer'))
 set_keymap({ 'n', 'v' }, '<leader>gB', function() Snacks.gitbrowse() end, desc('Git Browse'))
--- git
 set_keymap('n', '<leader>gg', function() Snacks.lazygit() end, desc('Lazygit'))
-set_keymap('n', '<leader>gb', function() Snacks.picker.git_branches() end, desc('Git Branches'))
-set_keymap('n', '<leader>gl', function() Snacks.picker.git_log() end, desc('Git Log'))
-set_keymap('n', '<leader>gL', function() Snacks.picker.git_log_line() end, desc('Git Log Line'))
-set_keymap('n', '<leader>gs', function() Snacks.picker.git_status() end, desc('Git Status'))
-set_keymap('n', '<leader>gS', function() Snacks.picker.git_stash() end, desc('Git Stash'))
-set_keymap('n', '<leader>gd', function() Snacks.picker.git_diff() end, desc('Git Diff (Hunks)'))
-set_keymap('n', '<leader>gf', function() Snacks.picker.git_log_file() end, desc('Git Log File'))
 
 
 -- lsp & lspsaga

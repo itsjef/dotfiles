@@ -259,6 +259,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 -- telescope.nvim
 local telescope = require('telescope')
 local actions = require('telescope.actions')
+local lga_actions = require('telescope-live-grep-args.actions')
 
 telescope.setup {
   defaults = {
@@ -266,17 +267,30 @@ telescope.setup {
       i = {
         ['<C-j>'] = actions.move_selection_next,
         ['<C-k>'] = actions.move_selection_previous,
-        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
         ['<esc>'] = actions.close,
         ['<CR>'] = actions.select_default + actions.center
       },
       n = {
         ['<C-j>'] = actions.move_selection_next,
         ['<C-k>'] = actions.move_selection_previous,
-        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
       }
     },
     file_ignore_patterns = { 'temp%_dir/.*' },
+  },
+  extensions = {
+    live_grep_args = {
+      auto_quoting = false,
+      mappings = {
+        i = {
+          ['<C-e>'] = lga_actions.quote_prompt(),
+          ['<C-i>'] = lga_actions.quote_prompt({ postfix = ' --iglob '}),
+          ['<C-space>'] = lga_actions.to_fuzzy_refine,
+        },
+      },
+    },
+    frecency = {
+      hide_current_buffer = true,
+    },
   },
 }
 telescope.load_extension('frecency')
