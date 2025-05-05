@@ -15,6 +15,11 @@ lspsaga.setup({
   },
 })
 
+local on_attach = function(client, bufnr)
+  vim.bo[bufnr].formatexpr = nil
+  vim.bo[bufnr].omnifunc = nil
+end
+
 local default_handler = function(server_name)
   lspconfig[server_name].setup {
     capabilities = capabilities,
@@ -42,6 +47,7 @@ local handlers = {
 
   ['pyright'] = function()
     lspconfig['pyright'].setup {
+      on_attach = on_attach,
       capabilities = capabilities,
       settings = {
         analysis = {
@@ -56,6 +62,7 @@ local handlers = {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
         client.server_capabilities.hoverProvider = false
+        on_attach(client, bufnr)
       end,
     }
   end,

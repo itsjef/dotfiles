@@ -85,13 +85,17 @@ set_keymap('n', '<leader>gf', function() Snacks.picker.git_log_file() end, desc(
 
 
 -- lsp & lspsaga
-set_keymap('n', '<leader>=', vim.lsp.buf.format, opts)
+-- remap default LSP keys with lspsaga
+set_keymap('n', 'grn', '<cmd>Lspsaga rename<cr>', opts)
+set_keymap('n', 'gra', '<cmd>Lspsaga code_action<cr>', opts)
+set_keymap('n', 'grr', '<cmd>Lspsaga finder ref<cr>', opts)
+set_keymap('n', 'gri', '<cmd>Lspsaga finder imp<cr>', opts)
+set_keymap('n', 'gO', '<cmd>Lspsaga outline<cr>', opts)
 set_keymap('n', 'K', '<cmd>Lspsaga hover_doc<cr>', opts)
-set_keymap('n', '<leader>ca', '<cmd>Lspsaga code_action<cr>', opts)
-set_keymap('n', '<leader>e', '<cmd>Lspsaga show_line_diagnostics<cr>', opts)
-set_keymap('n', '<leader>gd', '<cmd>Lspsaga goto_definition<cr>', opts)
-set_keymap('n', '<leader>gr', '<cmd>Lspsaga finder<cr>', opts)
-set_keymap('n', '<leader>q', '<cmd>Lspsaga show_buf_diagnostics<cr>', opts)
-set_keymap('n', '<leader>rn', '<cmd>Lspsaga rename<cr>', opts)
 set_keymap('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<cr>', opts)
 set_keymap('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<cr>', opts)
+-- other lsp/lspsaga mappings
+set_keymap('n', '<leader>=', vim.lsp.buf.format, opts)
+set_keymap('n', '<leader>e', '<cmd>Lspsaga show_line_diagnostics<cr>', opts)
+set_keymap('n', '<leader>q', '<cmd>Lspsaga show_buf_diagnostics<cr>', opts)
+set_keymap('n', '<leader>gd', '<cmd>Lspsaga goto_definition<cr>', opts)
