@@ -279,7 +279,7 @@ telescope.setup {
   },
   extensions = {
     live_grep_args = {
-      auto_quoting = false,
+      auto_quoting = true,
       mappings = {
         i = {
           ['<C-e>'] = lga_actions.quote_prompt(),
