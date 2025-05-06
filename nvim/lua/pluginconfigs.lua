@@ -131,10 +131,7 @@ require('blink.cmp').setup {
     return not vim.tbl_contains(disabled_fts, vim.bo.filetype)
   end,
   sources = {
-    default = { 'lsp', 'path', 'snippets', 'buffer' },
-    per_filetype = {
-      codecompanion = { 'codecompanion' },
-    },
+    default = { 'lsp', 'path', 'snippets' },
   },
   keymap = {
     preset = 'default',
@@ -308,6 +305,7 @@ require('gp').setup {
       disable = true,
     }
   },
+  default_chat_agent = 'ChatClaude-3-7-Sonnet',
 }
 
 
