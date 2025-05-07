@@ -1,3 +1,4 @@
+local wk = require('which-key')
 local set_keymap = vim.keymap.set
 local desc = function(description)
     return {
@@ -10,27 +11,35 @@ end
 local opts = desc(nil)
 
 
--- Quick shortcut for splittling
-set_keymap('n', '<C-W>-', ':split<CR>', opts)
-set_keymap('n', '<C-W>\\', ':vsplit<CR>', opts)
+wk.add {
+  {
+    hidden = true,
+    -- Quick shortcut for splittling
+    { mode = 'n', '<C-W>-', ':split<CR>' },
+    { mode = 'n', '<C-W>\\', ':vsplit<CR>' },
 
+    -- Break undo sequence to smaller chunks
+    { mode = 'i', '.', '.<C-g>u' },
+    { mode = 'i', '?', '?<C-g>u' },
+    { mode = 'i', '!', '!<C-g>u' },
+    { mode = 'i', ',', ',<C-g>u' },
 
--- Break undo sequence to smaller chunks
-set_keymap('i', '.', '.<C-g>u', opts)
-set_keymap('i', '?', '?<C-g>u', opts)
-set_keymap('i', '!', '!<C-g>u', opts)
-set_keymap('i', ',', ',<C-g>u', opts)
+    -- Moving between windows
+    { mode = 'n', '<A-h>', '<C-w>h' },
+    { mode = 'n', '<A-j>', '<C-w>j' },
+    { mode = 'n', '<A-k>', '<C-w>k' },
+    { mode = 'n', '<A-l>', '<C-w>l' },
 
+    -- Clear highlighted search result
+    { mode = 'n', '<ESC>', ':noh<CR><ESC>' },
 
--- Moving between windows
-set_keymap('n', '<A-h>', '<C-w>h', opts)
-set_keymap('n', '<A-j>', '<C-w>j', opts)
-set_keymap('n', '<A-k>', '<C-w>k', opts)
-set_keymap('n', '<A-l>', '<C-w>l', opts)
-
-
--- Clear highlighted search result
-set_keymap('n', '<ESC>', ':noh<CR><ESC>', opts)
+    -- Some plugin mappings that don't need to show
+    { mode = 'n', '<C-p>', '<cmd>Telescope frecency workspace=CWD<cr>', desc = 'Find files' },
+    { mode = 'n', '<leader>/', '<cmd>Telescope live_grep_args<cr>', desc = 'Live grep' },
+    { mode = 'n', '<leader>*', '<cmd>Telescope grep_string<cr>', desc = 'Grep string' },
+    { mode = 'n', '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
+  },
+}
 
 
 -- hop.nvim
@@ -53,30 +62,24 @@ set_keymap('o', hop_prefix..'F', HopChar1CurrentLineBC_inclusive_jump, opts)
 
 
 -- telescope.nvim
-set_keymap('n', '<C-p>', '<cmd>Telescope frecency workspace=CWD<cr>', desc('Find files'))
-set_keymap('n', '<leader>/', '<cmd>Telescope live_grep_args<cr>', desc('Live grep'))
-set_keymap('n', '<leader>*', '<cmd>Telescope grep_string<cr>', desc('Grep string'))
-set_keymap('n', '<leader>tb', '<cmd>Telescope buffers<cr>', desc('Buffers'))
-set_keymap('n', '<leader>tr', '<cmd>Telescope resume<cr>', desc('Resume Telescope'))
-set_keymap('n', '<leader>tF', '<cmd>Telescope frecency<cr>', desc('Previously opened files'))
-set_keymap('n', '<leader>tq', '<cmd>Telescope command_history<cr>', desc('Command history'))
-set_keymap('n', '<leader>t/', '<cmd>Telescope search_history<cr>', desc('Search history'))
--- git
-set_keymap('n', '<leader>gb', '<cmd>Telescope git_branches<cr>', desc('Git branches'))
-set_keymap('n', '<leader>gs', '<cmd>Telescope git_status<cr>', desc('Git status'))
-set_keymap('n', '<leader>gS', '<cmd>Telescope git_stash<cr>', desc('Git stash'))
+wk.add {
+  { '<leader>t', group = 'Telescope' },
+  { '<leader>tb', '<cmd>Telescope buffers<cr>',  desc = 'Buffers' },
+  { '<leader>tc', '<cmd>Telescope quickfix<cr>',  desc = 'Quickfix' },
+  { '<leader>tr', '<cmd>Telescope resume<cr>',  desc = 'Resume' },
+  { '<leader>tF', '<cmd>Telescope frecency<cr>',  desc = 'Previously opened files' },
+  { '<leader>tq', '<cmd>Telescope command_history<cr>',  desc = 'Command history' },
+  { '<leader>t/', '<cmd>Telescope search_history<cr>',  desc = 'Search history' },
+}
 
 
 -- gp.nvim
-set_keymap('n', '<leader>ug', '<cmd>GpChatToggle popup<cr>', desc('GPT Prompt - Toggle Chat'))
-set_keymap('n', '<leader>ur', '<cmd>GpChatRespond<cr>', desc('GPT Prompt - Respond'))
-set_keymap('n', '<leader>un', '<cmd>GpChatNew popup<cr>', desc('GPT Prompt - New Chat'))
-
-
--- snacks.nvim
-set_keymap('n', '<leader>bd', function() Snacks.bufdelete() end, desc('Delete Buffer'))
-set_keymap({ 'n', 'v' }, '<leader>gB', function() Snacks.gitbrowse() end, desc('Git Browse'))
-set_keymap('n', '<leader>gg', function() Snacks.lazygit() end, desc('Lazygit'))
+wk.add {
+  {'<leader>u', group = 'GPT Prompt'},
+  {'<leader>ug', '<cmd>GpChatToggle popup<cr>', desc = 'Toggle Chat'},
+  {'<leader>ur', '<cmd>GpChatRespond<cr>', desc = 'Respond'},
+  {'<leader>un', '<cmd>GpChatNew popup<cr>', desc = 'New Chat'},
+}
 
 
 -- lsp & lspsaga
@@ -93,3 +96,19 @@ set_keymap('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<cr>', opts)
 set_keymap('n', '<leader>=', vim.lsp.buf.format, opts)
 set_keymap('n', '<leader>e', '<cmd>Lspsaga show_line_diagnostics<cr>', opts)
 set_keymap('n', '<leader>q', '<cmd>Lspsaga show_buf_diagnostics<cr>', opts)
+
+
+-- Git
+wk.add {
+  { '<leader>g', group = 'Git' },
+  { '<leader>gb', '<cmd>Telescope git_branches<cr>', desc = 'branches' },
+  { '<leader>gs', '<cmd>Telescope git_status<cr>', desc = 'status' },
+  { '<leader>gS', '<cmd>Telescope git_stash<cr>', desc = 'stash' },
+  { '<leader>gg', function() Snacks.lazygit() end, desc = 'lazygit' },
+  {
+    mode = { 'n', 'v' },
+    '<leader>gB',
+    function() Snacks.gitbrowse() end,
+    desc = 'Git Browse'
+  },
+}
