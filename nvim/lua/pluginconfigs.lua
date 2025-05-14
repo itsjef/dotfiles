@@ -266,7 +266,7 @@ telescope.setup {
       mappings = {
         i = {
           ['<C-e>'] = lga_actions.quote_prompt(),
-          ['<C-i>'] = lga_actions.quote_prompt({ postfix = ' --iglob '}),
+          ['<C-t>'] = lga_actions.quote_prompt({ postfix = ' -t'}),
           ['<C-space>'] = lga_actions.to_fuzzy_refine,
         },
       },
