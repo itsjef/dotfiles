@@ -1,85 +1,81 @@
-local lspsaga = require('lspsaga')
-local mason = require('mason')
-local mason_lspconfig = require('mason-lspconfig')
-local lspconfig = require('lspconfig')
-local capabilities = require('blink.cmp').get_lsp_capabilities()
+local lsp = vim.lsp
 
-lspsaga.setup({
-  lightbulb = {
-    enable = false,
-  },
-  rename = {
-    keys = {
-      quit = '<esc>',
+
+-- Extend default LSP capabilities and extend them with blink.cmp's
+local capabilities = require('blink.cmp').get_lsp_capabilities(lsp.protocol.make_client_capabilities())
+lsp.config('*', { capabilities = capabilities })
+
+
+-- Disable default key bindings
+for _, binding in ipairs({ 'grn', 'gra', 'gri', 'grr' }) do
+  pcall(vim.keymap.del, 'n', binding)
+end
+
+
+-- Create key bindings, commands, autocommands, etc. on LSP attach
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(e)
+    local bufnr = e.buf
+    local client = lsp.get_client_by_id(e.data.client_id)
+
+    if not client then
+      return
+    end
+
+    ---@diagnostic disable-next-line need-check-nil
+    if client.server_capabilities.completionProvider then
+      vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+    end
+
+    ---@diagnostic disable-next-line need-check-nil
+    if client.server_capabilities.definitionProvider then
+      vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
+    end
+
+    -- Key mappings
+    local set_keymap = vim.keymap.set
+    local opts = { silent = true, noremap = true, buffer = bufnr }
+    local opt = function(desc)
+      return vim.tbl_extend('force', opts, { desc = desc })
+    end
+
+    -- disable key bindings
+    pcall(vim.keymap.del, 'n', 'K', { buffer = bufnr })
+
+    -- custom key bindings
+    set_keymap('n', '<leader>=', lsp.buf.format, opts)
+    set_keymap('n', '<leader>ca', '<cmd>Lspsaga code_action<cr>', opt('Code Action'))
+    set_keymap('n', '<leader>rn', '<cmd>Lspsaga rename<cr>', opt('Rename'))
+    -- set_keymap('n', '<leader>wa', lsp.buf.add_workspace_folder, opt('Add Workspace Folder'))
+    -- set_keymap('n', '<leader>wl', function() print(vim.inspect(lsp.buf.list_workspace_folders)) end, opt('Show Workspace Folders'))
+    -- set_keymap('n', '<leader>wr', lsp.buf.remove_workspace_folder, opt('Remove Workspace Folder'))
+    -- set_keymap('n', '<leader>wS', lsp.buf.workspace_symbol, opt('Show Workspace Symbol'))
+    set_keymap('n', 'K', '<cmd>Lspsaga hover_doc<cr>', opt('Show Documentation'))
+    set_keymap('n', 'gD', lsp.buf.declaration, opt('Go to Declaration'))
+    set_keymap('n', 'gO', '<cmd>Lspsaga outline<cr>', opt('Show Outline'))
+    set_keymap('n', 'gd', '<cmd>Lspsaga goto_definition<cr>', opt('Go to Definition'))
+    set_keymap('n', 'gi', '<cmd>Lspsaga finder imp<cr>', opt('Go to Implementation'))
+    set_keymap('n', 'gr', '<cmd>Lspsaga finder ref<cr>', opt('Show References'))
+    set_keymap('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<cr>', opts)
+    set_keymap('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<cr>', opts)
+    set_keymap('n', '<leader>e', '<cmd>Lspsaga show_line_diagnostics<cr>', opts)
+    set_keymap('n', '<leader>q', '<cmd>Lspsaga show_buf_diagnostics<cr>', opts)
+  end
+})
+
+
+-- Servers
+local ensure_installed = { 'pyright', 'ruff', 'dockerls', 'lua_ls' }
+require('mason').setup()
+require('mason-lspconfig').setup({ ensure_installed = ensure_installed })
+
+lsp.config.pyright = {
+  filetypes = { 'python' },
+  settings = {
+    python = {
+      analysis = {
+        ignore = { '*' },
+      },
     },
   },
-})
-
-local on_attach = function(client, bufnr)
-  vim.bo[bufnr].formatexpr = nil
-  vim.bo[bufnr].omnifunc = nil
-end
-
-local default_handler = function(server_name)
-  lspconfig[server_name].setup {
-    capabilities = capabilities,
-  }
-end
-
-local handlers = {
-  default_handler,
-
-  -- ['basedpyright'] = function()
-  --   lspconfig['basedpyright'].setup {
-  --     capabilities = capabilities,
-  --     settings = {
-  --       basedpyright = {
-  --         disableOrganizeImports = true,
-  --         -- typeCheckingMode = 'strict',
-  --         typeCheckingMode = 'standard',
-  --         -- analysis = {
-  --         --   ignore = { '*' }, -- Ignore all files for analysis to exclusively use Ruff for linting
-  --         -- },
-  --       },
-  --     },
-  --   }
-  -- end,
-
-  ['pyright'] = function()
-    lspconfig['pyright'].setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      settings = {
-        analysis = {
-          ignore = { '*' },
-        },
-      },
-    }
-  end,
-
-  ['ruff'] = function()
-    lspconfig['ruff'].setup {
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        client.server_capabilities.hoverProvider = false
-        on_attach(client, bufnr)
-      end,
-    }
-  end,
-
-  ['docker_ls'] = nil,
-  ['lua_ls'] = nil,
 }
-
-local ensure_installed = {}
-for server, _ in ipairs(handlers) do
-  if type(server) == "string" then
-    table.insert(ensure_installed, server)
-  end
-end
-
-mason.setup()
-mason_lspconfig.setup({
-  ensure_installed = ensure_installed,
-  handlers = handlers
-})
