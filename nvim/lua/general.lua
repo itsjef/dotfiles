@@ -54,7 +54,7 @@ vim.api.nvim_create_autocmd(
 )
 
 vim.api.nvim_create_autocmd(
-  { 'BufLeave', 'FocusLost', 'InsertEnter', 'CmdlineEnter', 'WinLeave' },
+  { 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave' },
   {
     pattern = '*',
     group = augroup,
