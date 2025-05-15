@@ -67,10 +67,14 @@ wk.add {
   -- Git
   {
     { '<leader>g', group = 'Git' },
-    { '<leader>gb', '<cmd>Telescope git_branches<cr>', desc = 'branches' },
-    { '<leader>gs', '<cmd>Telescope git_status<cr>', desc = 'status' },
-    { '<leader>gS', '<cmd>Telescope git_stash<cr>', desc = 'stash' },
+    { '<leader>gO', function() Snacks.gitbrowse() end, desc = 'Open Browser', mode = 'nv' },
+    { '<leader>gc', '<cmd>Neogit commit<cr>', desc = 'Commit' },
+    { '<leader>gp', '<cmd>Neogit pull<cr>', desc = 'Pull' },
+    { '<leader>gP', '<cmd>Neogit push<cr>', desc = 'Push' },
+    { '<leader>gb', '<cmd>Telescope git_branches<cr>', desc = 'Branches' },
+    { '<leader>gB', '<cmd>Gitsign blame<cr>', desc = 'Blame' },
+    { '<leader>gs', '<cmd>Neogit<cr>', desc = 'Status' },
+    { '<leader>gS', '<cmd>Telescope git_stash<cr>', desc = 'Stash' },
     { '<leader>gg', function() Snacks.lazygit() end, desc = 'lazygit' },
-    { '<leader>gB', function() Snacks.gitbrowse() end, desc = 'Git Browse', mode = 'nv' },
   },
 }

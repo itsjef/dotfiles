@@ -37,7 +37,8 @@ return {
 
   -- Git
   {
-    'sindrets/diffview.nvim',
+    'NeogitOrg/neogit',
+    dependencies = { 'sindrets/diffview.nvim' },
   },
   {
     'lewis6991/gitsigns.nvim',
