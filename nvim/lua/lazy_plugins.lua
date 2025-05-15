@@ -13,14 +13,6 @@ return {
       'neovim/nvim-lspconfig'
     },
   },
-  {
-    'nvimdev/lspsaga.nvim',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-tree/nvim-web-devicons',
-    },
-    event = { 'LspAttach' },
-  },
 
   -- DAP
   -- { 'mfussenegger/nvim-dap',

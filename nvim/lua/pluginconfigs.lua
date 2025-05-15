@@ -303,16 +303,3 @@ require('snacks').setup {
   scope = { enabled = true },
   words = { enabled = true },
 }
-
-
--- lspsaga
-require('lspsaga').setup {
-  lightbulb = {
-    enable = false,
-  },
-  rename = {
-    keys = {
-      quit = '<esc>',
-    },
-  },
-}
