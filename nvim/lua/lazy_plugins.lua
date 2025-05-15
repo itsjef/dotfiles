@@ -5,17 +5,6 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
 
-  -- Treesitter
-  {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      'nvim-treesitter/nvim-treesitter-context',
-      'HiPhish/rainbow-delimiters.nvim',
-    },
-  },
-
   -- LSPs: diagnostic, auto-formatting, code actions, and more.
   {
     'williamboman/mason-lspconfig.nvim',
@@ -55,7 +44,12 @@ return {
   },
 
   -- Git
-  'tpope/vim-fugitive',
+  {
+    'sindrets/diffview.nvim',
+  },
+  {
+    'lewis6991/gitsigns.nvim',
+  },
 
   -- Autocompletion & snippets
   {
@@ -73,6 +67,15 @@ return {
 
   -- Colorscheme & Syntax Highlighting
   {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'nvim-treesitter/nvim-treesitter-context',
+      'HiPhish/rainbow-delimiters.nvim',
+    },
+  },
+  {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
@@ -83,9 +86,7 @@ return {
   },
   {
     'chentoast/marks.nvim',
-  },
-  {
-    'lewis6991/gitsigns.nvim',
+    event = { 'VeryLazy' },
   },
   {
     'nvim-zh/colorful-winsep.nvim',
@@ -133,5 +134,10 @@ return {
         desc = 'Buffer Local Keymaps (which-key)',
       },
     },
+  },
+  {
+    'kevinhwang91/nvim-bqf',
+    ft = 'qf',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
 }
