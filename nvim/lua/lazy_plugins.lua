@@ -45,13 +45,6 @@ return {
 
   -- File explorer, Bufferline, Statusline
   {
-    'nvim-tree/nvim-tree.lua',
-    version = 'v1.*',
-    keys = {
-      { '<leader>nn', '<cmd>NvimTreeToggle<CR>', desc = 'NvimTree' },
-    },
-  },
-  {
     'akinsho/bufferline.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     version = 'v4.*',

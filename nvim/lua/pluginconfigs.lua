@@ -82,17 +82,6 @@ require('treesitter-context').setup {
 }
 
 
--- nvim-tree
-require('nvim-tree').setup {
-  view = {
-    side = 'right',
-  },
-  renderer = {
-    highlight_git = true,
-  }
-}
-
-
 -- lualine
 require('lualine').setup {
   options = {
@@ -221,14 +210,21 @@ require('hop').setup {}
 
 
 -- mini.nvim
-require('mini.ai').setup()
-require('mini.align').setup()
-require('mini.bracketed').setup()
-require('mini.bufremove').setup()
-require('mini.pairs').setup()
-require('mini.splitjoin').setup()
-require('mini.surround').setup()
-require('mini.trailspace').setup()
+local mini_modules = {
+  'ai',
+  'align',
+  'bracketed',
+  'bufremove',
+  'files',
+  'pairs',
+  'splitjoin',
+  'surround',
+  'trailspace',
+}
+
+for _, module in ipairs(mini_modules) do
+  require('mini.' .. module).setup()
+end
 
 local formatAugroup = vim.api.nvim_create_augroup('FormatAutogroup', { clear = true })
 
