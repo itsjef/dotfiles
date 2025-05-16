@@ -68,14 +68,15 @@ wk.add {
   -- Git
   {
     { '<leader>g', group = 'Git' },
-    { '<leader>gO', function() Snacks.gitbrowse() end, desc = 'Open Browser', mode = 'nv' },
+    { '<leader>gs', require('neogit').open, desc = 'Status' },
     { '<leader>gc', '<cmd>Neogit commit<cr>', desc = 'Commit' },
-    { '<leader>gp', '<cmd>Neogit pull<cr>', desc = 'Pull' },
-    { '<leader>gP', '<cmd>Neogit push<cr>', desc = 'Push' },
+    { '<leader>gl', '<cmd>Neogit pull<cr>', desc = 'Pull' },
+    { '<leader>gp', '<cmd>Neogit push<cr>', desc = 'Push' },
+    -- diffview?
     { '<leader>gb', '<cmd>Telescope git_branches<cr>', desc = 'Branches' },
-    { '<leader>gB', '<cmd>Gitsign blame<cr>', desc = 'Blame' },
-    { '<leader>gs', '<cmd>Neogit<cr>', desc = 'Status' },
     { '<leader>gS', '<cmd>Telescope git_stash<cr>', desc = 'Stash' },
+    { '<leader>gB', '<cmd>Gitsign blame<cr>', desc = 'Blame' },
+    { '<leader>gO', function() Snacks.gitbrowse() end, desc = 'Open Browser', mode = 'nv' },
     { '<leader>gg', function() Snacks.lazygit() end, desc = 'lazygit' },
   },
 }
