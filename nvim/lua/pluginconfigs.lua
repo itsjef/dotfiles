@@ -352,8 +352,6 @@ require('gp').setup {
 require('snacks').setup {
   bigfile = { enabled = true },
   indent = { enabled = true },
-  input = { enabled = true },
-  -- picker = { enabled = true },
   quickfile = { enabled = true },
   scope = { enabled = true },
   words = { enabled = true },
