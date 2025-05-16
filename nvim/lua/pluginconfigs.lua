@@ -119,9 +119,9 @@ require('blink.cmp').setup {
     local disabled_fts = { 'lua', 'markdown' }
     return not vim.tbl_contains(disabled_fts, vim.bo.filetype)
   end,
-  cmdline = { enabled = false },
+  cmdline = { enabled = true },
   sources = {
-    default = { 'lsp', 'path', 'snippets' },
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
   },
   keymap = {
     preset = 'default',
@@ -358,3 +358,7 @@ require('snacks').setup {
   scope = { enabled = true },
   words = { enabled = true },
 }
+
+
+-- noice.nvim
+require('noice').setup {}
