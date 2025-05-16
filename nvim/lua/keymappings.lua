@@ -72,7 +72,7 @@ wk.add {
     { '<leader>gc', '<cmd>Neogit commit<cr>', desc = 'Commit' },
     { '<leader>gl', '<cmd>Neogit pull<cr>', desc = 'Pull' },
     { '<leader>gp', '<cmd>Neogit push<cr>', desc = 'Push' },
-    -- diffview?
+    { '<leader>gL', '<cmd>Neogit log<cr>', desc = 'Push' },
     { '<leader>gb', '<cmd>Telescope git_branches<cr>', desc = 'Branches' },
     { '<leader>gS', '<cmd>Telescope git_stash<cr>', desc = 'Stash' },
     { '<leader>gB', '<cmd>Gitsign blame<cr>', desc = 'Blame' },
