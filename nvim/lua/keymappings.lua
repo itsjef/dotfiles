@@ -32,6 +32,7 @@ wk.add {
     { '<ESC>', ':noh<CR><ESC>' },
 
     -- Some plugin mappings that don't need to show
+    { '<C-/>', function() Snacks.terminal() end, desc = 'Toggler Terminal' },
     { '<C-p>', '<cmd>Telescope frecency workspace=CWD<cr>', desc = 'Find files' },
     { '<leader>/', '<cmd>Telescope live_grep_args<cr>', desc = 'Live grep' },
     { '<leader>*', '<cmd>Telescope grep_string<cr>', desc = 'Grep string' },
