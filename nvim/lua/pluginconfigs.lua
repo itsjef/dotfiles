@@ -359,3 +359,13 @@ require('snacks').setup {
 
 -- noice.nvim
 require('noice').setup {}
+
+
+-- nvim-bqf
+require('bqf').setup {
+  filter = {
+    fzf = {
+      extra_opts = {'--bind', 'ctrl-o:toggle-all', '--delimiter', '│'}
+    }
+  }
+}

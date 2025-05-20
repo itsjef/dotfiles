@@ -146,6 +146,9 @@ return {
   {
     'kevinhwang91/nvim-bqf',
     ft = 'qf',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = {
+      { 'junegunn/fzf', build = './install --bin' },
+      { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+    },
   },
 }
