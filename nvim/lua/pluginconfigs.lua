@@ -349,6 +349,16 @@ require('codecompanion').setup {
 -- snacks.nvim
 require('snacks').setup {
   bigfile = { enabled = true },
+  gitbrowse = {
+    url_patterns = {
+      ["git%.parcelperform%.com"] = {
+        branch = "/-/tree/{branch}",
+        file = "/-/blob/{branch}/{file}#L{line_start}-L{line_end}",
+        permalink = "/-/blob/{commit}/{file}#L{line_start}-L{line_end}",
+        commit = "/-/commit/{commit}",
+      },
+    }
+  },
   indent = { enabled = true },
   notifier = { enabled = true },
   quickfile = { enabled = true },
