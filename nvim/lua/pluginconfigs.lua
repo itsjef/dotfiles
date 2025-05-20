@@ -122,6 +122,9 @@ require('blink.cmp').setup {
   cmdline = { enabled = true },
   sources = {
     default = { 'lsp', 'path', 'snippets', 'buffer' },
+    per_filetype = {
+      codecompanion = { 'codecompanion' },
+    },
   },
   keymap = {
     preset = 'default',
@@ -334,17 +337,12 @@ telescope.load_extension('fzf')
 telescope.load_extension('live_grep_args')
 
 
--- gp.nvim
-require('gp').setup {
-  providers = {
-    anthropic = {
-      disable = false,
-    },
-    openai = {
-      disable = true,
-    }
+-- codecompanion.nvim
+require('codecompanion').setup {
+  strategies = {
+    chat = { adapter = 'anthropic' },
+    inline = { adapter = 'anthropic' },
   },
-  default_chat_agent = 'ChatClaude-3-7-Sonnet',
 }
 
 

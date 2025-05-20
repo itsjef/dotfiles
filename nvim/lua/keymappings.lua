@@ -59,10 +59,10 @@ wk.add {
 
   -- gp.nvim
   {
-    { '<leader>u', group = 'GPT Prompt' },
-    { '<leader>ug', '<cmd>GpChatToggle popup<cr>', desc = 'Toggle Chat' },
-    { '<leader>ur', '<cmd>GpChatRespond<cr>', desc = 'Respond' },
-    { '<leader>un', '<cmd>GpChatNew popup<cr>', desc = 'New Chat' },
+    { '<leader>a', group = 'GPT Prompt' },
+    { '<leader>at', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'Toggle Chat', mode = 'nv' },
+    { '<leader>aa', '<cmd>CodeCompanionChat Add<cr>', desc = 'Add selected text', mode = 'v' },
+    { '<leader>ac', '<cmd>CodeCompanionActions<cr>', desc = 'Actions', mode = 'nv' },
   },
 
   -- Git

@@ -107,7 +107,22 @@ return {
     'echasnovski/mini.nvim',
   },
   {
-    'robitx/gp.nvim',
+    'olimorris/codecompanion.nvim',
+    opts = {},
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      {
+        'OXY2DEV/markview.nvim',
+        ft = { 'markdown', 'codecompanion' },
+        opts = {
+          preview = {
+            filetypes = { "markdown", "codecompanion" },
+            ignore_buftypes = {},
+          },
+        },
+      },
+    },
   },
   {
     'folke/snacks.nvim',
