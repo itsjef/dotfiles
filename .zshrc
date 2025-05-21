@@ -142,6 +142,8 @@ eval "$(pyenv virtualenv-init -)"
 [[ -x gh ]] && eval "$(gh copilot alias -- zsh)"
 [[ -x glab ]] && eval "$(glab completion -s zsh)"
 
-export PATH="$HOMEBREW_CELLAR/postgresql@15/15.12_1/bin:$PATH"
+export SCALA_PATH="$HOMEBREW_CELLAR/scala@2.12/2.12.20/bin"
+export PGSQL_PATH="$HOMEBREW_CELLAR/postgresql@15/15.12_1/bin"
+export PATH="$SCALA_PATH:$PGSQL_PATH:$PATH"
 
 [[ -f "$HOME/dotfiles/.zsh_env_vars" ]] && source "$HOME/dotfiles/.zsh_env_vars"
