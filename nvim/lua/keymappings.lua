@@ -37,7 +37,7 @@ wk.add {
     { '<leader>/', '<cmd>Telescope live_grep_args<cr>', desc = 'Live grep' },
     { '<leader>*', '<cmd>Telescope grep_string<cr>', desc = 'Grep string' },
     { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
-    { '<leader>nn', function() MiniFiles.open() end, desc = 'File Browser' },
+    { '<leader>nn', function() if not MiniFiles.close() then MiniFiles.open() end end, desc = 'File Browser' },
     { hop_prefix..'t', HopChar1CurrentLineAC, mode = 'nvo' },
     { hop_prefix..'T', HopChar1CurrentLineBC, mode = 'nvo' },
     { hop_prefix..'f', HopChar1CurrentLineAC },
@@ -45,6 +45,10 @@ wk.add {
     { hop_prefix..'w', HopWordCurrentLineAC },
     { hop_prefix..'W', HopWordCurrentLineBC },
   },
+
+  -- Close quickfix list
+  { '<leader>co', ':copen<cr>', desc = 'Open quickfix list' },
+  { '<leader>cq', ':cclose<cr>', desc = 'Close quickfix list' },
 
   -- telescope.nvim
   {
