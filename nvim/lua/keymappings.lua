@@ -61,14 +61,6 @@ wk.add {
     { '<leader>t/', '<cmd>Telescope search_history<cr>',  desc = 'Search history' },
   },
 
-  -- gp.nvim
-  {
-    { '<leader>a', group = 'GPT Prompt' },
-    { '<leader>at', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'Toggle Chat', mode = 'nv' },
-    { '<leader>aa', '<cmd>CodeCompanionChat Add<cr>', desc = 'Add selected text', mode = 'v' },
-    { '<leader>ac', '<cmd>CodeCompanionActions<cr>', desc = 'Actions', mode = 'nv' },
-  },
-
   -- Git
   {
     { '<leader>g', group = 'Git' },
@@ -82,5 +74,20 @@ wk.add {
     { '<leader>gB', '<cmd>Gitsign blame<cr>', desc = 'Blame' },
     { '<leader>gO', function() Snacks.gitbrowse() end, desc = 'Open Browser', mode = 'nv' },
     { '<leader>gg', function() Snacks.lazygit() end, desc = 'lazygit' },
+  },
+
+  -- AI Assistant
+  {
+    { '<leader>a', group = 'AI Assistant' },
+    { '<leader>aa', '<cmd>CodeCompanionActions<cr>', desc = 'Actions' },
+    { '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'Toggle Chat' },
+    { '<leader>an', '<cmd>CodeCompanionChat<cr>', desc = 'New Chat' },
+    { '<leader>ae', '<cmd>CodeCompanion /explain<cr>', desc = 'Explain Code', mode = 'v' },
+    { '<leader>ar', '<cmd>CodeCompanion /review<cr>', desc = 'Review Code', mode = 'v' },
+    { '<leader>af', '<cmd>CodeCompanion /fix<cr>', desc = 'Fix Code', mode = 'v' },
+    { '<leader>at', '<cmd>CodeCompanion /tests<cr>', desc = 'Generate Tests', mode = 'v' },
+    { '<leader>ad', '<cmd>CodeCompanion /doc<cr>', desc = 'Document Code', mode = 'v' },
+    { '<leader>aq', '<cmd>CodeCompanion<cr>', desc = 'Quick Question', mode = 'nv' },
+    { '<leader>ap', '<cmd>CodeCompanionChat Add<cr>', desc = 'Add to Chat', mode = 'v' },
   },
 }

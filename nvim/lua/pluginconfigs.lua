@@ -96,7 +96,7 @@ require('lualine').setup {
     lualine_a = { 'mode' },
     lualine_b = { 'branch' },
     lualine_c = { { 'filename', path = 1 } },
-    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_x = { 'encoding', 'fileformat', 'filetype', { require('codecompanion_lualine') } },
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
   },
@@ -339,6 +339,20 @@ telescope.load_extension('live_grep_args')
 
 -- codecompanion.nvim
 require('codecompanion').setup {
+  adapters = {
+    anthropic = function()
+      return require('codecompanion.adapters').extend('anthropic', {
+        schema = {
+          model = {
+            default = 'claude-opus-4-20250514',
+          },
+          temperature = {
+            default = 0.8
+          },
+        },
+      })
+    end,
+  },
   strategies = {
     chat = { adapter = 'anthropic' },
     inline = { adapter = 'anthropic' },
