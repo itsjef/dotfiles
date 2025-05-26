@@ -122,6 +122,13 @@ require('blink.cmp').setup {
   cmdline = { enabled = true },
   sources = {
     default = { 'lsp', 'path', 'snippets', 'buffer' },
+    providers = {
+      codecompanion = {
+        name = 'CodeCompanion',
+        module = 'codecompanion.providers.completion.blink',
+        enabled = true,
+      },
+    },
     per_filetype = {
       codecompanion = { 'codecompanion', 'path' },
     },
