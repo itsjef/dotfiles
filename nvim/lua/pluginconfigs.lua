@@ -279,7 +279,6 @@ local mini_modules = {
   'ai',
   'align',
   'bracketed',
-  'bufremove',
   'files',
   'pairs',
   'splitjoin',
