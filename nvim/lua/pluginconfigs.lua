@@ -260,14 +260,18 @@ telescope.setup {
   defaults = {
     mappings = {
       i = {
+        ['<ESC>'] = actions.close,
+        ['<CR>'] = actions.select_default + actions.center,
         ['<C-j>'] = actions.move_selection_next,
         ['<C-k>'] = actions.move_selection_previous,
-        ['<esc>'] = actions.close,
-        ['<CR>'] = actions.select_default + actions.center
+        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<Tab>'] = actions.toggle_selection + actions.move_selection_better,
+        ['<S-Tab>'] = actions.toggle_selection + actions.move_selection_worse,
       },
       n = {
-        ['<C-j>'] = actions.move_selection_next,
-        ['<C-k>'] = actions.move_selection_previous,
+        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<Tab>'] = actions.toggle_selection + actions.move_selection_better,
+        ['<S-Tab>'] = actions.toggle_selection + actions.move_selection_worse,
       }
     },
     file_ignore_patterns = { 'temp%_dir/.*' },
