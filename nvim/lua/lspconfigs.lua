@@ -32,36 +32,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
     end
 
-    -- Key mappings
-    local set_keymap = vim.keymap.set
-    local opts = { silent = true, noremap = true, buffer = bufnr }
-    local opt = function(desc)
-      return vim.tbl_extend('force', opts, { desc = desc })
-    end
-
     -- disable key bindings
     pcall(vim.keymap.del, 'n', 'K', { buffer = bufnr })
 
     -- custom key bindings
-    set_keymap('n', '<leader>=', lsp.buf.format, opt('Lsp Format'))
-    set_keymap('n', '<leader>ca', lsp.buf.code_action, opt('Code Action'))
-    set_keymap('n', '<leader>rn', lsp.buf.rename, opt('Lsp Rename'))
-    -- set_keymap('n', '<leader>wa', lsp.buf.add_workspace_folder, opt('Add Workspace Folder'))
-    -- set_keymap('n', '<leader>wl', function() print(vim.inspect(lsp.buf.list_workspace_folders)) end, opt('Show Workspace Folders'))
-    -- set_keymap('n', '<leader>wr', lsp.buf.remove_workspace_folder, opt('Remove Workspace Folder'))
-    -- set_keymap('n', '<leader>wS', lsp.buf.workspace_symbol, opt('Show Workspace Symbol'))
-    set_keymap('n', 'K', lsp.buf.hover, opt('Show Documentation'))
-    set_keymap('n', 'gD', lsp.buf.declaration, opt('Go to Declaration'))
-    set_keymap('n', 'gK', lsp.buf.signature_help, opt('Signature Help'))
-    set_keymap('n', 'gO', lsp.buf.document_symbol, opt('Show Document Symbols'))
-    set_keymap('n', 'gd', lsp.buf.definition, opt('Go to Definition'))
-    set_keymap('n', 'gi', lsp.buf.implementation, opt('Go to Implementation'))
-    set_keymap('n', 'gr', lsp.buf.references, opt('Show References'))
-    set_keymap('n', 'gy', lsp.buf.type_definition, opt('Go to Type Definition'))
-    set_keymap('n', '[d', vim.diagnostic.goto_prev, opt('Diagnostic backward'))
-    set_keymap('n', ']d', vim.diagnostic.goto_next, opt('Diagnostic forward'))
-    set_keymap('n', '<leader>e', vim.diagnostic.open_float, opt('Show Diagnostic (inline)'))
-    set_keymap('n', '<leader>q', vim.diagnostic.setqflist, opt('Diagnostic qflist'))
+    require('keymappings').lsp_keys(bufnr)
   end
 })
 

@@ -200,60 +200,9 @@ require('marks').setup()
 
 
 -- gitsigns.nvim
-local gitsigns = require('gitsigns')
-
-gitsigns.setup {
+require('gitsigns').setup {
   on_attach = function(bufnr)
-
-    local function map(mode, l, r, opts)
-      opts = opts or {}
-      opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
-    end
-
-    -- Navigation
-    map('n', ']h', function()
-      if vim.wo.diff then
-        vim.cmd.normal({']h', bang = true})
-      else
-        gitsigns.nav_hunk('next')
-      end
-    end, { desc = 'Hunk forward' })
-
-    map('n', '[h', function()
-      if vim.wo.diff then
-        vim.cmd.normal({'[h', bang = true})
-      else
-        gitsigns.nav_hunk('prev')
-      end
-    end, { desc = 'Hunk backward' })
-
-    -- Actions
-    map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Stage Hunk' })
-    map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'Reset Hunk' })
-
-    map('v', '<leader>hs', function()
-      gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-    end, { desc = 'Stage Hunk (selection)' })
-
-    map('v', '<leader>hr', function()
-      gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-    end, { desc = 'Reset Hunk (selection)' })
-
-    map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'Stage Buffer' })
-    map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'Reset Buffer' })
-    map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'Preview Hunk' })
-    map('n', '<leader>hi', gitsigns.preview_hunk_inline, { desc = 'Preview Hunk (inline)' })
-    map('n', '<leader>hb', function() gitsigns.blame_line({ full = true }) end, { desc = 'Git blame (current line)' })
-    -- map('n', '<leader>hd', gitsigns.diffthis)
-    -- map('n', '<leader>hD', function() gitsigns.diffthis('~') end)
-    -- map('n', '<leader>hQ', function() gitsigns.setqflist('all') end)
-    -- map('n', '<leader>hq', gitsigns.setqflist)
-    map('n', '<leader>tB', gitsigns.toggle_current_line_blame, { desc = 'Toggle git blame (inline)' })
-    map('n', '<leader>tW', gitsigns.toggle_word_diff, { desc = 'Toggle word diff' })
-
-    -- Text object
-    map({'o', 'x'}, 'ih', gitsigns.select_hunk)
+    require('keymappings').gitsigns_keys(bufnr)
   end
 }
 

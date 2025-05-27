@@ -35,4 +35,4 @@ require('lspconfigs')
 -- Load other configs
 require('general')
 require('themes')
-require('keymappings')
+require('keymappings').setup({})
