@@ -52,7 +52,6 @@ return {
       'onsails/lspkind.nvim',
       'nvim-tree/nvim-web-devicons',
       'rafamadriz/friendly-snippets',
-      'folke/noice.nvim',
     },
     version = '1.*',
     opts_extend = { 'sources.default' }
@@ -108,24 +107,6 @@ return {
     'echasnovski/mini.nvim',
   },
   {
-    'olimorris/codecompanion.nvim',
-    opts = {},
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
-      {
-        'OXY2DEV/markview.nvim',
-        ft = { 'markdown', 'codecompanion' },
-        opts = {
-          preview = {
-            filetypes = { "markdown", "codecompanion" },
-            ignore_buftypes = {},
-          },
-        },
-      },
-    },
-  },
-  {
     'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
@@ -145,11 +126,36 @@ return {
     },
   },
   {
+    'folke/noice.nvim',
+    event = 'VeryLazy',
+    dependencies = { 'MunifTanjim/nui.nvim' }
+  },
+  {
     'kevinhwang91/nvim-bqf',
     ft = 'qf',
     dependencies = {
       { 'junegunn/fzf', build = './install --bin' },
       { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+    },
+  },
+
+  -- AI Assistant
+  {
+    'olimorris/codecompanion.nvim',
+    opts = {},
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      {
+        'OXY2DEV/markview.nvim',
+        ft = { 'markdown', 'codecompanion' },
+        opts = {
+          preview = {
+            filetypes = { "markdown", "codecompanion" },
+            ignore_buftypes = {},
+          },
+        },
+      },
     },
   },
 }
