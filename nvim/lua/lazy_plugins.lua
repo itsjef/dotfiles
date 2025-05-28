@@ -2,7 +2,6 @@ return {
   -- greeter
   {
     'goolord/alpha-nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
 
   -- LSPs: diagnostic, auto-formatting, code actions, and more.
@@ -27,12 +26,10 @@ return {
   -- File explorer, Bufferline, Statusline
   {
     'akinsho/bufferline.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
     version = 'v4.*',
   },
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
 
   -- Git
@@ -49,8 +46,6 @@ return {
     'saghen/blink.cmp',
     dependencies = {
       'saghen/blink.compat',
-      'onsails/lspkind.nvim',
-      'nvim-tree/nvim-web-devicons',
       'rafamadriz/friendly-snippets',
     },
     version = '1.*',
@@ -113,7 +108,6 @@ return {
   },
   {
     'folke/which-key.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
     event = 'VeryLazy',
     keys = {
       {

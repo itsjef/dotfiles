@@ -1,6 +1,5 @@
 -- alpha-nvim
 local startify = require('alpha.themes.startify')
-startify.file_icons.provider = 'devicons'
 require('alpha').setup(startify.config)
 
 
@@ -158,37 +157,25 @@ require('blink.cmp').setup {
         components = {
           kind_icon = {
             text = function(ctx)
-              local lspkind = require('lspkind')
-              local icon = ctx.kind_icon
-              if vim.tbl_contains({ 'Path' }, ctx.source_name) then
-                  local dev_icon, _ = require('nvim-web-devicons').get_icon(ctx.label)
-                  if dev_icon then
-                      icon = dev_icon
-                  end
-              else
-                  icon = lspkind.symbolic(ctx.kind, {
-                      mode = 'symbol',
-                  })
-              end
-
-              return icon .. ctx.icon_gap
+              local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
+              return kind_icon
             end,
-
-            -- Optionally, use the highlight groups from nvim-web-devicons
-            -- You can also add the same function for `kind.highlight` if you want to
-            -- keep the highlight groups in sync with the icons.
+            -- (optional) use highlights from mini.icons
             highlight = function(ctx)
-              local hl = ctx.kind_hl
-              if vim.tbl_contains({ 'Path' }, ctx.source_name) then
-                local dev_icon, dev_hl = require('nvim-web-devicons').get_icon(ctx.label)
-                if dev_icon then
-                  hl = dev_hl
-                end
-              end
+              local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
               return hl
             end,
-          }
-        }
+          },
+          kind = {
+            -- (optional) use highlights from mini.icons
+            highlight = function(ctx)
+              local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+              return hl
+            end,
+          },
+        },
+        columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon' }, { 'kind' } },
+        treesitter = { 'lsp' },
       }
     }
   },
@@ -230,6 +217,7 @@ local mini_modules = {
   'align',
   'bracketed',
   'files',
+  'icons',
   'pairs',
   'splitjoin',
   'surround',
@@ -249,6 +237,8 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     MiniTrailspace.trim_last_lines()
   end,
 })
+
+MiniIcons.mock_nvim_web_devicons()
 
 
 -- telescope.nvim

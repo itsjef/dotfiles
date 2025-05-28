@@ -2,6 +2,7 @@
     "diagnostics.globals": [
         "vim",
         "MiniFiles",
+        "MiniIcons",
         "MiniTrailspace",
         "Snacks",
     ]
