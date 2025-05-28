@@ -369,3 +369,12 @@ require('bqf').setup {
     }
   }
 }
+
+
+-- which-key
+require('which-key').setup {
+  preset = 'helix',
+  delay = function(ctx)
+    return ctx.plugin and 0 or 500
+  end,
+}
