@@ -23,13 +23,16 @@ return {
   --   },
   -- },
 
-  -- File explorer, Bufferline, Statusline
+  -- File explorer, Bufferline, Statusline, Statuscolumn
   {
     'akinsho/bufferline.nvim',
     version = 'v4.*',
   },
   {
     'nvim-lualine/lualine.nvim',
+  },
+  {
+    'luukvbaal/statuscol.nvim',
   },
 
   -- Git

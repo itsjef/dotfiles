@@ -113,6 +113,10 @@ require('lualine').setup {
 }
 
 
+-- statuscol.nvim
+require('statuscol').setup {}
+
+
 -- blink.cmp
 require('blink.cmp').setup {
   enabled = function()
