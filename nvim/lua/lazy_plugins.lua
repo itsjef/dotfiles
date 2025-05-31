@@ -99,6 +99,11 @@ return {
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
   },
+  {
+    'folke/trouble.nvim',
+    opts = {},
+    cmd = 'Trouble'
+  },
 
   -- Utils & Helpers
   {

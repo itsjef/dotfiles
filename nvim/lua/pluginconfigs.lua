@@ -249,6 +249,10 @@ MiniIcons.mock_nvim_web_devicons()
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 local lga_actions = require('telescope-live-grep-args.actions')
+local open_with_trouble = require("trouble.sources.telescope").open
+
+-- Use this to add more results without clearing the trouble list
+-- local add_to_trouble = require("trouble.sources.telescope").add
 
 telescope.setup {
   defaults = {
@@ -259,11 +263,13 @@ telescope.setup {
         ['<C-j>'] = actions.move_selection_next,
         ['<C-k>'] = actions.move_selection_previous,
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<C-t>'] = open_with_trouble,
         ['<Tab>'] = actions.toggle_selection + actions.move_selection_better,
         ['<S-Tab>'] = actions.toggle_selection + actions.move_selection_worse,
       },
       n = {
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<C-t>'] = open_with_trouble,
         ['<Tab>'] = actions.toggle_selection + actions.move_selection_better,
         ['<S-Tab>'] = actions.toggle_selection + actions.move_selection_worse,
       }
