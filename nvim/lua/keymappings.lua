@@ -97,27 +97,27 @@ end
 
 function M:lsp_keys(_)
   local lsp = vim.lsp
+  local builtin = require('telescope.builtin')
 
   wk.add {
-    { '<leader>=', lsp.buf.format, desc = 'Lsp Format' },
-    { '<leader>ca', lsp.buf.code_action, desc = 'Code Action' },
-    { '<leader>rn', lsp.buf.rename, desc = 'Lsp Rename' },
-    -- { '<leader>wa', lsp.buf.add_workspace_folder, desc = 'Add Workspace Folder' },
-    -- { '<leader>wl', function() print(vim.inspect(lsp.buf.list_workspace_folders)) end, desc = 'Show Workspace Folders' },
-    -- { '<leader>wr', lsp.buf.remove_workspace_folder, desc = 'Remove Workspace Folder' },
-    -- { '<leader>wS', lsp.buf.workspace_symbol, desc = 'Show Workspace Symbol' },
     { 'K', lsp.buf.hover, desc = 'Show Documentation' },
-    { 'gD', lsp.buf.declaration, desc = 'Go to Declaration' },
-    { 'gK', lsp.buf.signature_help, desc = 'Signature Help' },
-    { 'gO', lsp.buf.document_symbol, desc = 'Show Document Symbols' },
-    { 'gd', lsp.buf.definition, desc = 'Go to Definition' },
-    { 'gi', lsp.buf.implementation, desc = 'Go to Implementation' },
-    { 'gr', lsp.buf.references, desc = 'Show References' },
-    { 'gy', lsp.buf.type_definition, desc = 'Go to Type Definition' },
-    { '[d', vim.diagnostic.goto_prev, desc = 'Diagnostic backward' },
-    { ']d', vim.diagnostic.goto_next, desc = 'Diagnostic forward' },
-    { '<leader>e', vim.diagnostic.open_float, desc = 'Show Diagnostic (inline)' },
-    { '<leader>q', vim.diagnostic.setqflist, desc = 'Diagnostic qflist' },
+    { 'gO', builtin.lsp_document_symbols, desc = 'Show Symb[O]ls in current buffer' },
+    { 'gd', builtin.lsp_definitions, desc = 'Go to [d]efinition' },
+    { 'gi', builtin.lsp_implementations, desc = 'Go to [i]mplementation' },
+    { 'gr', builtin.lsp_references, desc = 'Show [r]eferences' },
+    { '<C-s>', lsp.buf.signature_help, desc = 'Show [s]ignature help', mode = 'i' },
+    -- format, rename, code action, etc.
+    { '<leader>=', lsp.buf.format, desc = 'Format' },
+    { '<leader>ca', lsp.buf.code_action, desc = 'Code Action', mode = 'nv' },
+    { '<leader>rn', lsp.buf.rename, desc = 'Rename' },
+    -- diagnostics
+    { '<leader>di', function() vim.diagnostic.open_float(nil, { border = 'rounded' }) end, desc = 'Show diagnostic [i]nline' },
+    { '<leader>dq', builtin.diagnostics, desc = 'Add diagnostics to a [q]uickfix list' },
+    -- workspace
+    { '<leader>wa', lsp.buf.add_workspace_folder, desc = '[a]dd workspace folder' },
+    { '<leader>wr', lsp.buf.remove_workspace_folder, desc = '[r]emove workspace folder' },
+    { '<leader>wl', function() print(vim.inspect(lsp.buf.list_workspace_folders())) end, desc = '[l]ist workspace folders' },
+    { '<leader>ws', builtin.lsp_workspace_symbols, desc = 'query workspace [s]ymbols' },
   }
 end
 
