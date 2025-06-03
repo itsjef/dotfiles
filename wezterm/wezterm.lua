@@ -46,25 +46,6 @@ config.keys = {
       size = { Percent = 25 }
     },
   },
-  {
-    key = 'LeftArrow',
-    mods = 'LEADER',
-    action = act.AdjustPaneSize { 'Left', 2 },
-  },
-  {
-    key = 'DownArrow',
-    mods = 'LEADER',
-    action = act.AdjustPaneSize { 'Down', 2 },
-  },
-  {
-    key = 'UpArrow',
-    mods = 'LEADER',
-    action = act.AdjustPaneSize { 'Up', 2 } },
-  {
-    key = 'RightArrow',
-    mods = 'LEADER',
-    action = act.AdjustPaneSize { 'Right', 2 },
-  },
 }
 config.mouse_bindings = {
   -- Change the default click behavior so that it only selects
@@ -81,6 +62,23 @@ config.mouse_bindings = {
     action = wezterm.action.OpenLinkAtMouseCursor,
   },
 }
+
+-- integrates with smart-splits
+local smart_splits = wezterm.plugin.require 'https://github.com/mrjones2014/smart-splits.nvim'
+
+smart_splits.apply_to_config(config, {
+  direction_keys = {
+    move = { 'h', 'j', 'k', 'l' },
+    resize = { 'LeftArrow', 'DownArrow', 'UpArrow', 'RightArrow' },
+  },
+  -- modifier keys to combine with direction_keys
+  modifiers = {
+    move = 'META', -- modifier to use for pane movement, e.g. META+h to move left
+    resize = 'CTRL', -- modifier to use for pane resize, e.g. CTRL+h to resize to the left
+  },
+  -- log level to use: info, warn, error
+  log_level = 'info',
+})
 
 -- return the configuration to wezterm
 return config
