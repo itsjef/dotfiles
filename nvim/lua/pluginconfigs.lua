@@ -323,6 +323,8 @@ require('codecompanion').setup {
   },
 }
 
+vim.cmd([[cab cc CodeCompanion]])  -- expand 'cc' into 'CodeCompanion' in the command line
+
 
 -- snacks.nvim
 require('snacks').setup {
