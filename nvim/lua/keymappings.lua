@@ -105,7 +105,7 @@ function M:lsp_keys(_)
     { 'gd', builtin.lsp_definitions, desc = 'Go to [d]efinition' },
     { 'gi', builtin.lsp_implementations, desc = 'Go to [i]mplementation' },
     { 'gr', builtin.lsp_references, desc = 'Show [r]eferences' },
-    { '<C-s>', lsp.buf.signature_help, desc = 'Show [s]ignature help', mode = 'i' },
+    { '<C-h>', lsp.buf.signature_help, desc = 'Show signature [h]elp', mode = 'i' },
     -- format, rename, code action, etc.
     { '<leader>=', lsp.buf.format, desc = 'Format' },
     { '<leader>ca', lsp.buf.code_action, desc = 'Code Action', mode = 'nv' },
