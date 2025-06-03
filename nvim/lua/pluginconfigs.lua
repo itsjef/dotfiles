@@ -380,3 +380,7 @@ require('which-key').setup {
     return ctx.plugin and 0 or 500
   end,
 }
+
+
+-- smart-splits
+require('smart-splits').setup {}

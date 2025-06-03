@@ -104,6 +104,9 @@ return {
     opts = {},
     cmd = 'Trouble'
   },
+  {
+    'mrjones2014/smart-splits.nvim',
+  },
 
   -- Utils & Helpers
   {

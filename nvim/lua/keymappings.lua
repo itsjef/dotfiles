@@ -1,5 +1,6 @@
 local M = {}
 local wk = require('which-key')
+local smart_splits = require('smart-splits')
 
 
 function M:setup()
@@ -23,11 +24,25 @@ function M:setup()
       { '!', '!<C-g>u', mode = 'i' },
       { ',', ',<C-g>u', mode = 'i' },
 
-      -- Moving between windows
-      { '<A-h>', '<C-w>h' },
-      { '<A-j>', '<C-w>j' },
-      { '<A-k>', '<C-w>k' },
-      { '<A-l>', '<C-w>l' },
+      -- smart-splits
+      -- resizing splits
+      -- these keymaps will also accept a range,
+      -- for example `10<C-h>` will `resize_left` by `(10 * config.default_amount)`
+      { '<C-h>', smart_splits.resize_left },
+      { '<C-j>', smart_splits.resize_down },
+      { '<C-k>', smart_splits.resize_up },
+      { '<C-l>', smart_splits.resize_right },
+      -- moving between splits
+      { '<A-h>', smart_splits.move_cursor_left },
+      { '<A-j>', smart_splits.move_cursor_down },
+      { '<A-k>', smart_splits.move_cursor_up },
+      { '<A-l>', smart_splits.move_cursor_right },
+      { '<A-\\>', smart_splits.move_cursor_previous },
+      -- swapping buffers between windows
+      { '<leader><leader>h', smart_splits.swap_buf_left },
+      { '<leader><leader>j', smart_splits.swap_buf_down },
+      { '<leader><leader>k', smart_splits.swap_buf_up },
+      { '<leader><leader>l', smart_splits.swap_buf_right },
 
       -- Clear highlighted search result
       { '<ESC>', ':noh<CR><ESC>' },
