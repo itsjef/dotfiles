@@ -219,6 +219,7 @@ require('hop').setup {}
 local mini_modules = {
   'ai',
   'align',
+  'animate',
   'bracketed',
   'files',
   'icons',
