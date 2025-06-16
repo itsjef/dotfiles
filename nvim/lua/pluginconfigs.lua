@@ -123,7 +123,16 @@ require('blink.cmp').setup {
     local disabled_fts = { 'lua', 'markdown' }
     return not vim.tbl_contains(disabled_fts, vim.bo.filetype)
   end,
-  cmdline = { enabled = true },
+  cmdline = {
+    enabled = true,
+    completion = {
+      list = {
+        selection = {
+          preselect = false,
+        },
+      },
+    },
+  },
   sources = {
     default = { 'lsp', 'path', 'snippets', 'buffer' },
     providers = {
