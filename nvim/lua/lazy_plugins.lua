@@ -113,6 +113,11 @@ return {
     'echasnovski/mini.nvim',
   },
   {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    config = true
+  },
+  {
     'folke/snacks.nvim',
     priority = 1000,
     lazy = false,

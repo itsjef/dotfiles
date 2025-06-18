@@ -232,7 +232,6 @@ local mini_modules = {
   'bracketed',
   'files',
   'icons',
-  'pairs',
   'splitjoin',
   'surround',
   'trailspace',
