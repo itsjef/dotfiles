@@ -48,8 +48,8 @@ function M:setup()
       { '<ESC>', ':noh<CR><ESC>' },
 
       -- Some plugin mappings that don't need to show
-      { '<C-/>', function() Snacks.terminal() end, desc = 'Toggler Terminal' },
-      { '<C-p>', '<cmd>Telescope frecency workspace=CWD<cr>', desc = 'Find files' },
+      { '<C-/>', function() Snacks.terminal() end, desc = 'Toggle Terminal' },
+      { '<C-p>', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
       { '<leader>/', '<cmd>Telescope live_grep_args<cr>', desc = 'Live grep' },
       { '<leader>*', '<cmd>Telescope grep_string<cr>', desc = 'Grep string' },
       { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
