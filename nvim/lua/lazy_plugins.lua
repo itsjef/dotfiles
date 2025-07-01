@@ -168,4 +168,13 @@ return {
       },
     },
   },
+  {
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+    dependencies = {
+      'fang2hou/blink-copilot',
+      'AndreM222/copilot-lualine',
+    },
+  },
 }

@@ -96,7 +96,7 @@ require('lualine').setup {
     lualine_a = { 'mode' },
     lualine_b = { 'branch' },
     lualine_c = { { 'filename', path = 1 } },
-    lualine_x = { 'encoding', 'fileformat', 'filetype', { require('codecompanion_lualine') } },
+    lualine_x = { 'copilot', 'encoding', 'fileformat', 'filetype', { require('codecompanion_lualine') } },
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
   },
@@ -134,12 +134,18 @@ require('blink.cmp').setup {
     },
   },
   sources = {
-    default = { 'lsp', 'path', 'snippets', 'buffer' },
+    default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
     providers = {
       codecompanion = {
         name = 'CodeCompanion',
         module = 'codecompanion.providers.completion.blink',
         enabled = true,
+      },
+      copilot = {
+        name = 'copilot',
+        module = 'blink-copilot',
+        score_offset = 100,
+        async = true,
       },
     },
     per_filetype = {
@@ -393,3 +399,14 @@ require('which-key').setup {
 
 -- smart-splits
 require('smart-splits').setup {}
+
+
+-- copilot
+require('copilot').setup {
+  suggestion = { enabled = false },
+  panel = { enabled = false },
+  filetypes = {
+    markdown = true,
+    help = true,
+  },
+}
