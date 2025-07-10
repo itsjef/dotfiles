@@ -126,7 +126,7 @@ function M:lsp_keys(_)
     { '<leader>ca', lsp.buf.code_action, desc = 'Code Action', mode = 'nv' },
     { '<leader>rn', lsp.buf.rename, desc = 'Rename' },
     -- diagnostics
-    { '<leader>di', function() vim.diagnostic.open_float(nil, { border = 'rounded' }) end, desc = 'Show diagnostic [i]nline' },
+    { '<leader>e', function() vim.diagnostic.open_float(nil, { border = 'rounded' }) end, desc = 'Show diagnostic [e]rror inline' },
     { '<leader>dq', builtin.diagnostics, desc = 'Add diagnostics to a [q]uickfix list' },
     -- workspace
     { '<leader>wa', lsp.buf.add_workspace_folder, desc = '[a]dd workspace folder' },
