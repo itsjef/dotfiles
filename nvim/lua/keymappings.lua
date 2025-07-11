@@ -93,19 +93,7 @@ function M:setup()
     },
 
     -- AI Assistant
-    {
-      { '<leader>a', group = 'AI Assistant' },
-      { '<leader>aa', '<cmd>CodeCompanionActions<cr>', desc = '[A]ctions' },
-      { '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'Toggle [C]hat' },
-      { '<leader>an', '<cmd>CodeCompanionChat<cr>', desc = '[N]ew Chat' },
-      { '<leader>ae', '<cmd>CodeCompanion /explain<cr>', desc = '[E]xplain Code', mode = 'v' },
-      { '<leader>ar', '<cmd>CodeCompanion /review<cr>', desc = '[R]eview Code', mode = 'v' },
-      { '<leader>af', '<cmd>CodeCompanion /fix<cr>', desc = '[F]ix Code', mode = 'v' },
-      { '<leader>at', '<cmd>CodeCompanion /tests<cr>', desc = 'Generate [T]ests', mode = 'v' },
-      { '<leader>ad', '<cmd>CodeCompanion /doc<cr>', desc = '[D]ocument Code', mode = 'v' },
-      { '<leader>aq', '<cmd>CodeCompanion<cr>', desc = 'Quick [Q]uestion', mode = 'nv' },
-      { '<leader>ap', '<cmd>CodeCompanionChat Add<cr>', desc = '[A]dd to Chat', mode = 'v' },
-    },
+    -- ...
   }
 end
 

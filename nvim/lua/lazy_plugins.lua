@@ -63,6 +63,7 @@ return {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'nvim-treesitter/nvim-treesitter-context',
       'HiPhish/rainbow-delimiters.nvim',
+      'OXY2DEV/markview.nvim',
     },
   },
   {
@@ -150,24 +151,6 @@ return {
   },
 
   -- AI Assistant
-  {
-    'olimorris/codecompanion.nvim',
-    opts = {},
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
-      {
-        'OXY2DEV/markview.nvim',
-        ft = { 'markdown', 'codecompanion' },
-        opts = {
-          preview = {
-            filetypes = { "markdown", "codecompanion" },
-            ignore_buftypes = {},
-          },
-        },
-      },
-    },
-  },
   {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',

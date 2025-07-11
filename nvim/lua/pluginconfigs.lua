@@ -96,7 +96,7 @@ require('lualine').setup {
     lualine_a = { 'mode' },
     lualine_b = { 'branch' },
     lualine_c = { { 'filename', path = 1 } },
-    lualine_x = { 'copilot', 'encoding', 'fileformat', 'filetype', { require('codecompanion_lualine') } },
+    lualine_x = { 'copilot', 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
   },
@@ -136,11 +136,6 @@ require('blink.cmp').setup {
   sources = {
     default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
     providers = {
-      codecompanion = {
-        name = 'CodeCompanion',
-        module = 'codecompanion.providers.completion.blink',
-        enabled = true,
-      },
       copilot = {
         name = 'copilot',
         module = 'blink-copilot',
@@ -148,9 +143,7 @@ require('blink.cmp').setup {
         async = true,
       },
     },
-    per_filetype = {
-      codecompanion = { 'codecompanion', 'path' },
-    },
+    per_filetype = {},
   },
   keymap = {
     preset = 'default',
@@ -314,31 +307,6 @@ telescope.load_extension('frecency')
 telescope.load_extension('fzf')
 telescope.load_extension('live_grep_args')
 telescope.load_extension('ui-select')
-
-
--- codecompanion.nvim
-require('codecompanion').setup {
-  adapters = {
-    anthropic = function()
-      return require('codecompanion.adapters').extend('anthropic', {
-        schema = {
-          model = {
-            default = 'claude-sonnet-4-20250514',
-          },
-          temperature = {
-            default = 0.8
-          },
-        },
-      })
-    end,
-  },
-  strategies = {
-    chat = { adapter = 'anthropic' },
-    inline = { adapter = 'anthropic' },
-  },
-}
-
-vim.cmd([[cab cc CodeCompanion]])  -- expand 'cc' into 'CodeCompanion' in the command line
 
 
 -- snacks.nvim
