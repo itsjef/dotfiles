@@ -44,17 +44,6 @@ return {
     'lewis6991/gitsigns.nvim',
   },
 
-  -- Autocompletion & snippets
-  {
-    'saghen/blink.cmp',
-    dependencies = {
-      'saghen/blink.compat',
-      'rafamadriz/friendly-snippets',
-    },
-    version = '1.*',
-    opts_extend = { 'sources.default' }
-  },
-
   -- Colorscheme & Syntax Highlighting
   {
     'nvim-treesitter/nvim-treesitter',
@@ -150,14 +139,24 @@ return {
     },
   },
 
-  -- AI Assistant
+  -- Autocompletion (AI, snippets, etc.)
   {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
     event = 'InsertEnter',
     dependencies = {
-      'fang2hou/blink-copilot',
       'AndreM222/copilot-lualine',
     },
   },
+  {
+    'saghen/blink.cmp',
+    dependencies = {
+      'fang2hou/blink-copilot',
+      'rafamadriz/friendly-snippets',
+      'saghen/blink.compat',
+    },
+    version = '1.*',
+    opts_extend = { 'sources.default' }
+  },
+
 }
