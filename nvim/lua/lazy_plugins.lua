@@ -126,11 +126,6 @@ return {
     },
   },
   {
-    'folke/noice.nvim',
-    event = 'VeryLazy',
-    dependencies = { 'MunifTanjim/nui.nvim' }
-  },
-  {
     'kevinhwang91/nvim-bqf',
     ft = 'qf',
     dependencies = {
@@ -147,5 +142,26 @@ return {
     dependencies = {
       'AndreM222/copilot-lualine',
     },
+  },
+  {
+    'L3MON4D3/LuaSnip',
+    version = 'v2.*',
+    dependencies = {
+     'rafamadriz/friendly-snippets',
+    }
+  },
+  {
+    'hrsh7th/nvim-cmp',
+    event = { 'InsertEnter', 'CmdlineEnter' },
+    dependencies = {
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-nvim-lsp-document-symbol',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'saadparwaiz1/cmp_luasnip',
+      'zbirenbaum/copilot-cmp',
+    }
   },
 }
