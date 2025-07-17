@@ -5,7 +5,6 @@ require('catppuccin').setup({
     })
   end,
   integrations = {
-    blink_cmp = true,
     colorful_winsep = { enabled = true },
     diffview = true,
     hop = true,

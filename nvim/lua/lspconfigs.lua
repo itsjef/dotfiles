@@ -1,9 +1,9 @@
 local lsp = vim.lsp
 
 
--- Extend default LSP capabilities and extend them with blink.cmp's
-local capabilities = require('blink.cmp').get_lsp_capabilities(lsp.protocol.make_client_capabilities())
-lsp.config('*', { capabilities = capabilities })
+-- Extend default LSP capabilities
+-- local capabilities =
+-- lsp.config('*', { capabilities = capabilities })
 
 
 -- Disable default key bindings
