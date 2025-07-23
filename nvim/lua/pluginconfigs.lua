@@ -100,15 +100,7 @@ require('lualine').setup {
     lualine_a = { 'mode' },
     lualine_b = { 'branch' },
     lualine_c = { { 'filename', path = 1 } },
-    lualine_x = {
-      'copilot', 'encoding', 'fileformat', 'filetype',
-      -- Show @recording messages in the statusline
-      {
-        require('noice').api.statusline.mode.get,
-        cond = require('noice').api.statusline.mode.has,
-        color = { fg = '#ff9e64' },
-      }
-    },
+    lualine_x = { 'copilot', 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
   },
@@ -192,10 +184,10 @@ MiniIcons.mock_nvim_web_devicons()
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 local lga_actions = require('telescope-live-grep-args.actions')
-local open_with_trouble = require("trouble.sources.telescope").open
+local open_with_trouble = require('trouble.sources.telescope').open
 
 -- Use this to add more results without clearing the trouble list
--- local add_to_trouble = require("trouble.sources.telescope").add
+-- local add_to_trouble = require('trouble.sources.telescope').add
 
 telescope.setup {
   defaults = {
@@ -249,11 +241,11 @@ require('snacks').setup {
   bigfile = { enabled = true },
   gitbrowse = {
     url_patterns = {
-      ["git%.parcelperform%.com"] = {
-        branch = "/-/tree/{branch}",
-        file = "/-/blob/{branch}/{file}#L{line_start}-L{line_end}",
-        permalink = "/-/blob/{commit}/{file}#L{line_start}-L{line_end}",
-        commit = "/-/commit/{commit}",
+      ['git%.parcelperform%.com'] = {
+        branch = '/-/tree/{branch}',
+        file = '/-/blob/{branch}/{file}#L{line_start}-L{line_end}',
+        permalink = '/-/blob/{commit}/{file}#L{line_start}-L{line_end}',
+        commit = '/-/commit/{commit}',
       },
     }
   },
@@ -262,22 +254,6 @@ require('snacks').setup {
   quickfile = { enabled = true },
   scope = { enabled = true },
   words = { enabled = true },
-}
-
-
--- noice.nvim
-require('noice').setup {
-  lsp = {
-    override = {
-      ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-      ['vim.lsp.util.stylize_markdown'] = true,
-    },
-  },
-  presets = {
-    bottom_search = true, -- use a classic bottom cmdline for search
-    long_message_to_split = true, -- long messages will be sent to a split
-    lsp_doc_border = true, -- add a border to hover docs and signature help
-  },
 }
 
 
@@ -304,7 +280,7 @@ require('which-key').setup {
 require('smart-splits').setup {}
 
 
--- Autocompletion
+-- autocompletion
 require('copilot').setup {
   suggestion = { enabled = false },
   panel = { enabled = false },
@@ -314,81 +290,107 @@ require('copilot').setup {
   },
 }
 
-require('blink.cmp').setup {
-  enabled = function()
-    local disabled_fts = { 'lua', 'markdown' }
-    return not vim.tbl_contains(disabled_fts, vim.bo.filetype)
-  end,
-  cmdline = {
-    completion = {
-      menu = { auto_show = true },
-      list = { selection = { preselect = false } },
-    },
+require('copilot_cmp').setup()
+
+local has_words_before = function()
+  unpack = unpack or table.unpack
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+end
+
+local cmp = require('cmp')
+local luasnip = require('luasnip')
+
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
   },
-  sources = {
-    default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
-    providers = {
-      copilot = {
-        name = 'copilot',
-        module = 'blink-copilot',
-        score_offset = 100,
-        async = true,
-      },
-    },
-    per_filetype = {},
-  },
-  fuzzy = {
-    sorts = {
-      'exact',
-      'score',
-      'sort_text',
-    },
-  },
-  keymap = {
-    preset = 'default',
-    -- on Macbook, uncheck 'Switch Input Sources' shortcuts for <C-Space> to work
-    ['<Tab>'] = { 'select_next', 'fallback' },
-    ['<S-Tab>'] = { 'select_prev', 'fallback' },
-    ['<C-j>'] = { 'select_and_accept' },  -- less finger stretch
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   completion = {
-    documentation = {
-      auto_show = true,
-      auto_show_delay_ms = 500,
-      treesitter_highlighting = true,
-      window = { border = 'single' },
-    },
-    list = {
-      selection = { preselect = false },
-    },
-    trigger = {
-      show_on_insert_on_trigger_character = false,
-      show_on_accept_on_trigger_character = false,
-    },
-    menu = {
-      border = 'single',
-      draw = {
-        components = {
-          kind_icon = {
-            text = function(ctx)
-              local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
-              return kind_icon
-            end,
-            highlight = function(ctx)
-              local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
-              return hl
-            end,
-          },
-          kind = {
-            highlight = function(ctx)
-              local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
-              return hl
-            end,
-          },
-        },
-        columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon' }, { 'kind' } },
-        treesitter = { 'lsp' },
-      },
+    completeopt = 'menu,menuone,noselect',
+  },
+  preselect = cmp.PreselectMode.None,
+  sorting = {
+    priority_weight = 1.0,
+    comparators = {
+      cmp.config.compare.locality,
+      cmp.config.compare.recently_used,
+      cmp.config.compare.score,
+      cmp.config.compare.offset,
+      cmp.config.compare.order,
     },
   },
+  mapping = cmp.mapping.preset.insert({
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.locally_jumpable(1) then
+        luasnip.jump(1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.locally_jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<C-j>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        if luasnip.expandable() then
+          luasnip.expand()
+        else
+          cmp.confirm({ select = true })
+        end
+      else
+          fallback()
+      end
+    end),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+  }),
+  sources = cmp.config.sources({
+    { name = 'copilot' },
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'nvim_lsp_document_symbol' },
+    { name = 'luasnip' },
+    { name = 'path' },
+  }, {
+    { name = 'buffer' },
+  }),
 }
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  }),
+  matching = { disallow_symbol_nonprefix_matching = false }
+})
+
+-- Add parentheses after selecting function or method item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+
+-- Use existing VS Code style snippets from plugin (rafamadriz/friendly-snippets)
+require('luasnip.loaders.from_vscode').lazy_load()
