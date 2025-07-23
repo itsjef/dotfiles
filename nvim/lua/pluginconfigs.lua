@@ -320,13 +320,9 @@ require('blink.cmp').setup {
     return not vim.tbl_contains(disabled_fts, vim.bo.filetype)
   end,
   cmdline = {
-    enabled = true,
     completion = {
-      list = {
-        selection = {
-          preselect = false,
-        },
-      },
+      menu = { auto_show = true },
+      list = { selection = { preselect = false } },
     },
   },
   sources = {
@@ -341,6 +337,13 @@ require('blink.cmp').setup {
     },
     per_filetype = {},
   },
+  fuzzy = {
+    sorts = {
+      'exact',
+      'score',
+      'sort_text',
+    },
+  },
   keymap = {
     preset = 'default',
     -- on Macbook, uncheck 'Switch Input Sources' shortcuts for <C-Space> to work
@@ -349,16 +352,19 @@ require('blink.cmp').setup {
     ['<C-j>'] = { 'select_and_accept' },  -- less finger stretch
   },
   completion = {
-    -- Show documentation when selecting a completion item
     documentation = {
       auto_show = true,
       auto_show_delay_ms = 500,
+      treesitter_highlighting = true,
       window = { border = 'single' },
     },
-
-    -- Display a preview of the selected item on the current line
-    ghost_text = { enabled = false },
-
+    list = {
+      selection = { preselect = false },
+    },
+    trigger = {
+      show_on_insert_on_trigger_character = false,
+      show_on_accept_on_trigger_character = false,
+    },
     menu = {
       border = 'single',
       draw = {
@@ -368,14 +374,12 @@ require('blink.cmp').setup {
               local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
               return kind_icon
             end,
-            -- (optional) use highlights from mini.icons
             highlight = function(ctx)
               local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
               return hl
             end,
           },
           kind = {
-            -- (optional) use highlights from mini.icons
             highlight = function(ctx)
               local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
               return hl
@@ -384,7 +388,7 @@ require('blink.cmp').setup {
         },
         columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon' }, { 'kind' } },
         treesitter = { 'lsp' },
-      }
-    }
+      },
+    },
   },
 }
