@@ -1,9 +1,9 @@
--- alpha-nvim
+-- Plugin: alpha-nvim
 local startify = require('alpha.themes.startify')
 require('alpha').setup(startify.config)
 
 
--- treesitter
+-- Plugin: treesitter
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
     'bash',
@@ -86,7 +86,7 @@ require('treesitter-context').setup {
 }
 
 
--- lualine
+-- Plugin: lualine
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -117,15 +117,15 @@ require('lualine').setup {
 }
 
 
--- statuscol.nvim
+-- Plugin: statuscol.nvim
 require('statuscol').setup {}
 
 
--- marks.nvim
+-- Plugin: marks.nvim
 require('marks').setup()
 
 
--- gitsigns.nvim
+-- Plugin: gitsigns.nvim
 require('gitsigns').setup {
   on_attach = function(bufnr)
     require('keymappings').gitsigns_keys(bufnr)
@@ -133,7 +133,7 @@ require('gitsigns').setup {
 }
 
 
--- colorful-winsep.nvim
+-- Plugin: colorful-winsep.nvim
 require('colorful-winsep').setup({
   no_exec_files = {
     -- 'NvimTree',
@@ -146,11 +146,11 @@ require('colorful-winsep').setup({
 })
 
 
--- hop.nvim
+-- Plugin: hop.nvim
 require('hop').setup {}
 
 
--- mini.nvim
+-- Plugin: mini.nvim
 local mini_modules = {
   'ai',
   'align',
@@ -180,7 +180,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 MiniIcons.mock_nvim_web_devicons()
 
 
--- telescope.nvim
+-- Plugin: telescope.nvim
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 local lga_actions = require('telescope-live-grep-args.actions')
@@ -236,7 +236,7 @@ telescope.load_extension('live_grep_args')
 telescope.load_extension('ui-select')
 
 
--- snacks.nvim
+-- Plugin: snacks.nvim
 require('snacks').setup {
   bigfile = { enabled = true },
   gitbrowse = {
@@ -257,7 +257,7 @@ require('snacks').setup {
 }
 
 
--- nvim-bqf
+-- Plugin: nvim-bqf
 require('bqf').setup {
   filter = {
     fzf = {
@@ -267,7 +267,7 @@ require('bqf').setup {
 }
 
 
--- which-key
+-- Plugin: which-key
 require('which-key').setup {
   preset = 'helix',
   delay = function(ctx)
@@ -276,11 +276,11 @@ require('which-key').setup {
 }
 
 
--- smart-splits
+-- Plugin: smart-splits
 require('smart-splits').setup {}
 
 
--- autocompletion
+-- Plugin: autocompletion
 require('copilot').setup {
   suggestion = { enabled = false },
   panel = { enabled = false },
