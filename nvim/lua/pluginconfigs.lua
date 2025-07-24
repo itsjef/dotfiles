@@ -383,7 +383,7 @@ cmp.setup.cmdline(':', {
   sources = cmp.config.sources({
     { name = 'path' }
   }, {
-    { name = 'cmdline' }
+    { name = 'cmdline', option = { treat_trailing_slash = false } }
   }),
   matching = { disallow_symbol_nonprefix_matching = false }
 })
