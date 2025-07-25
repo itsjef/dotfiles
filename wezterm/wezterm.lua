@@ -46,6 +46,22 @@ config.keys = {
       size = { Percent = 25 }
     },
   },
+  -- activate pane selection mode with numeric labels
+  {
+    key = '9',
+    mods = 'CTRL',
+    action = act.PaneSelect {
+      alphabet = '1234567890',
+    },
+  },
+  -- show the pane selection mode, but have it swap the active and selected panes
+  {
+    key = '0',
+    mods = 'CTRL',
+    action = act.PaneSelect {
+      mode = 'SwapWithActive',
+    },
+  },
 }
 config.mouse_bindings = {
   -- Change the default click behavior so that it only selects
