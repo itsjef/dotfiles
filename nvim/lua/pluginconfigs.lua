@@ -133,19 +133,6 @@ require('gitsigns').setup {
 }
 
 
--- Plugin: colorful-winsep.nvim
-require('colorful-winsep').setup({
-  no_exec_files = {
-    -- 'NvimTree',
-    'TelescopePrompt',
-    'alpha',
-    'lazy',
-    'mason',
-  },
-  only_line_seq = false,
-})
-
-
 -- Plugin: hop.nvim
 require('hop').setup {}
 

@@ -5,7 +5,6 @@ require('catppuccin').setup({
     })
   end,
   integrations = {
-    colorful_winsep = { enabled = true },
     diffview = true,
     hop = true,
     markview = true,

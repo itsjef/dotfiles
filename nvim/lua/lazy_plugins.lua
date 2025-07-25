@@ -102,10 +102,6 @@ return {
     'chentoast/marks.nvim',
     event = { 'VeryLazy' },
   },
-  {
-    'nvim-zh/colorful-winsep.nvim',
-    event = { 'WinLeave' },
-  },
 
   -- Navigation
   {
