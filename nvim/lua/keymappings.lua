@@ -50,8 +50,8 @@ function M:setup()
       -- Some plugin mappings that don't need to show
       { '<C-/>', function() Snacks.terminal() end, desc = 'Toggle Terminal' },
       { '<C-p>', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
-      { '<leader>/', '<cmd>Telescope live_grep_args<cr>', desc = 'Live grep' },
-      { '<leader>*', '<cmd>Telescope grep_string<cr>', desc = 'Grep string' },
+      { '<leader>/', '<cmd>Telescope live_grep_args theme=ivy<cr>', desc = 'Live grep' },
+      { '<leader>*', '<cmd>Telescope grep_string theme=ivy<cr>', desc = 'Grep string' },
       { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
       { '<leader>nn', function() if not MiniFiles.close() then MiniFiles.open() end end, desc = 'File Browser' },
       { hop_prefix..'t', HopChar1CurrentLineAC, mode = 'nvo' },
@@ -62,18 +62,14 @@ function M:setup()
       { hop_prefix..'W', HopWordCurrentLineBC },
     },
 
-    -- Close quickfix list
-    { '<leader>co', ':copen<cr>', desc = 'Open quickfix list' },
-    { '<leader>cq', ':cclose<cr>', desc = 'Close quickfix list' },
-
     -- telescope.nvim
     {
       { '<leader>t', group = 'Telescope' },
       { '<leader>tb', '<cmd>Telescope buffers<cr>',  desc = 'Buffers' },
-      { '<leader>tc', '<cmd>Telescope quickfix<cr>',  desc = 'Quickfix' },
+      { '<leader>tq', '<cmd>Telescope quickfix<cr>',  desc = 'Quickfix' },
       { '<leader>tr', '<cmd>Telescope resume<cr>',  desc = 'Resume' },
       { '<leader>tF', '<cmd>Telescope frecency<cr>',  desc = 'Previously opened files' },
-      { '<leader>tq', '<cmd>Telescope command_history<cr>',  desc = 'Command history' },
+      { '<leader>tc', '<cmd>Telescope command_history<cr>',  desc = 'Command history' },
       { '<leader>t/', '<cmd>Telescope search_history<cr>',  desc = 'Search history' },
     },
 
