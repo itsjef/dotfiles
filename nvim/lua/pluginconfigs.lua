@@ -81,7 +81,7 @@ require('nvim-treesitter.configs').setup {
   },
 }
 require('treesitter-context').setup {
-  max_lines = 7,
+  multiline_threshold = 1,
   trim_scope = 'inner'
 }
 
