@@ -344,14 +344,13 @@ cmp.setup {
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
   }),
   sources = cmp.config.sources({
-    { name = 'copilot' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
-    { name = 'nvim_lsp_document_symbol' },
-    { name = 'luasnip' },
+    { name = 'luasnip', keyword_length = 2 },
     { name = 'path' },
+    { name = 'buffer', keyword_length = 3 },
   }, {
-    { name = 'buffer' },
+    { name = 'copilot' },
   }),
 }
 
