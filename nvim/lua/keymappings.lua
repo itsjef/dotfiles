@@ -53,7 +53,7 @@ function M:setup()
       { '<leader>/', '<cmd>Telescope live_grep_args theme=ivy<cr>', desc = 'Live grep' },
       { '<leader>*', '<cmd>Telescope grep_string theme=ivy<cr>', desc = 'Grep string' },
       { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
-      { '<leader>nn', function() if not MiniFiles.close() then MiniFiles.open() end end, desc = 'File Browser' },
+      { '<leader>nn', function() require('oil').toggle_float() end, desc = 'File Browser' },
       { hop_prefix..'t', HopChar1CurrentLineAC, mode = 'nvo' },
       { hop_prefix..'T', HopChar1CurrentLineBC, mode = 'nvo' },
       { hop_prefix..'f', HopChar1CurrentLineAC },
@@ -98,12 +98,7 @@ function M:setup()
       { '<leader>am', '<cmd>ClaudeCodeSelectModel<cr>', desc = 'Select Claude model' },
       { '<leader>ab', '<cmd>ClaudeCodeAdd %<cr>', desc = 'Add current buffer' },
       { '<leader>as', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Send to Claude' },
-      {
-        '<leader>as',
-        '<cmd>ClaudeCodeTreeAdd<cr>',
-        desc = 'Add file',
-        ft = { 'NvimTree', 'neo-tree', 'oil', 'minifiles' },
-      },
+      { '<leader>as', '<cmd>ClaudeCodeTreeAdd<cr>', desc = 'Add file' },
       -- Diff management
       { '<leader>aa', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
       { '<leader>ad', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff' },

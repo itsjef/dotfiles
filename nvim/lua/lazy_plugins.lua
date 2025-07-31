@@ -105,6 +105,10 @@ return {
 
   -- Navigation
   {
+    'benomahony/oil-git.nvim',
+    dependencies = { 'stevearc/oil.nvim' },
+  },
+  {
     'smoka7/hop.nvim',
     version = 'v2.*',
   },

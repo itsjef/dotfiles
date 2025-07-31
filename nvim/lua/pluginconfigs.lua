@@ -143,7 +143,6 @@ local mini_modules = {
   'align',
   'animate',
   'bracketed',
-  'files',
   'icons',
   'splitjoin',
   'surround',
@@ -382,3 +381,12 @@ cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 -- Use existing VS Code style snippets from plugin (rafamadriz/friendly-snippets)
 require('luasnip.loaders.from_vscode').lazy_load()
+
+
+-- Plugin: oil.nvim
+require('oil').setup {
+  float = {
+    max_width = 0.6,
+    max_height = 0.5,
+  }
+}
