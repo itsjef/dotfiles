@@ -124,11 +124,6 @@ return {
     },
   },
   {
-    'folke/trouble.nvim',
-    opts = {},
-    cmd = 'Trouble'
-  },
-  {
     'mrjones2014/smart-splits.nvim',
   },
 
