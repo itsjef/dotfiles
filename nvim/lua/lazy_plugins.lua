@@ -109,8 +109,16 @@ return {
     dependencies = { 'stevearc/oil.nvim' },
   },
   {
-    'smoka7/hop.nvim',
-    version = 'v2.*',
+    'folke/flash.nvim',
+    event = 'VeryLazy',
+    opts = {},
+    keys = {
+      { 's', mode = { 'n', 'x' }, function() require('flash').jump() end, desc = 'Flash' },
+      { 'S', mode = { 'n', 'x' }, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },
+      { 'r', mode = { 'o', 'x' }, function() require('flash').remote() end, desc = 'Remote Flash' },
+      { 'R', mode = { 'o', 'x' }, function() require('flash').treesitter_search() end, desc = 'Remote Flash Treesitter' },
+      { '<c-s>', mode = { 'c' }, function() require('flash').toggle() end, desc = 'Toggle Flash' },
+    }
   },
   {
     'nvim-telescope/telescope.nvim',
@@ -161,6 +169,9 @@ return {
       { 'junegunn/fzf', build = './install --bin' },
       { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     },
+  },
+  {
+    'stevearc/quicker.nvim'
   },
 
   -- Autocompletion (snippets, AI, etc.)

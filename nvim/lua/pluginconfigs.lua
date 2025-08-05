@@ -126,10 +126,6 @@ require('gitsigns').setup {
 }
 
 
--- Plugin: hop.nvim
-require('hop').setup {}
-
-
 -- Plugin: mini.nvim
 local mini_modules = {
   'ai',
@@ -238,6 +234,10 @@ require('bqf').setup {
     }
   }
 }
+
+
+-- Plugin: quicker.nvim
+require('quicker').setup {}
 
 
 -- Plugin: which-key

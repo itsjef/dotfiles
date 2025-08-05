@@ -4,12 +4,6 @@ local smart_splits = require('smart-splits')
 
 
 function M:setup()
-  local hop_prefix = '<leader><leader>'
-  local HopChar1CurrentLineAC = '<cmd>HopChar1CurrentLineAC<cr>'
-  local HopChar1CurrentLineBC = '<cmd>HopChar1CurrentLineBC<cr>'
-  local HopWordCurrentLineAC = '<cmd>HopWordCurrentLineAC<cr>'
-  local HopWordCurrentLineBC = '<cmd>HopWordCurrentLineBC<cr>'
-
   wk.add {
     -- hidden key mappings
     {
@@ -54,22 +48,17 @@ function M:setup()
       { '<leader>*', '<cmd>Telescope grep_string theme=ivy<cr>', desc = 'Grep string' },
       { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
       { '<leader>nn', function() require('oil').toggle_float() end, desc = 'File Browser' },
-      { hop_prefix..'t', HopChar1CurrentLineAC, mode = 'nvo' },
-      { hop_prefix..'T', HopChar1CurrentLineBC, mode = 'nvo' },
-      { hop_prefix..'f', HopChar1CurrentLineAC },
-      { hop_prefix..'F', HopChar1CurrentLineBC },
-      { hop_prefix..'w', HopWordCurrentLineAC },
-      { hop_prefix..'W', HopWordCurrentLineBC },
+      { '<leader>qq', function() require('quicker').toggle({ focus = true }) end, desc = 'Quickfix' },
     },
 
     -- telescope.nvim
     {
       { '<leader>t', group = 'Telescope' },
       { '<leader>tb', '<cmd>Telescope buffers<cr>',  desc = 'Buffers' },
-      { '<leader>tq', '<cmd>Telescope quickfix<cr>',  desc = 'Quickfix' },
       { '<leader>tr', '<cmd>Telescope resume<cr>',  desc = 'Resume' },
       { '<leader>tF', '<cmd>Telescope frecency<cr>',  desc = 'Previously opened files' },
       { '<leader>tc', '<cmd>Telescope command_history<cr>',  desc = 'Command history' },
+      { '<leader>tk', '<cmd>Telescope keymaps<cr>',  desc = 'Keymaps' },
       { '<leader>t/', '<cmd>Telescope search_history<cr>',  desc = 'Search history' },
     },
 
