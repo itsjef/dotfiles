@@ -254,16 +254,16 @@ require('smart-splits').setup {}
 
 
 -- Plugin: autocompletion
-require('copilot').setup {
-  suggestion = { enabled = false },
-  panel = { enabled = false },
-  filetypes = {
-    markdown = true,
-    help = true,
-  },
-}
-
-require('copilot_cmp').setup()
+-- require('copilot').setup {
+--   suggestion = { enabled = false },
+--   panel = { enabled = false },
+--   filetypes = {
+--     markdown = true,
+--     help = true,
+--   },
+-- }
+--
+-- require('copilot_cmp').setup()
 
 local has_words_before = function()
   unpack = unpack or table.unpack
