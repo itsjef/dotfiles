@@ -4,6 +4,7 @@ vim.o.mouse = 'a' -- enable mouse
 vim.o.scrolloff = 999 -- Set lines to the cursor when moving around with j/k keys
 vim.o.cursorline = true -- Display the line you are in
 vim.o.number = true
+vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
 
 -- Indentation
 vim.o.tabstop = 2

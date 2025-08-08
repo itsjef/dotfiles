@@ -203,9 +203,14 @@ return {
       'zbirenbaum/copilot-cmp',
     }
   },
+
+  -- Auto-session
   {
-    'coder/claudecode.nvim',
-    dependencies = { 'folke/snacks.nvim' },
-    config = true,
+    'rmagatti/auto-session',
+    lazy = false,
+    opts = {
+      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      auto_restore = false,
+    },
   },
 }
