@@ -164,14 +164,6 @@ return {
 
   -- Autocompletion (snippets, AI, etc.)
   {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    dependencies = {
-      'AndreM222/copilot-lualine',
-    },
-  },
-  {
     'L3MON4D3/LuaSnip',
     version = 'v2.*',
     dependencies = {
@@ -188,8 +180,19 @@ return {
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
-      'zbirenbaum/copilot-cmp',
     }
+  },
+  {
+    'milanglacier/minuet-ai.nvim',
+    config = function()
+      require('minuet').setup {
+        provider = 'claude',
+        provider_options = {
+          claude = { model = 'claude-sonnet-4-20250514' }
+        },
+        cmp = { enable_auto_complete = false },
+      }
+    end,
   },
 
   -- Auto-session

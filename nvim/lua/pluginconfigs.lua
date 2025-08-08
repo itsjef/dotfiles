@@ -100,7 +100,7 @@ require('lualine').setup {
     lualine_a = { 'mode' },
     lualine_b = { 'branch' },
     lualine_c = { { 'filename', path = 1 } },
-    lualine_x = { 'copilot', 'encoding', 'fileformat', 'filetype' },
+    lualine_x = { { require('minuet.lualine') }, 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress', 'location' },
     lualine_z = { {'datetime', style = '%H:%M'} }
   },
@@ -170,6 +170,7 @@ require('snacks').setup {
     }
   },
   indent = { enabled = true },
+  input = { enabled = true },
   notifier = { enabled = true },
   picker = {
     sources = {
@@ -219,17 +220,6 @@ require('smart-splits').setup {}
 
 
 -- Plugin: autocompletion
--- require('copilot').setup {
---   suggestion = { enabled = false },
---   panel = { enabled = false },
---   filetypes = {
---     markdown = true,
---     help = true,
---   },
--- }
---
--- require('copilot_cmp').setup()
-
 local has_words_before = function()
   unpack = unpack or table.unpack
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -251,6 +241,9 @@ cmp.setup {
   },
   completion = {
     completeopt = 'menu,menuone,noselect',
+  },
+  performance = {
+    fetching_timeout = 2000,
   },
   preselect = cmp.PreselectMode.None,
   sorting = {
@@ -294,6 +287,7 @@ cmp.setup {
       end
     end),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-y>'] = require('minuet').make_cmp_map(),
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -302,7 +296,7 @@ cmp.setup {
     { name = 'path' },
     { name = 'buffer', keyword_length = 3 },
   }, {
-    { name = 'copilot' },
+    { name = 'minuet' },
   }),
 }
 
