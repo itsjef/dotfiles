@@ -7,7 +7,7 @@ lsp.config('*', { capabilities = capabilities })
 
 
 -- Disable default key bindings
-for _, binding in ipairs({ 'grn', 'gra', 'gri', 'grr' }) do
+for _, binding in ipairs({ 'grn', 'gra', 'gri', 'grr', 'grt' }) do
   pcall(vim.keymap.del, 'n', binding)
 end
 

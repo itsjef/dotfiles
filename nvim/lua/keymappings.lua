@@ -43,23 +43,28 @@ function M:setup()
 
       -- Some plugin mappings that don't need to show
       { '<C-/>', function() Snacks.terminal() end, desc = 'Toggle Terminal' },
-      { '<C-p>', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
-      { '<leader>/', '<cmd>Telescope live_grep_args theme=ivy<cr>', desc = 'Live grep' },
-      { '<leader>*', '<cmd>Telescope grep_string theme=ivy<cr>', desc = 'Grep string' },
+      { '<C-p>', function() Snacks.picker.files() end, desc = 'Find Files' },
+      { '<leader>/', function() Snacks.picker.grep() end, desc = 'Grep' },
+      { '<leader>*', function() Snacks.picker.grep_word() end, desc = 'Grep Selection', mode = 'nx' },
       { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
-      { '<leader>nn', function() require('oil').toggle_float() end, desc = 'File Browser' },
+      { '<leader>nn', function() Snacks.explorer() end, desc = 'File Browser' },
       { '<leader>qq', function() require('quicker').toggle({ focus = true }) end, desc = 'Quickfix' },
     },
 
-    -- telescope.nvim
+    -- snacks.nvim
     {
-      { '<leader>t', group = 'Telescope' },
-      { '<leader>tb', '<cmd>Telescope buffers<cr>',  desc = 'Buffers' },
-      { '<leader>tr', '<cmd>Telescope resume<cr>',  desc = 'Resume' },
-      { '<leader>tF', '<cmd>Telescope frecency<cr>',  desc = 'Previously opened files' },
-      { '<leader>tc', '<cmd>Telescope command_history<cr>',  desc = 'Command history' },
-      { '<leader>tk', '<cmd>Telescope keymaps<cr>',  desc = 'Keymaps' },
-      { '<leader>t/', '<cmd>Telescope search_history<cr>',  desc = 'Search history' },
+      { '<leader>s', group = 'Snacks Pickers' },
+      { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Smart Find Files' },
+      { '<leader>s"', function() Snacks.picker.registers() end,  desc = 'Registers' },
+      { '<leader>s/', function() Snacks.picker.search_history() end,  desc = 'Search history' },
+      { '<leader>sD', function() Snacks.picker.diagnostics() end, desc = 'Diagnostics' },
+      { '<leader>sb', function() Snacks.picker.buffers() end,  desc = 'Buffers' },
+      { '<leader>sc', function() Snacks.picker.command_history() end,  desc = 'Command history' },
+      { '<leader>sd', function() Snacks.picker.diagnostics_buffer() end, desc = 'Buffer Diagnostics' },
+      { '<leader>sk', function() Snacks.picker.keymaps() end,  desc = 'Keymaps' },
+      { '<leader>sl', function() Snacks.picker.loclist() end, desc = 'Location List' },
+      { '<leader>sq', function() Snacks.picker.qflist() end,  desc = 'Quickfix List' },
+      { '<leader>sr', function() Snacks.picker.resume() end,  desc = 'Resume' },
     },
 
     -- Git
@@ -69,7 +74,7 @@ function M:setup()
       { '<leader>gc', '<cmd>Neogit commit<cr>', desc = 'Commit' },
       { '<leader>gl', '<cmd>Neogit pull<cr>', desc = 'Pull' },
       { '<leader>gp', '<cmd>Neogit push<cr>', desc = 'Push' },
-      { '<leader>gL', '<cmd>Neogit log<cr>', desc = 'Push' },
+      { '<leader>gL', '<cmd>Neogit log<cr>', desc = 'Log' },
       { '<leader>gB', '<cmd>Gitsign blame<cr>', desc = 'Blame' },
       { '<leader>gO', function() Snacks.gitbrowse() end, desc = 'Open Browser', mode = 'nv' },
       { '<leader>gg', function() Snacks.lazygit() end, desc = 'lazygit' },
@@ -80,14 +85,15 @@ end
 
 function M:lsp_keys(_)
   local lsp = vim.lsp
-  local builtin = require('telescope.builtin')
 
   wk.add {
     { 'K', lsp.buf.hover, desc = 'Show Documentation' },
-    { 'gO', builtin.lsp_document_symbols, desc = 'Show Symb[O]ls in current buffer' },
-    { 'gd', builtin.lsp_definitions, desc = 'Go to [d]efinition' },
-    { 'gi', builtin.lsp_implementations, desc = 'Go to [i]mplementation' },
-    { 'gr', builtin.lsp_references, desc = 'Show [r]eferences' },
+    { 'gO', function() Snacks.picker.lsp_symbols() end, desc = 'Show LSP Symbols' },
+    { 'gy', function() Snacks.picker.lsp_type_definitions() end, desc = 'Go to Type Definition' },
+    { 'gd', function() Snacks.picker.lsp_definitions() end, desc = 'Go to Definition' },
+    { 'gD', function() Snacks.picker.lsp_declarations() end, desc = 'Go to Declaration' },
+    { 'gI', function() Snacks.picker.lsp_implementations() end, desc = 'Go to Implementation' },
+    { 'gr', function() Snacks.picker.lsp_references() end, desc = 'Show References' },
     { '<C-h>', lsp.buf.signature_help, desc = 'Show signature [h]elp', mode = 'i' },
     -- format, rename, code action, etc.
     { '<leader>=', lsp.buf.format, desc = 'Format' },
@@ -95,12 +101,11 @@ function M:lsp_keys(_)
     { '<leader>rn', lsp.buf.rename, desc = 'Rename' },
     -- diagnostics
     { '<leader>e', function() vim.diagnostic.open_float(nil, { border = 'rounded' }) end, desc = 'Show diagnostic [e]rror inline' },
-    { '<leader>dq', builtin.diagnostics, desc = 'Add diagnostics to a [q]uickfix list' },
     -- workspace
     { '<leader>wa', lsp.buf.add_workspace_folder, desc = '[a]dd workspace folder' },
     { '<leader>wr', lsp.buf.remove_workspace_folder, desc = '[r]emove workspace folder' },
     { '<leader>wl', function() print(vim.inspect(lsp.buf.list_workspace_folders())) end, desc = '[l]ist workspace folders' },
-    { '<leader>ws', builtin.lsp_workspace_symbols, desc = 'query workspace [s]ymbols' },
+    { '<leader>ws', function() Snacks.picker.lsp_workspace_symbols() end, desc = 'Show LSP Workspace Symbols' },
   }
 end
 

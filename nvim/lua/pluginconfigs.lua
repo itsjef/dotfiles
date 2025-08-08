@@ -155,59 +155,10 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 MiniIcons.mock_nvim_web_devicons()
 
 
--- Plugin: telescope.nvim
-local telescope = require('telescope')
-local actions = require('telescope.actions')
-local lga_actions = require('telescope-live-grep-args.actions')
-
-telescope.setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<ESC>'] = actions.close,
-        ['<CR>'] = actions.select_default + actions.center,
-        ['<C-j>'] = actions.move_selection_next,
-        ['<C-k>'] = actions.move_selection_previous,
-        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-        ['<Tab>'] = actions.toggle_selection + actions.move_selection_better,
-        ['<S-Tab>'] = actions.toggle_selection + actions.move_selection_worse,
-      },
-      n = {
-        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-        ['<Tab>'] = actions.toggle_selection + actions.move_selection_better,
-        ['<S-Tab>'] = actions.toggle_selection + actions.move_selection_worse,
-      }
-    },
-    file_ignore_patterns = { 'temp%_dir/.*' },
-  },
-  extensions = {
-    live_grep_args = {
-      auto_quoting = true,
-      mappings = {
-        i = {
-          ['<C-e>'] = lga_actions.quote_prompt(),
-          ['<C-t>'] = lga_actions.quote_prompt({ postfix = ' -t'}),
-          ['<C-space>'] = lga_actions.to_fuzzy_refine,
-        },
-      },
-    },
-    frecency = {
-      hide_current_buffer = true,
-    },
-    ['ui-select'] = {
-      require('telescope.themes').get_dropdown {}
-    },
-  },
-}
-telescope.load_extension('frecency')
-telescope.load_extension('fzf')
-telescope.load_extension('live_grep_args')
-telescope.load_extension('ui-select')
-
-
 -- Plugin: snacks.nvim
 require('snacks').setup {
   bigfile = { enabled = true },
+  explorer = { enabled = true },
   gitbrowse = {
     url_patterns = {
       ['git%.parcelperform%.com'] = {
@@ -220,6 +171,20 @@ require('snacks').setup {
   },
   indent = { enabled = true },
   notifier = { enabled = true },
+  picker = {
+    sources = {
+      explorer = {
+        layout = { layout = { position = 'right' } }
+      },
+    },
+    win = {
+      input = {
+        keys = {
+          ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
+        },
+      },
+    },
+  },
   quickfile = { enabled = true },
   scope = { enabled = true },
   words = { enabled = true },

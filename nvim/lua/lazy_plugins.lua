@@ -51,7 +51,6 @@ return {
   -- { 'mfussenegger/nvim-dap',
   --   dependencies = {
   --     'mfussenegger/nvim-dap-python',
-  --     'nvim-telescope/telescope-dap.nvim',
   --     'rcarriga/nvim-dap-ui',
   --     'theHamsta/nvim-dap-virtual-text',
   --   },
@@ -119,17 +118,6 @@ return {
       { 'R', mode = { 'o', 'x' }, function() require('flash').treesitter_search() end, desc = 'Remote Flash Treesitter' },
       { '<c-s>', mode = { 'c' }, function() require('flash').toggle() end, desc = 'Toggle Flash' },
     }
-  },
-  {
-    'nvim-telescope/telescope.nvim',
-    version = '0.1.*',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-frecency.nvim',
-      'nvim-telescope/telescope-live-grep-args.nvim',
-      'nvim-telescope/telescope-ui-select.nvim',
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    },
   },
   {
     'mrjones2014/smart-splits.nvim',
