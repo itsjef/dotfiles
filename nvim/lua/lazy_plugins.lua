@@ -2,6 +2,10 @@ return {
   -- greeter
   {
     'goolord/alpha-nvim',
+    config = function()
+      local startify = require('alpha.themes.startify')
+      require('alpha').setup(startify.config)
+    end
   },
 
   -- LSPs: diagnostic, auto-formatting, code actions, and more.
@@ -66,6 +70,9 @@ return {
   },
   {
     'luukvbaal/statuscol.nvim',
+    config = function()
+      require('statuscol').setup {}
+    end
   },
 
   -- Git
@@ -75,6 +82,13 @@ return {
   },
   {
     'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup {
+        on_attach = function(bufnr)
+          require('keymappings').gitsigns_keys(bufnr)
+        end
+      }
+    end
   },
 
   -- Colorscheme & Syntax Highlighting
@@ -99,13 +113,22 @@ return {
   },
   {
     'chentoast/marks.nvim',
-    event = { 'VeryLazy' },
+    event = 'VeryLazy',
+    config = function()
+      require('marks').setup {}
+    end
   },
 
   -- Navigation
   {
-    'benomahony/oil-git.nvim',
-    dependencies = { 'stevearc/oil.nvim' },
+    'stevearc/oil.nvim',
+    dependencies = { 'benomahony/oil-git.nvim' },
+    opts = {
+      float = {
+        max_width = 0.6,
+        max_height = 0.5,
+      },
+    },
   },
   {
     'folke/flash.nvim',
@@ -121,6 +144,9 @@ return {
   },
   {
     'mrjones2014/smart-splits.nvim',
+    config = function()
+      require('smart-splits').setup {}
+    end
   },
 
   -- Utils & Helpers
@@ -149,6 +175,12 @@ return {
         desc = 'Buffer Local Keymaps (which-key)',
       },
     },
+    opts = {
+      preset = 'helix',
+      delay = function(ctx)
+        return ctx.plugin and 0 or 500
+      end,
+    },
   },
   {
     'kevinhwang91/nvim-bqf',
@@ -157,9 +189,21 @@ return {
       { 'junegunn/fzf', build = './install --bin' },
       { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     },
+    config = function()
+      require('bqf').setup {
+        filter = {
+          fzf = {
+            extra_opts = {'--bind', 'ctrl-o:toggle-all', '--delimiter', '│'}
+          }
+        }
+      }
+    end
   },
   {
-    'stevearc/quicker.nvim'
+    'stevearc/quicker.nvim',
+    config = function()
+      require('quicker').setup {}
+    end
   },
 
   -- Autocompletion (snippets, AI, etc.)

@@ -1,8 +1,3 @@
--- Plugin: alpha-nvim
-local startify = require('alpha.themes.startify')
-require('alpha').setup(startify.config)
-
-
 -- Plugin: treesitter
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
@@ -110,22 +105,6 @@ require('lualine').setup {
 }
 
 
--- Plugin: statuscol.nvim
-require('statuscol').setup {}
-
-
--- Plugin: marks.nvim
-require('marks').setup()
-
-
--- Plugin: gitsigns.nvim
-require('gitsigns').setup {
-  on_attach = function(bufnr)
-    require('keymappings').gitsigns_keys(bufnr)
-  end
-}
-
-
 -- Plugin: mini.nvim
 local mini_modules = {
   'ai',
@@ -190,33 +169,6 @@ require('snacks').setup {
   scope = { enabled = true },
   words = { enabled = true },
 }
-
-
--- Plugin: nvim-bqf
-require('bqf').setup {
-  filter = {
-    fzf = {
-      extra_opts = {'--bind', 'ctrl-o:toggle-all', '--delimiter', '│'}
-    }
-  }
-}
-
-
--- Plugin: quicker.nvim
-require('quicker').setup {}
-
-
--- Plugin: which-key
-require('which-key').setup {
-  preset = 'helix',
-  delay = function(ctx)
-    return ctx.plugin and 0 or 500
-  end,
-}
-
-
--- Plugin: smart-splits
-require('smart-splits').setup {}
 
 
 -- Plugin: autocompletion
@@ -326,12 +278,3 @@ cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 -- Use existing VS Code style snippets from plugin (rafamadriz/friendly-snippets)
 require('luasnip.loaders.from_vscode').lazy_load()
-
-
--- Plugin: oil.nvim
-require('oil').setup {
-  float = {
-    max_width = 0.6,
-    max_height = 0.5,
-  }
-}
