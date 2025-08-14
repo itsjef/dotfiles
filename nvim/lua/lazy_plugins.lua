@@ -68,12 +68,6 @@ return {
   {
     'nvim-lualine/lualine.nvim',
   },
-  {
-    'luukvbaal/statuscol.nvim',
-    config = function()
-      require('statuscol').setup {}
-    end
-  },
 
   -- Git
   {
