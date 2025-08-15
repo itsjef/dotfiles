@@ -71,6 +71,7 @@ function M:setup()
     {
       { '<leader>g', group = 'Git' },
       { '<leader>gs', require('neogit').open, desc = 'Status' },
+      { '<leader>gb', '<cmd>Neogit branch<cr>', desc = 'Branch' },
       { '<leader>gc', '<cmd>Neogit commit<cr>', desc = 'Commit' },
       { '<leader>gl', '<cmd>Neogit pull<cr>', desc = 'Pull' },
       { '<leader>gp', '<cmd>Neogit push<cr>', desc = 'Push' },
