@@ -121,6 +121,11 @@ return {
       require('marks').setup {}
     end
   },
+  {
+    'nvim-zh/colorful-winsep.nvim',
+    event = 'WinLeave',
+    config = true,
+  },
 
   -- Navigation
   {
