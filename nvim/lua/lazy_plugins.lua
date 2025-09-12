@@ -21,10 +21,11 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     ft = { 'scala', 'sbt', 'java' },
     opts = function()
+      local lsp = vim.lsp
       local metals_config = require('metals').bare_config()
 
       metals_config.init_options.statusBarProvider = 'off'
-      metals_config.capabilities = require('cmp_nvim_lsp').default_capabilities()
+      metals_config.capabilities = require('blink.cmp').get_lsp_capabilities(lsp.protocol.make_client_capabilities())
       metals_config.on_attach = function(client, bufnr)
         if not client then
           return
@@ -239,32 +240,22 @@ return {
 
   -- Autocompletion (snippets, AI, etc.)
   {
-    'L3MON4D3/LuaSnip',
-    version = 'v2.*',
-    dependencies = {
-     'rafamadriz/friendly-snippets',
-    }
-  },
-  {
-    'hrsh7th/nvim-cmp',
-    event = { 'InsertEnter', 'CmdlineEnter' },
-    dependencies = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      'saadparwaiz1/cmp_luasnip',
-    }
+    'saghen/blink.cmp',
+    -- optional: provides snippets for the snippet source
+    dependencies = { 'rafamadriz/friendly-snippets' },
+
+    -- use a release tag to download pre-built binaries
+    version = '1.*',
+    opts_extend = { 'sources.default' }
   },
   {
     'milanglacier/minuet-ai.nvim',
     config = function()
       require('minuet').setup {
         provider = 'claude',
-        provider_options = {
-          claude = { model = 'claude-sonnet-4-20250514' }
-        },
+        -- provider_options = {
+        --   claude = { model = 'claude-sonnet-4-20250514' }
+        -- },
         cmp = { enable_auto_complete = false },
       }
     end,

@@ -2,7 +2,7 @@ local lsp = vim.lsp
 
 
 -- Extend default LSP capabilities
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('blink.cmp').get_lsp_capabilities(lsp.protocol.make_client_capabilities())
 lsp.config('*', { capabilities = capabilities })
 
 

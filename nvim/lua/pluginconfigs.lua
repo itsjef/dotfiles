@@ -89,7 +89,7 @@ require('lualine').setup {
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
     disabled_filetypes = {},
-    globalstatus = true,  -- overrides vim.o.laststatus
+    globalstatus = true, -- overrides vim.o.laststatus
   },
   sections = {
     lualine_a = { 'mode' },
@@ -97,7 +97,7 @@ require('lualine').setup {
     lualine_c = { { 'filename', path = 1 } },
     lualine_x = { { require('minuet.lualine') }, 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress', 'location' },
-    lualine_z = { {'datetime', style = '%H:%M'} }
+    lualine_z = { { 'datetime', style = '%H:%M' } }
   },
   inactive_sections = {},
   tabline = {},
@@ -177,109 +177,69 @@ require('snacks').setup {
 
 
 -- Plugin: autocompletion
-local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-end
-
-local cmp = require('cmp')
-local luasnip = require('luasnip')
-
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
-  },
-  completion = {
-    completeopt = 'menu,menuone,noselect',
-  },
-  performance = {
-    fetching_timeout = 2000,
-  },
-  preselect = cmp.PreselectMode.None,
-  sorting = {
-    priority_weight = 1.0,
-    comparators = {
-      cmp.config.compare.locality,
-      cmp.config.compare.recently_used,
-      cmp.config.compare.score,
-      cmp.config.compare.offset,
-      cmp.config.compare.order,
+require('blink.cmp').setup {
+  -- enabled = function()
+  --   local disabled_fts = { 'lua', 'markdown' }
+  --   return not vim.tbl_contains(disabled_fts, vim.bo.filetype)
+  -- end,
+  signature = { enabled = true },
+  cmdline = {
+    enabled = true,
+    completion = {
+      list = { selection = { preselect = false, auto_insert = true } },
     },
   },
-  mapping = cmp.mapping.preset.insert({
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.locally_jumpable(1) then
-        luasnip.jump(1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<C-j>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        if luasnip.expandable() then
-          luasnip.expand()
-        else
-          cmp.confirm({ select = true })
-        end
-      else
-          fallback()
-      end
-    end),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<C-y>'] = require('minuet').make_cmp_map(),
-  }),
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' },
-    { name = 'luasnip', keyword_length = 2 },
-    { name = 'path' },
-    { name = 'buffer', keyword_length = 3 },
-  -- }, {
-  --   { name = 'minuet' },
-  }),
-}
-
--- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
-  completion = { autocomplete = false },
-  mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'buffer' }
-  }
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline', option = { treat_trailing_slash = false } }
-  }),
-  matching = { disallow_symbol_nonprefix_matching = false }
-})
-
--- Add parentheses after selecting function or method item
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-
--- Use existing VS Code style snippets from plugin (rafamadriz/friendly-snippets)
-require('luasnip.loaders.from_vscode').lazy_load()
+    default = { 'lsp', 'path', 'snippets', 'buffer' }, -- 'minuet' excluded from default, for manual completion only
+    providers = {
+      minuet = {
+        name = 'minuet',
+        module = 'minuet.blink',
+        async = true,
+        -- Should match minuet.config.request_timeout * 1000,
+        -- since minuet.config.request_timeout is in seconds
+        timeout_ms = 3000,
+        score_offset = 50, -- Gives minuet higher priority among suggestions
+      },
+    },
+    per_filetype = {},
+  },
+  keymap = {
+    preset = 'cmdline',
+    ['<C-j>'] = { 'select_and_accept' }, -- less finger stretch
+    ['<C-y>'] = require('minuet').make_blink_map(),
+  },
+  completion = {
+    list = { selection = { preselect = false, auto_insert = true } },
+    documentation = { auto_show = true, window = { border = 'single' } },
+    trigger = { prefetch_on_insert = false }, -- Avoid unnecessary request
+    menu = {
+      auto_show = false,
+      border = 'single',
+      draw = {
+        components = {
+          kind_icon = {
+            text = function(ctx)
+              local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
+              return kind_icon
+            end,
+            -- (optional) use highlights from mini.icons
+            highlight = function(ctx)
+              local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+              return hl
+            end,
+          },
+          kind = {
+            -- (optional) use highlights from mini.icons
+            highlight = function(ctx)
+              local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+              return hl
+            end,
+          },
+        },
+        columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon' }, { 'kind' } },
+        treesitter = { 'lsp' },
+      },
+    },
+  },
+}
