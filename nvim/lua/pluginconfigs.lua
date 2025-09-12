@@ -109,7 +109,7 @@ require('lualine').setup {
 local mini_modules = {
   'ai',
   'align',
-  'animate',
+  { 'animate', { cursor = { enable = false } } },
   'bracketed',
   'icons',
   'splitjoin',
@@ -118,7 +118,11 @@ local mini_modules = {
 }
 
 for _, module in ipairs(mini_modules) do
-  require('mini.' .. module).setup()
+  if type(module) == 'table' then
+    require('mini.' .. module[1]).setup(module[2])
+  else
+    require('mini.' .. module).setup()
+  end
 end
 
 local formatAugroup = vim.api.nvim_create_augroup('FormatAutogroup', { clear = true })
