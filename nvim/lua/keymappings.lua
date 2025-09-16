@@ -88,7 +88,7 @@ function M:lsp_keys(_)
   local lsp = vim.lsp
 
   wk.add {
-    { 'K', lsp.buf.hover, desc = 'Show Documentation' },
+    { 'K', function() lsp.buf.hover({ border = 'single' }) end, desc = 'Show Documentation' },
     { 'gO', function() Snacks.picker.lsp_symbols() end, desc = 'Show LSP Symbols' },
     { 'gy', function() Snacks.picker.lsp_type_definitions() end, desc = 'Go to Type Definition' },
     { 'gd', function() Snacks.picker.lsp_definitions() end, desc = 'Go to Definition' },

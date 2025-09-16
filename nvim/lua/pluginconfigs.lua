@@ -182,7 +182,10 @@ require('blink.cmp').setup {
   --   local disabled_fts = { 'lua', 'markdown' }
   --   return not vim.tbl_contains(disabled_fts, vim.bo.filetype)
   -- end,
-  signature = { enabled = true },
+  signature = {
+    enabled = true,
+    window = { border = 'single' }
+  },
   cmdline = {
     enabled = true,
     completion = {
