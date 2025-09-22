@@ -195,6 +195,20 @@ require('blink.cmp').setup {
   sources = {
     default = { 'lsp', 'path', 'snippets', 'buffer' }, -- 'minuet' excluded from default, for manual completion only
     providers = {
+      lsp = {
+        min_keyword_length = 2,
+        score_offset = 0,
+      },
+      path = {
+        min_keyword_length = 0,
+      },
+      snippets = {
+        min_keyword_length = 2,
+      },
+      buffer = {
+        min_keyword_length = 5,
+        max_items = 5,
+      },
       minuet = {
         name = 'minuet',
         module = 'minuet.blink',
