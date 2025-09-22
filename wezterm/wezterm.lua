@@ -62,6 +62,12 @@ config.keys = {
       mode = 'SwapWithActive',
     },
   },
+  -- Line break for Claude Code input
+  {
+    key = 'Enter',
+    mods = 'SHIFT',
+    action = wezterm.action { SendString = "\x1b\r" }
+  },
 }
 config.mouse_bindings = {
   -- Change the default click behavior so that it only selects
@@ -89,7 +95,7 @@ smart_splits.apply_to_config(config, {
   },
   -- modifier keys to combine with direction_keys
   modifiers = {
-    move = 'META', -- modifier to use for pane movement, e.g. META+h to move left
+    move = 'META',   -- modifier to use for pane movement, e.g. META+h to move left
     resize = 'CTRL', -- modifier to use for pane resize, e.g. CTRL+h to resize to the left
   },
   -- log level to use: info, warn, error
