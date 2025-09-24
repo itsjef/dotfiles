@@ -222,7 +222,21 @@ require('blink.cmp').setup {
     per_filetype = {},
   },
   keymap = {
-    preset = 'cmdline',
+    preset = 'enter',
+    ['<Tab>'] = {
+      function(cmp)
+        return cmp.select_next()
+      end,
+      'snippet_forward',
+      'fallback',
+    },
+    ['<S-Tab>'] = {
+      function(cmp)
+        return cmp.select_prev()
+      end,
+      'snippet_backward',
+      'fallback',
+    },
     ['<C-j>'] = { 'select_and_accept' }, -- less finger stretch
     ['<C-y>'] = require('minuet').make_blink_map(),
   },
@@ -231,7 +245,7 @@ require('blink.cmp').setup {
     documentation = { auto_show = true, window = { border = 'single' } },
     trigger = { prefetch_on_insert = false }, -- Avoid unnecessary request
     menu = {
-      auto_show = false,
+      auto_show = true,
       border = 'single',
       draw = {
         components = {
