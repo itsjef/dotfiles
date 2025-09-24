@@ -28,6 +28,7 @@ config.font_size = 12.5
 config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 config.window_close_confirmation = 'NeverPrompt'
+config.native_macos_fullscreen_mode = true
 
 config.max_fps = 120
 
