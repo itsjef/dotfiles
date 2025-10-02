@@ -297,6 +297,8 @@ return {
     opts = {
       suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
       auto_restore = false,
+      bypass_save_filetypes = { 'alpha', 'colorful-winsep' },
+      close_filetypes_on_save = { 'checkhealth', 'colorful-winsep' },
     },
   },
 }
