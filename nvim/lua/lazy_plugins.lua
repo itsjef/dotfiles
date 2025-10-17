@@ -157,6 +157,7 @@ return {
     dependencies = { 'benomahony/oil-git.nvim' },
     opts = {
       float = {
+        border = 'single',
         max_width = 0.6,
         max_height = 0.5,
       },
