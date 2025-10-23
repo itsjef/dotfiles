@@ -1,6 +1,7 @@
 local M = {}
 local wk = require('which-key')
 local smart_splits = require('smart-splits')
+local flash = require('flash')
 
 
 function M:setup()
@@ -79,6 +80,15 @@ function M:setup()
       { '<leader>gB', '<cmd>Gitsign blame<cr>', desc = 'Blame' },
       { '<leader>gO', function() Snacks.gitbrowse() end, desc = 'Open Browser', mode = 'nv' },
       { '<leader>gg', function() Snacks.lazygit() end, desc = 'lazygit' },
+    },
+
+    -- Flash
+    {
+      { 's',     flash.jump,              desc = 'Flash',                   mode = 'nxo' },
+      { 'S',     flash.treesitter,        desc = 'Flash Treesitter',        mode = 'nxo' },
+      { 'r',     flash.remote,            desc = 'Remote Flash',            mode = 'o'   },
+      { 'R',     flash.treesitter_search, desc = 'Remote Flash Treesitter', mode = 'xo'  },
+      { '<c-s>', flash.toggle,            desc = 'Toggle Flash',            mode = 'c'   },
     },
   }
 end
