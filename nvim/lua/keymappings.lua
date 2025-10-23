@@ -1,8 +1,8 @@
 local M = {}
+local tw = require('treewalker')
 local wk = require('which-key')
 local smart_splits = require('smart-splits')
 local flash = require('flash')
-
 
 function M:setup()
   wk.add {
@@ -90,6 +90,14 @@ function M:setup()
       { 'R',     flash.treesitter_search, desc = 'Remote Flash Treesitter', mode = 'xo'  },
       { '<c-s>', flash.toggle,            desc = 'Toggle Flash',            mode = 'c'   },
     },
+
+    -- Treewalker
+    {
+      { '[s', tw.move_up,   desc = 'Treewalker - Prev Neighbor Node', mode = 'nv' },
+      { ']s', tw.move_down, desc = 'Treewalker - Next Neighbor Node', mode = 'nv' },
+      { '[p', tw.move_out,  desc = 'Treewalker - Parent',             mode = 'nv' },
+      { ']p', tw.move_in,   desc = 'Treewalker - First Child',        mode = 'nv' },
+    }
   }
 end
 

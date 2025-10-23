@@ -173,6 +173,12 @@ return {
       require('smart-splits').setup {}
     end
   },
+  {
+    'aaronik/treewalker.nvim',
+    config = function()
+      require('treewalker').setup {}
+    end
+  },
 
   -- Utils & Helpers
   {
