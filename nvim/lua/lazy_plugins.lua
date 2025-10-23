@@ -179,6 +179,14 @@ return {
       require('treewalker').setup {}
     end
   },
+  {
+    'andymass/vim-matchup',
+    opts = {
+      treesitter = {
+        stopline = 500,
+      }
+    },
+  },
 
   -- Utils & Helpers
   {
