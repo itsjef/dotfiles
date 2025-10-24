@@ -13,6 +13,7 @@ require('nvim-treesitter.configs').setup {
     'markdown_inline',
     'python',
     'regex',
+    'scala',
     'toml',
     'typst',
     'vimdoc',
