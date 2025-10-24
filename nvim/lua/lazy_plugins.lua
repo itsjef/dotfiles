@@ -91,6 +91,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
       'nvim-treesitter/nvim-treesitter-context',
       'HiPhish/rainbow-delimiters.nvim',
     },
@@ -103,7 +104,7 @@ return {
     },
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
-    opts = {},
+    opts = { enabled = false },
   },
   {
     'hat0uma/csvview.nvim',
@@ -171,12 +172,6 @@ return {
     'mrjones2014/smart-splits.nvim',
     config = function()
       require('smart-splits').setup {}
-    end
-  },
-  {
-    'aaronik/treewalker.nvim',
-    config = function()
-      require('treewalker').setup {}
     end
   },
   {

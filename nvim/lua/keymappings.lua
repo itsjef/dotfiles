@@ -1,8 +1,8 @@
 local M = {}
-local tw = require('treewalker')
 local wk = require('which-key')
 local smart_splits = require('smart-splits')
 local flash = require('flash')
+local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
 
 function M:setup()
   wk.add {
@@ -50,6 +50,10 @@ function M:setup()
       { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
       { '<leader>nn', function() require('oil').toggle_float(nil) end, desc = 'File Browser' },
       { '<leader>qq', function() require('quicker').toggle({ focus = true }) end, desc = 'Quickfix' },
+
+      -- Repeat movement
+      -- { '<space>',   ts_repeat_move.repeat_last_move,          desc = 'TS - repeat last move',                       mode = 'nxo' },
+      -- { '<s-space>', ts_repeat_move.repeat_last_move_opposite, desc = 'TS - repeat last move in opposite direction', mode = 'nxo' },
     },
 
     -- snacks.nvim
@@ -90,14 +94,6 @@ function M:setup()
       { 'R',     flash.treesitter_search, desc = 'Remote Flash Treesitter', mode = 'xo'  },
       { '<c-s>', flash.toggle,            desc = 'Toggle Flash',            mode = 'c'   },
     },
-
-    -- Treewalker
-    {
-      { '[s', tw.move_up,   desc = 'Treewalker - Prev Neighbor Node', mode = 'nv' },
-      { ']s', tw.move_down, desc = 'Treewalker - Next Neighbor Node', mode = 'nv' },
-      { '[p', tw.move_out,  desc = 'Treewalker - Parent',             mode = 'nv' },
-      { ']p', tw.move_in,   desc = 'Treewalker - First Child',        mode = 'nv' },
-    }
   }
 end
 
