@@ -42,7 +42,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 
 -- Servers
-local ensure_installed = { 'pyright', 'ruff', 'dockerls', 'lua_ls' }
+local ensure_installed = {
+  'dockerls',
+  'lua_ls',
+  'marksman',
+  'pyright',
+  'ruff',
+}
 require('mason').setup()
 require('mason-lspconfig').setup({ ensure_installed = ensure_installed })
 
