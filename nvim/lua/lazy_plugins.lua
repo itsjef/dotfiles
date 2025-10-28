@@ -166,7 +166,11 @@ return {
   {
     'folke/flash.nvim',
     event = 'VeryLazy',
-    opts = {},
+    opts = {
+      modes = {
+        keys = { 'f', 'F', 't', 'T' },
+      }
+    },
   },
   {
     'mrjones2014/smart-splits.nvim',
