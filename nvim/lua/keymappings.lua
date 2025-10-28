@@ -52,8 +52,8 @@ function M:setup()
       { '<leader>qq', function() require('quicker').toggle({ focus = true }) end, desc = 'Quickfix' },
 
       -- Repeat movement
-      -- { '<space>',   ts_repeat_move.repeat_last_move,          desc = 'TS - repeat last move',                       mode = 'nxo' },
-      -- { '<s-space>', ts_repeat_move.repeat_last_move_opposite, desc = 'TS - repeat last move in opposite direction', mode = 'nxo' },
+      { ';',       ts_repeat_move.repeat_last_move,          desc = 'TS - repeat last move',                       mode = 'nxo' },
+      { '<space>', ts_repeat_move.repeat_last_move_opposite, desc = 'TS - repeat last move in opposite direction', mode = 'nxo' },
     },
 
     -- snacks.nvim
