@@ -150,17 +150,18 @@ function M:gitsigns_keys(_)
     },
 
     -- Actions
+    { '<leader>h', group = 'Gitsigns' },
     { '<leader>hs', gitsigns.stage_hunk, desc = 'Stage Hunk' },
     { '<leader>hr', gitsigns.reset_hunk, desc = 'Reset Hunk' },
     { '<leader>hs', function() gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, desc = 'Stage Hunk (selection)', mode = 'v' },
     { '<leader>hr', function() gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, desc = 'Reset Hunk (selection)', mode = 'v' },
-    { '<leader>hb', function() gitsigns.blame_line({ full = true }) end, desc = 'Git blame (current line)' },
+    { '<leader>hb', function() gitsigns.blame_line({ full = true }) end, desc = 'Blame (current line)' },
     { '<leader>hS', gitsigns.stage_buffer, desc = 'Stage Buffer' },
     { '<leader>hR', gitsigns.reset_buffer, desc = 'Reset Buffer' },
     { '<leader>hp', gitsigns.preview_hunk, desc = 'Preview Hunk' },
     { '<leader>hi', gitsigns.preview_hunk_inline, desc = 'Preview Hunk (inline)' },
-    { '<leader>hB', gitsigns.toggle_current_line_blame, desc = 'Toggle git blame (inline)' },
-    { '<leader>hW', gitsigns.toggle_word_diff, desc = 'Toggle word diff' },
+    { '<leader>hB', gitsigns.toggle_current_line_blame, desc = 'Blame (inline)' },
+    -- { '<leader>hW', gitsigns.toggle_word_diff, desc = 'Toggle word diff' },
     -- { '<leader>hd', gitsigns.diffthis }
     -- { '<leader>hD', function() gitsigns.diffthis('~') end }
     -- { '<leader>hQ', function() gitsigns.setqflist('all') end }
