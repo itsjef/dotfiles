@@ -243,6 +243,13 @@ return {
       require('quicker').setup {}
     end
   },
+  {
+    'yousefhadder/markdown-plus.nvim',
+    ft = 'markdown',
+    config = function()
+      require('markdown-plus').setup {}
+    end,
+  },
 
   -- Autocompletion (snippets, AI, etc.)
   {

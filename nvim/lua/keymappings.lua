@@ -6,6 +6,12 @@ local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
 
 function M:setup()
   wk.add {
+    -- groups
+    { '<leader>g', group = 'Neogit' },
+    { '<leader>h', group = 'Markdown and Gitsigns' },
+    { '<leader>m', group = 'Markdown (the rest)' },
+    { '<leader>s', group = 'Snacks Pickers' },
+
     -- hidden key mappings
     {
       hidden = true,
@@ -58,7 +64,6 @@ function M:setup()
 
     -- snacks.nvim
     {
-      { '<leader>s', group = 'Snacks Pickers' },
       { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Smart Find Files' },
       { '<leader>s"', function() Snacks.picker.registers() end,  desc = 'Registers' },
       { '<leader>s/', function() Snacks.picker.search_history() end,  desc = 'Search history' },
@@ -74,7 +79,6 @@ function M:setup()
 
     -- Git
     {
-      { '<leader>g', group = 'Git' },
       { '<leader>gs', require('neogit').open, desc = 'Status' },
       { '<leader>gb', '<cmd>Neogit branch<cr>', desc = 'Branch' },
       { '<leader>gc', '<cmd>Neogit commit<cr>', desc = 'Commit' },
@@ -150,7 +154,6 @@ function M:gitsigns_keys(_)
     },
 
     -- Actions
-    { '<leader>h', group = 'Gitsigns' },
     { '<leader>hs', gitsigns.stage_hunk, desc = 'Stage Hunk' },
     { '<leader>hr', gitsigns.reset_hunk, desc = 'Reset Hunk' },
     { '<leader>hs', function() gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, desc = 'Stage Hunk (selection)', mode = 'v' },
