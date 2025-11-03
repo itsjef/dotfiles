@@ -97,14 +97,8 @@ return {
     },
   },
   {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-mini/mini.nvim',
-    },
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = { enabled = false },
+    'OXY2DEV/markview.nvim',
+    lazy = false,
   },
   {
     'hat0uma/csvview.nvim',
