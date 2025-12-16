@@ -171,7 +171,7 @@ require('lualine').setup {
     lualine_a = { 'mode' },
     lualine_b = { 'branch' },
     lualine_c = { { 'filename', path = 1 } },
-    lualine_x = { { require('minuet.lualine') }, 'encoding', 'fileformat', 'filetype' },
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress', 'location' },
     lualine_z = { { 'datetime', style = '%H:%M' } }
   },
@@ -269,7 +269,7 @@ require('blink.cmp').setup {
     },
   },
   sources = {
-    default = { 'lsp', 'path', 'snippets', 'buffer' }, -- 'minuet' excluded from default, for manual completion only
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
     providers = {
       lsp = {
         min_keyword_length = 2,
@@ -284,15 +284,6 @@ require('blink.cmp').setup {
       buffer = {
         min_keyword_length = 5,
         max_items = 5,
-      },
-      minuet = {
-        name = 'minuet',
-        module = 'minuet.blink',
-        async = true,
-        -- Should match minuet.config.request_timeout * 1000,
-        -- since minuet.config.request_timeout is in seconds
-        timeout_ms = 3000,
-        score_offset = 50, -- Gives minuet higher priority among suggestions
       },
     },
     per_filetype = {},
@@ -314,7 +305,6 @@ require('blink.cmp').setup {
       'fallback',
     },
     ['<C-j>'] = { 'select_and_accept' }, -- less finger stretch
-    ['<C-y>'] = require('minuet').make_blink_map(),
   },
   completion = {
     list = { selection = { preselect = false, auto_insert = true } },

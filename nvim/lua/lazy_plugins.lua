@@ -256,18 +256,6 @@ return {
     opts_extend = { 'sources.default' }
   },
   {
-    'milanglacier/minuet-ai.nvim',
-    config = function()
-      require('minuet').setup {
-        provider = 'claude',
-        -- provider_options = {
-        --   claude = { model = 'claude-sonnet-4-20250514' }
-        -- },
-        cmp = { enable_auto_complete = false },
-      }
-    end,
-  },
-  {
     'coder/claudecode.nvim',
     dependencies = { 'folke/snacks.nvim' },
     config = true,
