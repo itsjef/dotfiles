@@ -155,6 +155,9 @@ return {
         max_width = 0.6,
         max_height = 0.5,
       },
+      keymaps = {
+        ['q'] = { 'actions.close', mode = 'n' },
+      },
     },
   },
   {
