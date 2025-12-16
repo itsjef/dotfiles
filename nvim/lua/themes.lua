@@ -8,7 +8,7 @@ require('catppuccin').setup({
     colorful_winsep = { enabled = true },
     diffview = true,
     hop = true,
-    markview = true,
+    render_markdown = true,
     mason = true,
     noice = true,
     snacks = { enabled = true },
