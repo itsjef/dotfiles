@@ -41,28 +41,7 @@ return {
           pcall(vim.keymap.del, 'n', 'K', { buffer = bufnr })
 
           -- custom key bindings
-          local wk = require('which-key')
-          wk.add {
-            { 'K', function() lsp.buf.hover({ border = 'single' }) end, desc = 'Show Documentation' },
-            { 'gO', function() Snacks.picker.lsp_symbols() end, desc = 'Show LSP Symbols' },
-            { 'gy', function() Snacks.picker.lsp_type_definitions() end, desc = 'Go to Type Definition' },
-            { 'gd', function() Snacks.picker.lsp_definitions() end, desc = 'Go to Definition' },
-            { 'gD', function() Snacks.picker.lsp_declarations() end, desc = 'Go to Declaration' },
-            { 'gI', function() Snacks.picker.lsp_implementations() end, desc = 'Go to Implementation' },
-            { 'gr', function() Snacks.picker.lsp_references() end, desc = 'Show References' },
-            { '<C-h>', lsp.buf.signature_help, desc = 'Show signature [h]elp', mode = 'i' },
-            -- format, rename, code action, etc.
-            { '<leader>=', lsp.buf.format, desc = 'Format' },
-            { '<leader>ca', lsp.buf.code_action, desc = 'Code Action', mode = 'nv' },
-            { '<leader>rn', lsp.buf.rename, desc = 'Rename' },
-            -- diagnostics
-            { '<leader>e', function() vim.diagnostic.open_float(nil, { border = 'rounded' }) end, desc = 'Show diagnostic [e]rror inline' },
-            -- workspace
-            { '<leader>wa', lsp.buf.add_workspace_folder, desc = '[a]dd workspace folder' },
-            { '<leader>wr', lsp.buf.remove_workspace_folder, desc = '[r]emove workspace folder' },
-            { '<leader>wl', function() print(vim.inspect(lsp.buf.list_workspace_folders())) end, desc = '[l]ist workspace folders' },
-            { '<leader>ws', function() Snacks.picker.lsp_workspace_symbols() end, desc = 'Show LSP Workspace Symbols' },
-          }
+          require('keymappings').lsp_keys(bufnr)
         end
       })
 
@@ -109,28 +88,7 @@ return {
         pcall(vim.keymap.del, 'n', 'K', { buffer = bufnr })
 
         -- custom key bindings
-        local wk = require('which-key')
-        wk.add {
-          { 'K', function() lsp.buf.hover({ border = 'single' }) end, desc = 'Show Documentation' },
-          { 'gO', function() Snacks.picker.lsp_symbols() end, desc = 'Show LSP Symbols' },
-          { 'gy', function() Snacks.picker.lsp_type_definitions() end, desc = 'Go to Type Definition' },
-          { 'gd', function() Snacks.picker.lsp_definitions() end, desc = 'Go to Definition' },
-          { 'gD', function() Snacks.picker.lsp_declarations() end, desc = 'Go to Declaration' },
-          { 'gI', function() Snacks.picker.lsp_implementations() end, desc = 'Go to Implementation' },
-          { 'gr', function() Snacks.picker.lsp_references() end, desc = 'Show References' },
-          { '<C-h>', lsp.buf.signature_help, desc = 'Show signature [h]elp', mode = 'i' },
-          -- format, rename, code action, etc.
-          { '<leader>=', lsp.buf.format, desc = 'Format' },
-          { '<leader>ca', lsp.buf.code_action, desc = 'Code Action', mode = 'nv' },
-          { '<leader>rn', lsp.buf.rename, desc = 'Rename' },
-          -- diagnostics
-          { '<leader>e', function() vim.diagnostic.open_float(nil, { border = 'rounded' }) end, desc = 'Show diagnostic [e]rror inline' },
-          -- workspace
-          { '<leader>wa', lsp.buf.add_workspace_folder, desc = '[a]dd workspace folder' },
-          { '<leader>wr', lsp.buf.remove_workspace_folder, desc = '[r]emove workspace folder' },
-          { '<leader>wl', function() print(vim.inspect(lsp.buf.list_workspace_folders())) end, desc = '[l]ist workspace folders' },
-          { '<leader>ws', function() Snacks.picker.lsp_workspace_symbols() end, desc = 'Show LSP Workspace Symbols' },
-        }
+        require('keymappings').lsp_keys(bufnr)
       end
 
       return metals_config
