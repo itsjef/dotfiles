@@ -7,6 +7,7 @@ local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
 function M:setup()
   wk.add {
     -- groups
+    { '<leader>a', group = 'AI/Claude Code' },
     { '<leader>g', group = 'Neogit' },
     { '<leader>h', group = 'Markdown and Gitsigns' },
     { '<leader>m', group = 'Markdown (the rest)' },
@@ -97,6 +98,24 @@ function M:setup()
       { 'r',     flash.remote,            desc = 'Remote Flash',            mode = 'o'   },
       { 'R',     flash.treesitter_search, desc = 'Remote Flash Treesitter', mode = 'xo'  },
       { '<c-s>', flash.toggle,            desc = 'Toggle Flash',            mode = 'c'   },
+    },
+
+    -- which-key
+    {
+      { '<leader>?', function() require('which-key').show({ global = false }) end, desc = 'Buffer Local Keymaps (which-key)' },
+    },
+
+    -- Claude Code
+    {
+      { '<leader>ac', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },
+      { '<leader>af', '<cmd>ClaudeCodeFocus<cr>', desc = 'Focus Claude' },
+      { '<leader>ar', '<cmd>ClaudeCode --resume<cr>', desc = 'Resume Claude' },
+      { '<leader>aC', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },
+      { '<leader>am', '<cmd>ClaudeCodeSelectModel<cr>', desc = 'Select Claude model' },
+      { '<leader>ab', '<cmd>ClaudeCodeAdd %<cr>', desc = 'Add current buffer' },
+      { '<leader>as', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Send to Claude' },
+      { '<leader>aa', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
+      { '<leader>ad', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff' },
     },
   }
 end
