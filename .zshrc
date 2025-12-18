@@ -135,7 +135,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init - zsh)"
 eval "$(pyenv virtualenv-init -)"
 
-export JAVA_HOME="$HOMEBREW_CELLAR/openjdk@11/11.0.29"
+export JAVA_HOME="$HOMEBREW_CELLAR/openjdk/25.0.1/"
+export JAVA_11_HOME="$HOMEBREW_CELLAR/openjdk@11/11.0.29"
 
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
