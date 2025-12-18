@@ -1,4 +1,9 @@
+-- Editor enhancements and utilities
+
 return {
+  -- ==========================================================================
+  -- UI & Interface
+  -- ==========================================================================
   {
     'goolord/alpha-nvim',
     config = function()
@@ -17,19 +22,14 @@ return {
     },
   },
   {
-    'MeanderingProgrammer/render-markdown.nvim',
-    opts = {},
-  },
-  {
-    'chentoast/marks.nvim',
-    event = 'VeryLazy',
-    opts = {},
-  },
-  {
     'nvim-zh/colorful-winsep.nvim',
     event = 'WinLeave',
     config = true,
   },
+
+  -- ==========================================================================
+  -- File Management
+  -- ==========================================================================
   {
     'stevearc/oil.nvim',
     dependencies = { 'benomahony/oil-git.nvim' },
@@ -45,6 +45,15 @@ return {
     },
   },
   {
+    'chentoast/marks.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
+
+  -- ==========================================================================
+  -- Navigation & Motion
+  -- ==========================================================================
+  {
     'folke/flash.nvim',
     event = 'VeryLazy',
     opts = {
@@ -57,6 +66,10 @@ return {
     'mrjones2014/smart-splits.nvim',
     opts = {},
   },
+
+  -- ==========================================================================
+  -- Paired Characters
+  -- ==========================================================================
   {
     'andymass/vim-matchup',
     opts = {
@@ -70,6 +83,10 @@ return {
     event = 'InsertEnter',
     config = true
   },
+
+  -- ==========================================================================
+  -- Quickfix & Lists
+  -- ==========================================================================
   {
     'kevinhwang91/nvim-bqf',
     ft = 'qf',
@@ -89,21 +106,41 @@ return {
     'stevearc/quicker.nvim',
     opts = {},
   },
+
+  -- ==========================================================================
+  -- Markdown
+  -- ==========================================================================
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    opts = {},
+  },
   {
     'yousefhadder/markdown-plus.nvim',
     ft = 'markdown',
     opts = {},
   },
+
+  -- ==========================================================================
+  -- Git Integration
+  -- ==========================================================================
   {
-    'rmagatti/auto-session',
-    lazy = false,
-    opts = {
-      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
-      auto_restore = false,
-      bypass_save_filetypes = { 'alpha', 'colorful-winsep' },
-      close_filetypes_on_save = { 'checkhealth', 'colorful-winsep' },
-    },
+    'NeogitOrg/neogit',
+    dependencies = { 'sindrets/diffview.nvim' },
   },
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup {
+        on_attach = function(bufnr)
+          require('keymappings').gitsigns_keys(bufnr)
+        end
+      }
+    end
+  },
+
+  -- ==========================================================================
+  -- AI Assistants
+  -- ==========================================================================
   {
     'coder/claudecode.nvim',
     dependencies = { 'folke/snacks.nvim' },
