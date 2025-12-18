@@ -20,19 +20,10 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Install plugins
 require('lazy').setup({
-  spec = {
-    { import = 'lazy_plugins' },
-  },
-  change_detection = {
-    enabled = false,
-  }
+  spec = { { import = 'plugins' } },
+  change_detection = { enabled = false },
 })
-
--- Load plugin configs
-require('pluginconfigs')
-require('lspconfigs')
 
 -- Load other configs
 require('general')
-require('themes')
 require('keymappings').setup({})
