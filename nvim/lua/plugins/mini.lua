@@ -4,7 +4,6 @@ return {
     local mini_modules = {
       'ai',
       'align',
-      { 'animate', { cursor = { enable = false } } },
       'bracketed',
       'icons',
       'jump',
