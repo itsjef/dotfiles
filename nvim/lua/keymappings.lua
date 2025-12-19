@@ -1,8 +1,6 @@
 local M = {}
 local wk = require('which-key')
 local smart_splits = require('smart-splits')
-local flash = require('flash')
-local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
 
 function M:setup()
   wk.add {
@@ -57,10 +55,6 @@ function M:setup()
       { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
       { '<leader>nn', function() require('oil').toggle_float(nil) end, desc = 'File Browser' },
       { '<leader>qq', function() require('quicker').toggle({ focus = true }) end, desc = 'Quickfix' },
-
-      -- Repeat movement
-      { ';',       ts_repeat_move.repeat_last_move,          desc = 'TS - repeat last move',                       mode = 'nxo' },
-      { '<space>', ts_repeat_move.repeat_last_move_opposite, desc = 'TS - repeat last move in opposite direction', mode = 'nxo' },
     },
 
     -- snacks.nvim
@@ -74,6 +68,7 @@ function M:setup()
       { '<leader>sd', function() Snacks.picker.diagnostics_buffer() end, desc = 'Buffer Diagnostics' },
       { '<leader>sk', function() Snacks.picker.keymaps() end,  desc = 'Keymaps' },
       { '<leader>sl', function() Snacks.picker.loclist() end, desc = 'Location List' },
+      { '<leader>sn', function() Snacks.picker.notifications() end, desc = 'Notification History' },
       { '<leader>sq', function() Snacks.picker.qflist() end,  desc = 'Quickfix List' },
       { '<leader>sr', function() Snacks.picker.resume() end,  desc = 'Resume' },
     },
@@ -89,15 +84,6 @@ function M:setup()
       { '<leader>gB', '<cmd>Gitsign blame<cr>', desc = 'Blame' },
       { '<leader>gO', function() Snacks.gitbrowse() end, desc = 'Open Browser', mode = 'nv' },
       { '<leader>gg', function() Snacks.lazygit() end, desc = 'lazygit' },
-    },
-
-    -- Flash
-    {
-      { 's',     flash.jump,              desc = 'Flash',                   mode = 'nxo' },
-      { 'S',     flash.treesitter,        desc = 'Flash Treesitter',        mode = 'nxo' },
-      { 'r',     flash.remote,            desc = 'Remote Flash',            mode = 'o'   },
-      { 'R',     flash.treesitter_search, desc = 'Remote Flash Treesitter', mode = 'xo'  },
-      { '<c-s>', flash.toggle,            desc = 'Toggle Flash',            mode = 'c'   },
     },
 
     -- which-key

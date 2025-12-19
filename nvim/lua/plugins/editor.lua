@@ -54,15 +54,6 @@ return {
   -- Navigation & Motion
   -- ==========================================================================
   {
-    'folke/flash.nvim',
-    event = 'VeryLazy',
-    opts = {
-      modes = {
-        keys = { 'f', 'F', 't', 'T' },
-      }
-    },
-  },
-  {
     'mrjones2014/smart-splits.nvim',
     opts = {},
   },

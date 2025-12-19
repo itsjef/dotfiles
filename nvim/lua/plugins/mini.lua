@@ -7,6 +7,7 @@ return {
       { 'animate', { cursor = { enable = false } } },
       'bracketed',
       'icons',
+      'jump',
       'splitjoin',
       'surround',
       'trailspace',

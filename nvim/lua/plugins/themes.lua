@@ -1,7 +1,7 @@
 return {
   {
     'akinsho/bufferline.nvim',
-    version = 'v4.*',
+    version = '*',
   },
   {
     'catppuccin/nvim',
@@ -12,27 +12,24 @@ return {
         config = function()
           require('bufferline').setup({
             highlights = require('catppuccin.special.bufferline').get_theme(),
+            options = {
+              show_buffer_close_icons = false,
+              show_close_icon = false,
+            },
           })
         end,
         integrations = {
           colorful_winsep = { enabled = true },
           diffview = true,
-          hop = true,
           render_markdown = true,
           mason = true,
+          mini = { enabled = true, indentscope_color = '' },
           noice = true,
           snacks = { enabled = true },
         }
       })
 
       vim.cmd [[colo catppuccin-macchiato]]
-    end,
-  },
-  {
-    'projekt0n/github-nvim-theme',
-    version = '*',
-    config = function()
-      require('github-theme').setup()
     end,
   },
 }
