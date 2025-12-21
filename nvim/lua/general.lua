@@ -67,3 +67,34 @@ vim.api.nvim_create_autocmd(
     end,
   }
 )
+
+vim.api.nvim_create_autocmd(
+  'FileType',
+  {
+    pattern = {
+      'bash',
+      'comment',
+      'dockerfile',
+      'html',
+      'http',
+      'latex',
+      'lua',
+      'make',
+      'markdown',
+      'markdown_inline',
+      'python',
+      'regex',
+      'scala',
+      'toml',
+      'typst',
+      'vimdoc',
+      'yaml,'
+    },
+    callback = function()
+      -- TS highlighting
+      vim.treesitter.start()
+      -- TS indentation
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+  }
+)
