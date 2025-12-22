@@ -76,7 +76,14 @@ return {
       local lsp = vim.lsp
       local metals_config = require('metals').bare_config()
 
-      metals_config.settings = { javaHome = '/opt/homebrew/Cellar/openjdk@11/11.0.29' }
+      metals_config.settings = {
+        superMethodLensesEnabled = true,
+        showImplicitArguments = true,
+        showInferredType = true,
+        showImplicitConversionsAndClasses = true,
+        excludedPackages = {},
+        useGlobalExecutable = true,  -- force using MetaLS 1.3.5 (`cs install metals:1.3.5`) in order to work with Java 11
+      }
       metals_config.init_options.statusBarProvider = 'off'
       metals_config.capabilities = require('blink.cmp').get_lsp_capabilities(lsp.protocol.make_client_capabilities())
       metals_config.on_attach = function(client, bufnr)
