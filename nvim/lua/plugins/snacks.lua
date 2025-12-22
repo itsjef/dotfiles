@@ -5,7 +5,6 @@ return {
   config = function()
     require('snacks').setup {
       bigfile = { enabled = true },
-      explorer = { enabled = true },
       gitbrowse = {
         url_patterns = {
           ['git%.parcelperform%.com'] = {
@@ -20,11 +19,6 @@ return {
       input = { enabled = true },
       notifier = { enabled = true },
       picker = {
-        sources = {
-          explorer = {
-            layout = { layout = { position = 'right' } }
-          },
-        },
         win = {
           input = {
             keys = {
