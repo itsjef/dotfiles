@@ -93,8 +93,11 @@ vim.api.nvim_create_autocmd(
     callback = function()
       -- TS highlighting
       vim.treesitter.start()
-      -- TS indentation
-      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      -- TS indentation (only for specific filetypes) - run `:checkhealth nvim-treesitter` for supported languages
+      local indent_filetypes = { 'html', 'lua', 'markdown', 'python', 'toml', 'typst', 'yaml' }
+      if vim.tbl_contains(indent_filetypes, vim.bo.filetype) then
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
     end,
   }
 )
