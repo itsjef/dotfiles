@@ -27,6 +27,12 @@ return {
             return
           end
 
+          -- Attach navic if available
+          local ok, navic = pcall(require, 'nvim-navic')
+          if ok and client.server_capabilities.documentSymbolProvider then
+            navic.attach(client, bufnr)
+          end
+
           ---@diagnostic disable-next-line need-check-nil
           if client.server_capabilities.completionProvider then
             vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -89,6 +95,12 @@ return {
       metals_config.on_attach = function(client, bufnr)
         if not client then
           return
+        end
+
+        -- Attach navic if available
+        local ok, navic = pcall(require, 'nvim-navic')
+        if ok and client.server_capabilities.documentSymbolProvider then
+          navic.attach(client, bufnr)
         end
 
         -- disable key bindings
