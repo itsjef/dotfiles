@@ -51,6 +51,7 @@ function M:setup()
       { '<C-/>', function() Snacks.terminal() end, desc = 'Toggle Terminal' },
       { '<C-p>', function() Snacks.picker.files() end, desc = 'Find Files' },
       { '<leader>/', function() Snacks.picker.grep() end, desc = 'Grep' },
+      { '<leader>\'', function() Snacks.picker.grep_buffers() end, desc = 'Grep Open Buffers' },
       { '<leader>*', function() Snacks.picker.grep_word() end, desc = 'Grep Selection', mode = 'nx' },
       { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer' },
       { '<leader>nn', function() require('oil').toggle_float(nil) end, desc = 'File Browser' },

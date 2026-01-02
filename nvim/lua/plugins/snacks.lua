@@ -19,6 +19,7 @@ return {
       input = { enabled = true },
       notifier = { enabled = true },
       picker = {
+        layout = 'sidebar',
         win = {
           input = {
             keys = {
