@@ -69,7 +69,7 @@ return {
           }
         },
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
-        lualine_y = { 'progress', 'location' },
+        lualine_y = { 'searchcount', 'progress', 'location' },
         lualine_z = { { 'datetime', style = '%H:%M' } }
       },
       inactive_sections = {},

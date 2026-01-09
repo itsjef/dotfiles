@@ -8,9 +8,14 @@ return {
         ['vim.lsp.util.stylize_markdown'] = true,
       },
     },
+    routes = {
+      {
+        filter = { event = 'msg_show', kind = 'search_count' },
+        skip = true,
+      },
+    },
     presets = {
-      bottom_search = true, -- use a classic bottom cmdline for search
-      long_message_to_split = true, -- long messages will be sent to a split
+      long_message_to_split = true,
     },
   },
   dependencies = { 'MunifTanjim/nui.nvim' }
