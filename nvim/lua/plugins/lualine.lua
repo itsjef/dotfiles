@@ -74,6 +74,9 @@ return {
       },
       inactive_sections = {},
       tabline = {},
+      inactive_winbar = {
+        lualine_c = { { 'filetype', icon_only = true }, 'filename' },
+      },
       extensions = {}
     }
   end,
