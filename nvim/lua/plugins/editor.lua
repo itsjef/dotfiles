@@ -40,7 +40,7 @@ return {
         max_height = 0.5,
       },
       keymaps = {
-        ['q'] = { 'actions.close', mode = 'n' },
+        ['<esc>'] = { 'actions.close', mode = 'n' },
       },
     },
   },
