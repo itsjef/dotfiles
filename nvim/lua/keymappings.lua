@@ -1,6 +1,7 @@
 local M = {}
 local wk = require('which-key')
 local smart_splits = require('smart-splits')
+local ts_move = require('nvim-treesitter-textobjects.move')
 
 function M:setup()
   wk.add {
@@ -104,6 +105,20 @@ function M:setup()
       { '<leader>aa', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
       { '<leader>ad', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff' },
     },
+
+    -- Treesitter Text Objects
+    {
+      -- class
+      { ']]', function() ts_move.goto_next_start('@class.outer', 'textobjects') end,        desc = 'next Class start',    mode = 'nxo' },
+      { '][', function() ts_move.goto_next_end('@class.outer', 'textobjects') end,          desc = 'next Class end',      mode = 'nxo' },
+      { '[[', function() ts_move.goto_previous_start('@class.outer', 'textobjects') end,    desc = 'prev Class start',    mode = 'nxo' },
+      { '[]', function() ts_move.goto_previous_end('@class.outer', 'textobjects') end,      desc = 'prev Class end',      mode = 'nxo' },
+      -- function
+      { ']m', function() ts_move.goto_next_start('@function.outer', 'textobjects') end,     desc = 'next Function start', mode = 'nxo' },
+      { ']M', function() ts_move.goto_next_end('@function.outer', 'textobjects') end,       desc = 'next Function end',   mode = 'nxo' },
+      { '[m', function() ts_move.goto_previous_start('@function.outer', 'textobjects') end, desc = 'prev Function start', mode = 'nxo' },
+      { '[M', function() ts_move.goto_previous_end('@function.outer', 'textobjects') end,   desc = 'prev Function end',   mode = 'nxo' },
+    }
   }
 end
 
