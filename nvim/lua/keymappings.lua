@@ -77,15 +77,14 @@ function M:setup()
 
     -- Git
     {
-      { '<leader>gs', require('neogit').open, desc = 'Status' },
-      { '<leader>gb', '<cmd>Neogit branch<cr>', desc = 'Branch' },
-      { '<leader>gc', '<cmd>Neogit commit<cr>', desc = 'Commit' },
-      { '<leader>gl', '<cmd>Neogit pull<cr>', desc = 'Pull' },
-      { '<leader>gL', '<cmd>Neogit log<cr>', desc = 'Log' },
-      { '<leader>gP', '<cmd>Neogit push<cr>', desc = 'Push' },
-      { '<leader>gB', '<cmd>Gitsign blame<cr>', desc = 'Blame' },
+      { '<leader>gg', '<cmd>Neogit<cr>',                 desc = 'Open Neogit UI' },
+      { '<leader>gb', '<cmd>Neogit branch<cr>',          desc = 'Branch' },
+      { '<leader>gc', '<cmd>Neogit commit<cr>',          desc = 'Commit' },
+      { '<leader>gl', '<cmd>Neogit pull<cr>',            desc = 'Pull' },
+      { '<leader>gL', '<cmd>Neogit log<cr>',             desc = 'Log' },
+      { '<leader>gP', '<cmd>Neogit push<cr>',            desc = 'Push' },
+      { '<leader>gB', '<cmd>Gitsign blame<cr>',          desc = 'Blame' },
       { '<leader>gO', function() Snacks.gitbrowse() end, desc = 'Open Browser', mode = 'nv' },
-      { '<leader>gg', function() Snacks.lazygit() end, desc = 'lazygit' },
     },
 
     -- which-key
@@ -156,22 +155,22 @@ function M:gitsigns_keys(_)
   wk.add {
     -- Navigation
     {
-      ']h',
+      ']c',
       function()
-        if vim.wo.diff then vim.cmd.normal({']h', bang = true})
+        if vim.wo.diff then vim.cmd.normal({']c', bang = true})
         else gitsigns.nav_hunk('next')
         end
       end,
-      desc = 'Hunk forward',
+      desc = 'next git change',
     },
     {
-      '[h',
+      '[c',
       function()
-        if vim.wo.diff then vim.cmd.normal({'[h', bang = true})
+        if vim.wo.diff then vim.cmd.normal({'[c', bang = true})
         else gitsigns.nav_hunk('prev')
         end
       end,
-      desc = 'Hunk backward',
+      desc = 'prev git change',
     },
 
     -- Actions

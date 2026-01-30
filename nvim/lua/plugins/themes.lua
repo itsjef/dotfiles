@@ -20,7 +20,6 @@ return {
         end,
         integrations = {
           colorful_winsep = { enabled = true },
-          diffview = true,
           render_markdown = true,
           mason = true,
           mini = { enabled = true, indentscope_color = '' },

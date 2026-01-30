@@ -131,7 +131,13 @@ return {
   -- ==========================================================================
   {
     'NeogitOrg/neogit',
-    dependencies = { 'sindrets/diffview.nvim' },
+    lazy = true,
+    cmd = 'Neogit'
+  },
+  {
+    'esmuellert/codediff.nvim',
+    dependencies = { 'MunifTanjim/nui.nvim' },
+    cmd = 'CodeDiff',
   },
   {
     'lewis6991/gitsigns.nvim',
