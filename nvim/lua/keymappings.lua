@@ -77,7 +77,7 @@ function M:setup()
 
     -- Git
     {
-      { '<leader>gg', '<cmd>Neogit<cr>',                 desc = 'Open Neogit UI' },
+      { '<leader>gs', '<cmd>Neogit<cr>',                 desc = 'Open Neogit UI' },
       { '<leader>gb', '<cmd>Neogit branch<cr>',          desc = 'Branch' },
       { '<leader>gc', '<cmd>Neogit commit<cr>',          desc = 'Commit' },
       { '<leader>gl', '<cmd>Neogit pull<cr>',            desc = 'Pull' },
