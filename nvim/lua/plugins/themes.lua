@@ -9,6 +9,7 @@ return {
     priority = 1000,
     config = function()
       require('catppuccin').setup({
+        auto_integrations = true,
         config = function()
           require('bufferline').setup({
             highlights = require('catppuccin.special.bufferline').get_theme(),
@@ -18,14 +19,6 @@ return {
             },
           })
         end,
-        integrations = {
-          colorful_winsep = { enabled = true },
-          render_markdown = true,
-          mason = true,
-          mini = { enabled = true, indentscope_color = '' },
-          noice = true,
-          snacks = { enabled = true },
-        }
       })
 
       vim.cmd [[colo catppuccin-macchiato]]
