@@ -126,14 +126,14 @@ function M:lsp_keys(_)
   local lsp = vim.lsp
 
   wk.add {
-    { 'K', function() lsp.buf.hover({ border = 'single' }) end, desc = 'Show Documentation' },
-    { 'gO', function() Snacks.picker.lsp_symbols() end, desc = 'Show LSP Symbols' },
-    { 'gy', function() Snacks.picker.lsp_type_definitions() end, desc = 'Go to Type Definition' },
-    { 'gd', function() Snacks.picker.lsp_definitions() end, desc = 'Go to Definition' },
-    { 'gD', function() Snacks.picker.lsp_declarations() end, desc = 'Go to Declaration' },
-    { 'gI', function() Snacks.picker.lsp_implementations() end, desc = 'Go to Implementation' },
-    { 'gr', function() Snacks.picker.lsp_references() end, desc = 'Show References' },
-    { '<C-h>', lsp.buf.signature_help, desc = 'Show signature [h]elp', mode = 'i' },
+    { 'K',     function() lsp.buf.hover() end,                      desc = 'Show Documentation' },
+    { 'gO',    function() Snacks.picker.lsp_symbols() end,          desc = 'Show LSP Symbols' },
+    { 'gy',    function() Snacks.picker.lsp_type_definitions() end, desc = 'Go to Type Definition' },
+    { 'gd',    function() Snacks.picker.lsp_definitions() end,      desc = 'Go to Definition' },
+    { 'gD',    function() Snacks.picker.lsp_declarations() end,     desc = 'Go to Declaration' },
+    { 'gI',    function() Snacks.picker.lsp_implementations() end,  desc = 'Go to Implementation' },
+    { 'gr',    function() Snacks.picker.lsp_references() end,       desc = 'Show References' },
+    { '<C-h>', lsp.buf.signature_help,                              desc = 'Show signature [h]elp', mode = 'i' },
     -- format, rename, code action, etc.
     { '<leader>=', lsp.buf.format, desc = 'Format' },
     { '<leader>ca', lsp.buf.code_action, desc = 'Code Action', mode = 'nv' },
