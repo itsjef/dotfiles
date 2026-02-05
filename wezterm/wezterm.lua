@@ -23,7 +23,7 @@ config.font = wezterm.font {
   weight = 'Medium',
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
 }
-config.font_size = 12.5
+-- config.font_size = 12.5
 
 config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
