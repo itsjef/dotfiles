@@ -50,6 +50,7 @@ function M:setup()
 
       -- Some plugin mappings that don't need to show
       { '<C-/>', function() Snacks.terminal() end, desc = 'Toggle Terminal' },
+      { '<C-\\>', function() Snacks.picker.buffers() end,  desc = 'Buffers' },
       { '<C-p>', function() Snacks.picker.files() end, desc = 'Find Files' },
       { '<leader>/', function() Snacks.picker.grep() end, desc = 'Grep' },
       { '<leader>\'', function() Snacks.picker.grep_buffers() end, desc = 'Grep Open Buffers' },
@@ -65,7 +66,6 @@ function M:setup()
       { '<leader>s"', function() Snacks.picker.registers() end,  desc = 'Registers' },
       { '<leader>s/', function() Snacks.picker.search_history() end,  desc = 'Search history' },
       { '<leader>sD', function() Snacks.picker.diagnostics() end, desc = 'Diagnostics' },
-      { '<leader>sb', function() Snacks.picker.buffers() end,  desc = 'Buffers' },
       { '<leader>sc', function() Snacks.picker.command_history() end,  desc = 'Command history' },
       { '<leader>sd', function() Snacks.picker.diagnostics_buffer() end, desc = 'Buffer Diagnostics' },
       { '<leader>sk', function() Snacks.picker.keymaps() end,  desc = 'Keymaps' },
