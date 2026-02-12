@@ -1,8 +1,8 @@
 vim.o.clipboard = 'unnamedplus' -- copy & paste from system clipboard
-vim.o.hidden = true -- hide abandoned buffer
-vim.o.mouse = 'a' -- enable mouse
-vim.o.scrolloff = 999 -- Set lines to the cursor when moving around with j/k keys
-vim.o.cursorline = true -- Display the line you are in
+vim.o.hidden = true             -- hide abandoned buffer
+vim.o.mouse = 'a'               -- enable mouse
+vim.o.scrolloff = 999           -- Set lines to the cursor when moving around with j/k keys
+vim.o.cursorline = true         -- Display the line you are in
 vim.o.number = true
 vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
 
@@ -15,7 +15,7 @@ vim.o.smartindent = false
 
 -- Line mark
 vim.opt.list = true
-vim.opt.listchars = {eol = '¬', nbsp = '+', tab = '> ', trail = '-'}
+vim.opt.listchars = { eol = '¬', nbsp = '+', tab = '> ', trail = '-' }
 
 
 -- When searching try to be smart about cases

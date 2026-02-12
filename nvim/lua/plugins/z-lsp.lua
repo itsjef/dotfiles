@@ -88,7 +88,7 @@ return {
         showInferredType = true,
         showImplicitConversionsAndClasses = true,
         excludedPackages = {},
-        useGlobalExecutable = true,  -- force using MetaLS 1.3.5 (`cs install metals:1.3.5`) in order to work with Java 11
+        useGlobalExecutable = true, -- force using MetaLS 1.3.5 (`cs install metals:1.3.5`) in order to work with Java 11
       }
       metals_config.init_options.statusBarProvider = 'off'
       metals_config.capabilities = require('blink.cmp').get_lsp_capabilities(lsp.protocol.make_client_capabilities())

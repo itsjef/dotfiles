@@ -82,13 +82,13 @@ return {
     'kevinhwang91/nvim-bqf',
     ft = 'qf',
     dependencies = {
-      { 'junegunn/fzf', build = './install --bin' },
+      { 'junegunn/fzf',                    build = './install --bin' },
       { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     },
     opts = {
       filter = {
         fzf = {
-          extra_opts = {'--bind', 'ctrl-o:toggle-all', '--delimiter', '│'}
+          extra_opts = { '--bind', 'ctrl-o:toggle-all', '--delimiter', '│' }
         }
       }
     },
