@@ -110,21 +110,21 @@ return {
     ft = 'markdown',
     opts = {},
   },
-  {
-    'obsidian-nvim/obsidian.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    ft = 'markdown',
-    cmd = { 'Obsidian' },
-    opts = {
-      legacy_commands = false, -- this will be removed in the next major release
-      workspaces = {
-        {
-          name = 'personal',
-          path = '~/Documents/Obsidian',
-        },
-      },
-    },
-  },
+  -- {
+  --   'obsidian-nvim/obsidian.nvim',
+  --   dependencies = { 'nvim-lua/plenary.nvim' },
+  --   ft = 'markdown',
+  --   cmd = { 'Obsidian' },
+  --   opts = {
+  --     legacy_commands = false, -- this will be removed in the next major release
+  --     workspaces = {
+  --       {
+  --         name = 'personal',
+  --         path = '~/Documents/Obsidian',
+  --       },
+  --     },
+  --   },
+  -- },
 
   -- ==========================================================================
   -- Git Integration
