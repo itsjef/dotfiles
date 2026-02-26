@@ -101,7 +101,7 @@ function M:setup()
       { '<leader>aC', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },
       { '<leader>am', '<cmd>ClaudeCodeSelectModel<cr>', desc = 'Select Claude model' },
       { '<leader>ab', '<cmd>ClaudeCodeAdd %<cr>',       desc = 'Add current buffer' },
-      { '<leader>as', '<cmd>ClaudeCodeSend<cr>',        mode = 'v',                  desc = 'Send to Claude' },
+      { '<leader>as', '<cmd>ClaudeCodeSend<cr>',        desc = 'Send to Claude',     mode = 'v' },
       { '<leader>aa', '<cmd>ClaudeCodeDiffAccept<cr>',  desc = 'Accept diff' },
       { '<leader>ad', '<cmd>ClaudeCodeDiffDeny<cr>',    desc = 'Deny diff' },
     },
@@ -120,6 +120,16 @@ function M:setup()
       { '[M', function() ts_move.goto_previous_end('@function.outer', 'textobjects') end,   desc = 'prev Function end',   mode = 'nxo' },
     }
   }
+
+  -- Filetype-specific keymaps (buffer-local)
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'oil', 'netrw' },
+    callback = function()
+      wk.add {
+        { '<leader>as', '<cmd>ClaudeCodeTreeAdd<cr>', desc = 'Add file', buffer = 0 },
+      }
+    end,
+  })
 end
 
 function M:lsp_keys(_)
