@@ -156,20 +156,20 @@ return {
   {
     'coder/claudecode.nvim',
     dependencies = { 'folke/snacks.nvim' },
-    cmd = {
-      'ClaudeCode',
-      'ClaudeCodeFocus',
-      'ClaudeCodeSelectModel',
-      'ClaudeCodeAdd',
-      'ClaudeCodeSend',
-      'ClaudeCodeTreeAdd',
-      'ClaudeCodeDiffAccept',
-      'ClaudeCodeDiffDeny',
-    },
+    -- cmd = {
+    --   'ClaudeCode',
+    --   'ClaudeCodeFocus',
+    --   'ClaudeCodeSelectModel',
+    --   'ClaudeCodeAdd',
+    --   'ClaudeCodeSend',
+    --   'ClaudeCodeTreeAdd',
+    --   'ClaudeCodeDiffAccept',
+    --   'ClaudeCodeDiffDeny',
+    -- },
     config = true,
     opts = {
       terminal = {
-        split_width_percentage = 0.4,
+        provider = 'none',
       },
     },
   },
