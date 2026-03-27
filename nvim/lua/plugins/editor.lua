@@ -135,9 +135,8 @@ return {
     cmd = 'Neogit'
   },
   {
-    'esmuellert/codediff.nvim',
-    dependencies = { 'MunifTanjim/nui.nvim' },
-    cmd = 'CodeDiff',
+    'dlyongemallo/diffview.nvim',
+    version = '*'
   },
   {
     'lewis6991/gitsigns.nvim',
