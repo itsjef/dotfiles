@@ -2,6 +2,9 @@
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
+-- enable ui2
+require('vim._core.ui2').enable({})
+
 -- plugins with lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
