@@ -109,6 +109,21 @@ return {
     'yousefhadder/markdown-plus.nvim',
     ft = 'markdown',
     opts = {},
+    config = function(_, opts)
+      require('markdown-plus').setup(opts)
+      -- ]b/[b conflicts with mini.bracketed (buffer nav); move code block nav to ]`/[`
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'markdown',
+        callback = function(ev)
+          vim.schedule(function()
+            pcall(vim.keymap.del, 'n', ']b', { buffer = ev.buf })
+            pcall(vim.keymap.del, 'n', '[b', { buffer = ev.buf })
+            vim.keymap.set('n', ']`', '<Plug>(MarkdownPlusCodeBlockNext)', { buffer = ev.buf, desc = 'Next code block' })
+            vim.keymap.set('n', '[`', '<Plug>(MarkdownPlusCodeBlockPrev)', { buffer = ev.buf, desc = 'Prev code block' })
+          end)
+        end,
+      })
+    end,
   },
   -- {
   --   'obsidian-nvim/obsidian.nvim',
