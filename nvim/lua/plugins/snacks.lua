@@ -20,13 +20,13 @@ return {
       notifier = { enabled = true },
       picker = {
         layout = 'ivy',
-        win = {
-          input = {
-            keys = {
-              ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
-            },
-          },
-        },
+        -- win = {
+        --   input = {
+        --     keys = {
+        --       ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
+        --     },
+        --   },
+        -- },
       },
       quickfile = { enabled = true },
       scope = { enabled = true },
