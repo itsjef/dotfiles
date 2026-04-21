@@ -1,0 +1,35 @@
+# Font
+font-family = IosevkaTerm Nerd Font Mono
+font-style = Medium
+font-feature = -calt
+font-feature = -clig
+font-feature = -liga
+font-size = 12.5
+
+# Theme
+theme = Catppuccin Mocha
+
+# macOS
+fullscreen = non-native
+confirm-close-surface = false
+macos-option-as-alt = left
+macos-titlebar-style = hidden
+quit-after-last-window-closed = true
+
+# Window
+window-padding-x = 4
+window-padding-y = 4
+
+# Cursor
+cursor-style = block
+mouse-hide-while-typing = true
+
+# Shell
+shell-integration = detect
+
+# Clipboard
+copy-on-select = clipboard
+
+# Keybinds
+# Line break for Claude Code input (mirrors WezTerm shift+enter binding)
+keybind = shift+enter=text:\x1b\r
