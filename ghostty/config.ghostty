@@ -10,15 +10,15 @@ font-size = 12.5
 theme = Catppuccin Mocha
 
 # macOS
-fullscreen = non-native
+fullscreen = true
 confirm-close-surface = false
 macos-option-as-alt = left
-macos-titlebar-style = hidden
 quit-after-last-window-closed = true
 
 # Window
-window-padding-x = 4
-window-padding-y = 4
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
 
 # Cursor
 cursor-style = block
