@@ -33,15 +33,3 @@ copy-on-select = clipboard
 # Keybinds
 # Line break for Claude Code input (mirrors WezTerm shift+enter binding)
 keybind = shift+enter=text:\x1b\r
-
-# CMD+<number> -> select tmux window <number> (paired with user-keys in tmux.conf)
-keybind = cmd+zero=text:\x1b[90;0~
-keybind = cmd+one=text:\x1b[90;1~
-keybind = cmd+two=text:\x1b[90;2~
-keybind = cmd+three=text:\x1b[90;3~
-keybind = cmd+four=text:\x1b[90;4~
-keybind = cmd+five=text:\x1b[90;5~
-keybind = cmd+six=text:\x1b[90;6~
-keybind = cmd+seven=text:\x1b[90;7~
-keybind = cmd+eight=text:\x1b[90;8~
-keybind = cmd+nine=text:\x1b[90;9~
