@@ -17,7 +17,7 @@ quit-after-last-window-closed = true
 
 # Window
 window-padding-x = 10
-window-padding-y = 10
+window-padding-y = 4
 window-padding-balance = true
 
 # Cursor
