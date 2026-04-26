@@ -26,6 +26,15 @@ return {
     event = 'WinLeave',
     config = true,
   },
+  {
+    'rachartier/tiny-cmdline.nvim',
+    config = function()
+      tc = require('tiny-cmdline')
+      tc.setup {
+        on_reposition = tc.adapters.blink,
+      }
+    end
+  },
 
   -- ==========================================================================
   -- File Management

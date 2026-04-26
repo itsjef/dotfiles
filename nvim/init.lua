@@ -3,6 +3,7 @@ vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
 -- enable ui2
+vim.o.cmdheight = 0
 require('vim._core.ui2').enable({})
 
 -- plugins with lazy.nvim
