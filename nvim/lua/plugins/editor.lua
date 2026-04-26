@@ -150,6 +150,17 @@ return {
     cmd = 'Neogit'
   },
   {
+    url = 'https://codeberg.org/trevorhauter/gitportal.nvim',
+    opts = {
+      git_provider_map = {
+        ['git@git.parcelperform.com:'] = {
+          provider = 'gitlab',
+          base_url = 'https://git.parcelperform.com/',
+        }
+      },
+    },
+  },
+  {
     'dlyongemallo/diffview.nvim',
     version = '*'
   },
@@ -169,7 +180,6 @@ return {
   -- ==========================================================================
   {
     'coder/claudecode.nvim',
-    dependencies = { 'folke/snacks.nvim' },
     -- cmd = {
     --   'ClaudeCode',
     --   'ClaudeCodeFocus',

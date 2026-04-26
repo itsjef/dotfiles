@@ -5,13 +5,16 @@ local ts_move = require('nvim-treesitter-textobjects.move')
 local ts_select = require('nvim-treesitter-textobjects.select')
 
 function M:setup()
+  local tb  = require('telescope.builtin')
+  local lga = require('telescope').extensions.live_grep_args
+
   wk.add {
     -- groups
     { '<leader>a', group = 'AI/Claude Code' },
+    { '<leader>f', group = 'Telescope' },
     { '<leader>g', group = 'Neogit' },
     { '<leader>h', group = 'Markdown and Gitsigns' },
     { '<leader>m', group = 'Markdown (the rest)' },
-    { '<leader>s', group = 'Snacks Pickers' },
 
     -- hidden key mappings
     {
@@ -50,43 +53,41 @@ function M:setup()
       { '<ESC>',             ':noh<CR><ESC>' },
 
       -- Some plugin mappings that don't need to show
-      { '<C-/>',             function() Snacks.terminal() end,                           desc = 'Toggle Terminal' },
-      { '<C-\\>',            function() Snacks.picker.buffers() end,                     desc = 'Buffers' },
-      { '<C-p>',             function() Snacks.picker.files() end,                       desc = 'Find Files' },
-      { '<leader>/',         function() Snacks.picker.grep() end,                        desc = 'Grep' },
-      { '<leader>\'',        function() Snacks.picker.grep_buffers() end,                desc = 'Grep Open Buffers' },
-      { '<leader>*',         function() Snacks.picker.grep_word() end,                   desc = 'Grep Selection',   mode = 'nx' },
-      { '<leader>bd',        function() Snacks.bufdelete() end,                          desc = 'Delete Buffer' },
-      { '<leader>nn',        function() require('oil').toggle_float(nil) end,            desc = 'File Browser' },
-      { '<leader>qq',        function() require('quicker').toggle({ focus = true }) end, desc = 'Quickfix' },
+      { '<C-\\>',     tb.buffers,                                                                    desc = 'Buffers' },
+      { '<C-p>',      tb.find_files,                                                                 desc = 'Find Files' },
+      { '<leader>/',  lga.live_grep_args,                                                            desc = 'Grep' },
+      { '<leader>\'', function() lga.live_grep_args({ grep_open_files = true }) end,                 desc = 'Grep Open Buffers' },
+      { '<leader>*',  require('telescope-live-grep-args.shortcuts').grep_word_under_cursor,          desc = 'Grep Selection',   mode = 'nx' },
+      { '<leader>bd', require('mini.bufremove').delete,                                              desc = 'Delete Buffer' },
+      { '<leader>nn', function() require('oil').toggle_float(nil) end,                               desc = 'File Browser' },
+      { '<leader>qq', function() require('quicker').toggle({ focus = true }) end,                    desc = 'Quickfix' },
     },
 
-    -- snacks.nvim
+    -- telescope.nvim
     {
-      { '<leader><space>', function() Snacks.picker.smart() end,              desc = 'Smart Find Files' },
-      { '<leader>s"',      function() Snacks.picker.registers() end,          desc = 'Registers' },
-      { '<leader>s/',      function() Snacks.picker.search_history() end,     desc = 'Search history' },
-      { '<leader>sD',      function() Snacks.picker.diagnostics() end,        desc = 'Diagnostics' },
-      { '<leader>sc',      function() Snacks.picker.command_history() end,    desc = 'Command history' },
-      { '<leader>sd',      function() Snacks.picker.diagnostics_buffer() end, desc = 'Buffer Diagnostics' },
-      { '<leader>sk',      function() Snacks.picker.keymaps() end,            desc = 'Keymaps' },
-      { '<leader>sl',      function() Snacks.picker.loclist() end,            desc = 'Location List' },
-      { '<leader>sn',      function() Snacks.picker.notifications() end,      desc = 'Notification History' },
-      { '<leader>sq',      function() Snacks.picker.qflist() end,             desc = 'Quickfix List' },
-      { '<leader>sr',      function() Snacks.picker.resume() end,             desc = 'Resume' },
+      { '<leader><space>', tb.find_files,                                              desc = 'Find Files' },
+      { '<leader>f"',      tb.registers,                                               desc = 'Registers' },
+      { '<leader>f/',      tb.search_history,                                          desc = 'Search history' },
+      { '<leader>fD',      tb.diagnostics,                                             desc = 'Diagnostics' },
+      { '<leader>fc',      tb.command_history,                                         desc = 'Command history' },
+      { '<leader>fd',      function() tb.diagnostics({ bufnr = 0 }) end,              desc = 'Buffer Diagnostics' },
+      { '<leader>fk',      tb.keymaps,                                                desc = 'Keymaps' },
+      { '<leader>fl',      tb.loclist,                                                 desc = 'Location List' },
+      { '<leader>fq',      tb.quickfix,                                                desc = 'Quickfix List' },
+      { '<leader>fr',      tb.resume,                                                  desc = 'Resume' },
     },
 
     -- Git
     {
-      { '<leader>gs', '<cmd>Neogit<cr>',                 desc = 'Open Neogit UI' },
-      { '<leader>gb', '<cmd>Neogit branch<cr>',          desc = 'Branch' },
-      { '<leader>gc', '<cmd>Neogit commit<cr>',          desc = 'Commit' },
-      { '<leader>gl', '<cmd>Neogit log<cr>',             desc = 'Log' },
-      { '<leader>gp', '<cmd>Neogit pull<cr>',            desc = 'Pull' },
-      { '<leader>gr', '<cmd>Neogit rebase<cr>',          desc = 'Rebase' },
-      { '<leader>gP', '<cmd>Neogit push<cr>',            desc = 'Push' },
-      { '<leader>gB', '<cmd>Gitsign blame<cr>',          desc = 'Blame' },
-      { '<leader>gO', function() Snacks.gitbrowse() end, desc = 'Open Browser',  mode = 'nv' },
+      { '<leader>gs', '<cmd>Neogit<cr>',              desc = 'Open Neogit UI' },
+      { '<leader>gb', '<cmd>Neogit branch<cr>',       desc = 'Branch' },
+      { '<leader>gc', '<cmd>Neogit commit<cr>',       desc = 'Commit' },
+      { '<leader>gl', '<cmd>Neogit log<cr>',          desc = 'Log' },
+      { '<leader>gp', '<cmd>Neogit pull<cr>',         desc = 'Pull' },
+      { '<leader>gr', '<cmd>Neogit rebase<cr>',       desc = 'Rebase' },
+      { '<leader>gP', '<cmd>Neogit push<cr>',         desc = 'Push' },
+      { '<leader>gB', '<cmd>Gitsign blame<cr>',       desc = 'Blame' },
+      { '<leader>gO', require('gitportal').to_remote, desc = 'Open Browser',  mode = 'nv' },
     },
 
     -- which-key
@@ -144,27 +145,28 @@ end
 
 function M:lsp_keys(_)
   local lsp = vim.lsp
+  local tb  = require('telescope.builtin')
 
   wk.add {
-    { 'K',          function() lsp.buf.hover() end,                                        desc = 'Show Documentation' },
-    { 'gO',         function() Snacks.picker.lsp_symbols() end,                            desc = 'Show LSP Symbols' },
-    { 'gy',         function() Snacks.picker.lsp_type_definitions() end,                   desc = 'Go to Type Definition' },
-    { 'gd',         function() Snacks.picker.lsp_definitions() end,                        desc = 'Go to Definition' },
-    { 'gD',         function() Snacks.picker.lsp_declarations() end,                       desc = 'Go to Declaration' },
-    { 'gI',         function() Snacks.picker.lsp_implementations() end,                    desc = 'Go to Implementation' },
-    { 'gr',         function() Snacks.picker.lsp_references() end,                         desc = 'Show References' },
-    { '<C-h>',      lsp.buf.signature_help,                                                desc = 'Show signature [h]elp',         mode = 'i' },
+    { 'K',          lsp.buf.hover,                                                        desc = 'Show Documentation' },
+    { 'gO',         tb.lsp_document_symbols,                                              desc = 'Show LSP Symbols' },
+    { 'gy',         tb.lsp_type_definitions,                                              desc = 'Go to Type Definition' },
+    { 'gd',         tb.lsp_definitions,                                                   desc = 'Go to Definition' },
+    { 'gD',         tb.lsp_declarations,                                                  desc = 'Go to Declaration' },
+    { 'gI',         tb.lsp_implementations,                                               desc = 'Go to Implementation' },
+    { 'gr',         tb.lsp_references,                                                    desc = 'Show References' },
+    { '<C-h>',      lsp.buf.signature_help,                                               desc = 'Show signature [h]elp', mode = 'i' },
     -- format, rename, code action, etc.
-    { '<leader>=',  lsp.buf.format,                                                        desc = 'Format' },
-    { '<leader>ca', lsp.buf.code_action,                                                   desc = 'Code Action',                   mode = 'nv' },
-    { '<leader>rn', lsp.buf.rename,                                                        desc = 'Rename' },
+    { '<leader>=',  lsp.buf.format,                                                       desc = 'Format' },
+    { '<leader>ca', lsp.buf.code_action,                                                  desc = 'Code Action',           mode = 'nv' },
+    { '<leader>rn', lsp.buf.rename,                                                       desc = 'Rename' },
     -- diagnostics
     { '<leader>e',  function() vim.diagnostic.open_float(nil, { border = 'rounded' }) end, desc = 'Show diagnostic [e]rror inline' },
     -- workspace
-    { '<leader>wa', lsp.buf.add_workspace_folder,                                          desc = '[a]dd workspace folder' },
-    { '<leader>wr', lsp.buf.remove_workspace_folder,                                       desc = '[r]emove workspace folder' },
-    { '<leader>wl', function() print(vim.inspect(lsp.buf.list_workspace_folders())) end,   desc = '[l]ist workspace folders' },
-    { '<leader>ws', function() Snacks.picker.lsp_workspace_symbols() end,                  desc = 'Show LSP Workspace Symbols' },
+    { '<leader>wa', lsp.buf.add_workspace_folder,                                         desc = '[a]dd workspace folder' },
+    { '<leader>wr', lsp.buf.remove_workspace_folder,                                      desc = '[r]emove workspace folder' },
+    { '<leader>wl', function() print(vim.inspect(lsp.buf.list_workspace_folders())) end,  desc = '[l]ist workspace folders' },
+    { '<leader>ws', tb.lsp_workspace_symbols,                                             desc = 'Show LSP Workspace Symbols' },
   }
 end
 
