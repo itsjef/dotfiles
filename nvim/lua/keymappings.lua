@@ -1,12 +1,16 @@
 local M = {}
-local wk = require('which-key')
-local smart_splits = require('smart-splits')
-local ts_move = require('nvim-treesitter-textobjects.move')
-local ts_select = require('nvim-treesitter-textobjects.select')
+
+-- Lazy-call helper: returns a function that requires `mod` and calls `fn` only
+-- when invoked. Avoids loading plugins at keymappings.lua module-load time so
+-- lazy.nvim's event/cmd/keys triggers can do their job.
+local function lazy(mod, fn)
+  return function(...)
+    return require(mod)[fn](...)
+  end
+end
 
 function M:setup()
-  local tb  = require('telescope.builtin')
-  local lga = require('telescope').extensions.live_grep_args
+  local wk = require('which-key')
 
   wk.add {
     -- groups
@@ -31,63 +35,61 @@ function M:setup()
 
       -- smart-splits
       -- resizing splits
-      -- these keymaps will also accept a range,
-      -- for example `10<C-h>` will `resize_left` by `(10 * config.default_amount)`
-      { '<C-h>',             smart_splits.resize_left },
-      { '<C-j>',             smart_splits.resize_down },
-      { '<C-k>',             smart_splits.resize_up },
-      { '<C-l>',             smart_splits.resize_right },
+      { '<C-h>',             lazy('smart-splits', 'resize_left') },
+      { '<C-j>',             lazy('smart-splits', 'resize_down') },
+      { '<C-k>',             lazy('smart-splits', 'resize_up') },
+      { '<C-l>',             lazy('smart-splits', 'resize_right') },
       -- moving between splits
-      { '<A-h>',             smart_splits.move_cursor_left },
-      { '<A-j>',             smart_splits.move_cursor_down },
-      { '<A-k>',             smart_splits.move_cursor_up },
-      { '<A-l>',             smart_splits.move_cursor_right },
-      { '<A-\\>',            smart_splits.move_cursor_previous },
+      { '<A-h>',             lazy('smart-splits', 'move_cursor_left') },
+      { '<A-j>',             lazy('smart-splits', 'move_cursor_down') },
+      { '<A-k>',             lazy('smart-splits', 'move_cursor_up') },
+      { '<A-l>',             lazy('smart-splits', 'move_cursor_right') },
+      { '<A-\\>',            lazy('smart-splits', 'move_cursor_previous') },
       -- swapping buffers between windows
-      { '<leader><leader>h', smart_splits.swap_buf_left },
-      { '<leader><leader>j', smart_splits.swap_buf_down },
-      { '<leader><leader>k', smart_splits.swap_buf_up },
-      { '<leader><leader>l', smart_splits.swap_buf_right },
+      { '<leader><leader>h', lazy('smart-splits', 'swap_buf_left') },
+      { '<leader><leader>j', lazy('smart-splits', 'swap_buf_down') },
+      { '<leader><leader>k', lazy('smart-splits', 'swap_buf_up') },
+      { '<leader><leader>l', lazy('smart-splits', 'swap_buf_right') },
 
       -- Clear highlighted search result
       { '<ESC>',             ':noh<CR><ESC>' },
 
       -- Some plugin mappings that don't need to show
-      { '<C-\\>',     tb.buffers,                                                                    desc = 'Buffers' },
-      { '<C-p>',      tb.find_files,                                                                 desc = 'Find Files' },
-      { '<leader>/',  lga.live_grep_args,                                                            desc = 'Grep' },
-      { '<leader>\'', function() lga.live_grep_args({ grep_open_files = true }) end,                 desc = 'Grep Open Buffers' },
-      { '<leader>*',  require('telescope-live-grep-args.shortcuts').grep_word_under_cursor,          desc = 'Grep Selection',   mode = 'nx' },
-      { '<leader>bd', require('mini.bufremove').delete,                                              desc = 'Delete Buffer' },
-      { '<leader>nn', function() require('oil').toggle_float(nil) end,                               desc = 'File Browser' },
-      { '<leader>qq', function() require('quicker').toggle({ focus = true }) end,                    desc = 'Quickfix' },
+      { '<C-\\>',     lazy('telescope.builtin', 'buffers'),                                         desc = 'Buffers' },
+      { '<C-p>',      lazy('telescope.builtin', 'find_files'),                                      desc = 'Find Files' },
+      { '<leader>/',  function() require('telescope').extensions.live_grep_args.live_grep_args() end, desc = 'Grep' },
+      { '<leader>\'', function() require('telescope').extensions.live_grep_args.live_grep_args({ grep_open_files = true }) end, desc = 'Grep Open Buffers' },
+      { '<leader>*',  function() require('telescope-live-grep-args.shortcuts').grep_word_under_cursor() end, desc = 'Grep Selection',   mode = 'nx' },
+      { '<leader>bd', lazy('mini.bufremove', 'delete'),                                             desc = 'Delete Buffer' },
+      { '<leader>nn', function() require('oil').toggle_float(nil) end,                              desc = 'File Browser' },
+      { '<leader>qq', function() require('quicker').toggle({ focus = true }) end,                   desc = 'Quickfix' },
     },
 
     -- telescope.nvim
     {
-      { '<leader><space>', tb.find_files,                                              desc = 'Find Files' },
-      { '<leader>f"',      tb.registers,                                               desc = 'Registers' },
-      { '<leader>f/',      tb.search_history,                                          desc = 'Search history' },
-      { '<leader>fD',      tb.diagnostics,                                             desc = 'Diagnostics' },
-      { '<leader>fc',      tb.command_history,                                         desc = 'Command history' },
-      { '<leader>fd',      function() tb.diagnostics({ bufnr = 0 }) end,              desc = 'Buffer Diagnostics' },
-      { '<leader>fk',      tb.keymaps,                                                desc = 'Keymaps' },
-      { '<leader>fl',      tb.loclist,                                                 desc = 'Location List' },
-      { '<leader>fq',      tb.quickfix,                                                desc = 'Quickfix List' },
-      { '<leader>fr',      tb.resume,                                                  desc = 'Resume' },
+      { '<leader><space>', lazy('telescope.builtin', 'find_files'),                                 desc = 'Find Files' },
+      { '<leader>f"',      lazy('telescope.builtin', 'registers'),                                  desc = 'Registers' },
+      { '<leader>f/',      lazy('telescope.builtin', 'search_history'),                             desc = 'Search history' },
+      { '<leader>fD',      lazy('telescope.builtin', 'diagnostics'),                                desc = 'Diagnostics' },
+      { '<leader>fc',      lazy('telescope.builtin', 'command_history'),                            desc = 'Command history' },
+      { '<leader>fd',      function() require('telescope.builtin').diagnostics({ bufnr = 0 }) end,  desc = 'Buffer Diagnostics' },
+      { '<leader>fk',      lazy('telescope.builtin', 'keymaps'),                                    desc = 'Keymaps' },
+      { '<leader>fl',      lazy('telescope.builtin', 'loclist'),                                    desc = 'Location List' },
+      { '<leader>fq',      lazy('telescope.builtin', 'quickfix'),                                   desc = 'Quickfix List' },
+      { '<leader>fr',      lazy('telescope.builtin', 'resume'),                                     desc = 'Resume' },
     },
 
     -- Git
     {
-      { '<leader>gs', '<cmd>Neogit<cr>',              desc = 'Open Neogit UI' },
-      { '<leader>gb', '<cmd>Neogit branch<cr>',       desc = 'Branch' },
-      { '<leader>gc', '<cmd>Neogit commit<cr>',       desc = 'Commit' },
-      { '<leader>gl', '<cmd>Neogit log<cr>',          desc = 'Log' },
-      { '<leader>gp', '<cmd>Neogit pull<cr>',         desc = 'Pull' },
-      { '<leader>gr', '<cmd>Neogit rebase<cr>',       desc = 'Rebase' },
-      { '<leader>gP', '<cmd>Neogit push<cr>',         desc = 'Push' },
-      { '<leader>gB', '<cmd>Gitsign blame<cr>',       desc = 'Blame' },
-      { '<leader>gO', require('gitportal').to_remote, desc = 'Open Browser',  mode = 'nv' },
+      { '<leader>gs', '<cmd>Neogit<cr>',                                  desc = 'Open Neogit UI' },
+      { '<leader>gb', '<cmd>Neogit branch<cr>',                           desc = 'Branch' },
+      { '<leader>gc', '<cmd>Neogit commit<cr>',                           desc = 'Commit' },
+      { '<leader>gl', '<cmd>Neogit log<cr>',                              desc = 'Log' },
+      { '<leader>gp', '<cmd>Neogit pull<cr>',                             desc = 'Pull' },
+      { '<leader>gr', '<cmd>Neogit rebase<cr>',                           desc = 'Rebase' },
+      { '<leader>gP', '<cmd>Neogit push<cr>',                             desc = 'Push' },
+      { '<leader>gB', '<cmd>Gitsign blame<cr>',                           desc = 'Blame' },
+      { '<leader>gO', lazy('gitportal', 'to_remote'),                     desc = 'Open Browser', mode = 'nv' },
     },
 
     -- which-key
@@ -111,24 +113,24 @@ function M:setup()
     -- Treesitter Text Objects
     {
       -- navigate class
-      { ']]', function() ts_move.goto_next_start('@class.outer', 'textobjects') end,        desc = 'next Class start',      mode = 'nxo' },
-      { '][', function() ts_move.goto_next_end('@class.outer', 'textobjects') end,          desc = 'next Class end',        mode = 'nxo' },
-      { '[[', function() ts_move.goto_previous_start('@class.outer', 'textobjects') end,    desc = 'prev Class start',      mode = 'nxo' },
-      { '[]', function() ts_move.goto_previous_end('@class.outer', 'textobjects') end,      desc = 'prev Class end',        mode = 'nxo' },
+      { ']]', function() require('nvim-treesitter-textobjects.move').goto_next_start('@class.outer', 'textobjects') end,        desc = 'next Class start',      mode = 'nxo' },
+      { '][', function() require('nvim-treesitter-textobjects.move').goto_next_end('@class.outer', 'textobjects') end,          desc = 'next Class end',        mode = 'nxo' },
+      { '[[', function() require('nvim-treesitter-textobjects.move').goto_previous_start('@class.outer', 'textobjects') end,    desc = 'prev Class start',      mode = 'nxo' },
+      { '[]', function() require('nvim-treesitter-textobjects.move').goto_previous_end('@class.outer', 'textobjects') end,      desc = 'prev Class end',        mode = 'nxo' },
       -- navigate function
-      { ']m', function() ts_move.goto_next_start('@function.outer', 'textobjects') end,     desc = 'next Function start',   mode = 'nxo' },
-      { ']M', function() ts_move.goto_next_end('@function.outer', 'textobjects') end,       desc = 'next Function end',     mode = 'nxo' },
-      { '[m', function() ts_move.goto_previous_start('@function.outer', 'textobjects') end, desc = 'prev Function start',   mode = 'nxo' },
-      { '[M', function() ts_move.goto_previous_end('@function.outer', 'textobjects') end,   desc = 'prev Function end',     mode = 'nxo' },
+      { ']m', function() require('nvim-treesitter-textobjects.move').goto_next_start('@function.outer', 'textobjects') end,     desc = 'next Function start',   mode = 'nxo' },
+      { ']M', function() require('nvim-treesitter-textobjects.move').goto_next_end('@function.outer', 'textobjects') end,       desc = 'next Function end',     mode = 'nxo' },
+      { '[m', function() require('nvim-treesitter-textobjects.move').goto_previous_start('@function.outer', 'textobjects') end, desc = 'prev Function start',   mode = 'nxo' },
+      { '[M', function() require('nvim-treesitter-textobjects.move').goto_previous_end('@function.outer', 'textobjects') end,   desc = 'prev Function end',     mode = 'nxo' },
       -- navigate scope
-      { ']s', function() ts_move.goto_next_start('@local.scope', 'locals') end,             desc = 'next Scope start',      mode = 'nxo' },
-      { '[s', function() ts_move.goto_previous_start('@local.scope', 'locals') end,         desc = 'prev Scope start',      mode = 'nxo' },
+      { ']s', function() require('nvim-treesitter-textobjects.move').goto_next_start('@local.scope', 'locals') end,             desc = 'next Scope start',      mode = 'nxo' },
+      { '[s', function() require('nvim-treesitter-textobjects.move').goto_previous_start('@local.scope', 'locals') end,         desc = 'prev Scope start',      mode = 'nxo' },
       -- selection
-      { 'am', function() ts_select.select_textobject('@function.outer', 'textobjects') end, desc = 'select Function outer', mode = 'ox' },
-      { 'im', function() ts_select.select_textobject('@function.inner', 'textobjects') end, desc = 'select Function inner', mode = 'ox' },
-      { 'ac', function() ts_select.select_textobject('@class.outer', 'textobjects') end,    desc = 'select Class outer',    mode = 'ox' },
-      { 'ic', function() ts_select.select_textobject('@class.inner', 'textobjects') end,    desc = 'select Class inner',    mode = 'ox' },
-      { 'as', function() ts_select.select_textobject('@local.scope', 'locals') end,         desc = 'select Local scope',    mode = 'ox' },
+      { 'am', function() require('nvim-treesitter-textobjects.select').select_textobject('@function.outer', 'textobjects') end, desc = 'select Function outer', mode = 'ox' },
+      { 'im', function() require('nvim-treesitter-textobjects.select').select_textobject('@function.inner', 'textobjects') end, desc = 'select Function inner', mode = 'ox' },
+      { 'ac', function() require('nvim-treesitter-textobjects.select').select_textobject('@class.outer', 'textobjects') end,    desc = 'select Class outer',    mode = 'ox' },
+      { 'ic', function() require('nvim-treesitter-textobjects.select').select_textobject('@class.inner', 'textobjects') end,    desc = 'select Class inner',    mode = 'ox' },
+      { 'as', function() require('nvim-treesitter-textobjects.select').select_textobject('@local.scope', 'locals') end,         desc = 'select Local scope',    mode = 'ox' },
     }
   }
 
@@ -136,7 +138,7 @@ function M:setup()
   vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'oil', 'netrw' },
     callback = function()
-      wk.add {
+      require('which-key').add {
         { '<leader>as', '<cmd>ClaudeCodeTreeAdd<cr>', desc = 'Add file', buffer = 0 },
       }
     end,
@@ -145,16 +147,16 @@ end
 
 function M:lsp_keys(_)
   local lsp = vim.lsp
-  local tb  = require('telescope.builtin')
+  local wk  = require('which-key')
 
   wk.add {
     { 'K',          lsp.buf.hover,                                                        desc = 'Show Documentation' },
-    { 'gO',         tb.lsp_document_symbols,                                              desc = 'Show LSP Symbols' },
-    { 'gy',         tb.lsp_type_definitions,                                              desc = 'Go to Type Definition' },
-    { 'gd',         tb.lsp_definitions,                                                   desc = 'Go to Definition' },
-    { 'gD',         tb.lsp_declarations,                                                  desc = 'Go to Declaration' },
-    { 'gI',         tb.lsp_implementations,                                               desc = 'Go to Implementation' },
-    { 'gr',         tb.lsp_references,                                                    desc = 'Show References' },
+    { 'gO',         lazy('telescope.builtin', 'lsp_document_symbols'),                    desc = 'Show LSP Symbols' },
+    { 'gy',         lazy('telescope.builtin', 'lsp_type_definitions'),                    desc = 'Go to Type Definition' },
+    { 'gd',         lazy('telescope.builtin', 'lsp_definitions'),                         desc = 'Go to Definition' },
+    { 'gD',         lazy('telescope.builtin', 'lsp_declarations'),                        desc = 'Go to Declaration' },
+    { 'gI',         lazy('telescope.builtin', 'lsp_implementations'),                     desc = 'Go to Implementation' },
+    { 'gr',         lazy('telescope.builtin', 'lsp_references'),                          desc = 'Show References' },
     { '<C-h>',      lsp.buf.signature_help,                                               desc = 'Show signature [h]elp', mode = 'i' },
     -- format, rename, code action, etc.
     { '<leader>=',  lsp.buf.format,                                                       desc = 'Format' },
@@ -166,12 +168,13 @@ function M:lsp_keys(_)
     { '<leader>wa', lsp.buf.add_workspace_folder,                                         desc = '[a]dd workspace folder' },
     { '<leader>wr', lsp.buf.remove_workspace_folder,                                      desc = '[r]emove workspace folder' },
     { '<leader>wl', function() print(vim.inspect(lsp.buf.list_workspace_folders())) end,  desc = '[l]ist workspace folders' },
-    { '<leader>ws', tb.lsp_workspace_symbols,                                             desc = 'Show LSP Workspace Symbols' },
+    { '<leader>ws', lazy('telescope.builtin', 'lsp_workspace_symbols'),                   desc = 'Show LSP Workspace Symbols' },
   }
 end
 
 function M:gitsigns_keys(_)
   local gitsigns = require('gitsigns')
+  local wk       = require('which-key')
 
   wk.add {
     -- Navigation
@@ -209,11 +212,6 @@ function M:gitsigns_keys(_)
     { '<leader>hp', gitsigns.preview_hunk,                                                      desc = 'Preview Hunk' },
     { '<leader>hi', gitsigns.preview_hunk_inline,                                               desc = 'Preview Hunk (inline)' },
     { '<leader>hB', gitsigns.toggle_current_line_blame,                                         desc = 'Blame (inline)' },
-    -- { '<leader>hW', gitsigns.toggle_word_diff, desc = 'Toggle word diff' },
-    -- { '<leader>hd', gitsigns.diffthis }
-    -- { '<leader>hD', function() gitsigns.diffthis('~') end }
-    -- { '<leader>hQ', function() gitsigns.setqflist('all') end }
-    -- { '<leader>hq', gitsigns.setqflist }
 
     -- Text object
     { 'ih',         gitsigns.select_hunk,                                                       mode = 'ox' },

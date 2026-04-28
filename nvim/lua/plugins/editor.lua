@@ -28,6 +28,7 @@ return {
   },
   {
     'rachartier/tiny-cmdline.nvim',
+    event = 'CmdlineEnter',
     config = function()
       tc = require('tiny-cmdline')
       tc.setup {
@@ -41,6 +42,10 @@ return {
   -- ==========================================================================
   {
     'stevearc/oil.nvim',
+    cmd = 'Oil',
+    keys = {
+      { '-', '<cmd>Oil<CR>', desc = 'Open parent directory' },
+    },
     dependencies = { 'benomahony/oil-git.nvim' },
     opts = {
       float = {
@@ -64,6 +69,7 @@ return {
   -- ==========================================================================
   {
     'mrjones2014/smart-splits.nvim',
+    lazy = true,
     opts = {},
   },
 
@@ -72,6 +78,7 @@ return {
   -- ==========================================================================
   {
     'andymass/vim-matchup',
+    event = { 'BufReadPost', 'BufNewFile' },
     opts = {
       treesitter = {
         stopline = 500,
@@ -104,6 +111,8 @@ return {
   },
   {
     'stevearc/quicker.nvim',
+    ft = 'qf',
+    cmd = { 'Quicker' },
     opts = {},
   },
 
@@ -112,6 +121,7 @@ return {
   -- ==========================================================================
   {
     'MeanderingProgrammer/render-markdown.nvim',
+    ft = { 'markdown' },
     opts = {},
   },
   {
@@ -160,6 +170,7 @@ return {
   },
   {
     url = 'https://codeberg.org/trevorhauter/gitportal.nvim',
+    lazy = true,
     opts = {
       git_provider_map = {
         ['git@git.parcelperform.com:'] = {
@@ -171,10 +182,12 @@ return {
   },
   {
     'dlyongemallo/diffview.nvim',
-    version = '*'
+    version = '*',
+    cmd = { 'DiffviewOpen', 'DiffviewFileHistory', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewRefresh' },
   },
   {
     'lewis6991/gitsigns.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       require('gitsigns').setup {
         on_attach = function(bufnr)
@@ -189,16 +202,16 @@ return {
   -- ==========================================================================
   {
     'coder/claudecode.nvim',
-    -- cmd = {
-    --   'ClaudeCode',
-    --   'ClaudeCodeFocus',
-    --   'ClaudeCodeSelectModel',
-    --   'ClaudeCodeAdd',
-    --   'ClaudeCodeSend',
-    --   'ClaudeCodeTreeAdd',
-    --   'ClaudeCodeDiffAccept',
-    --   'ClaudeCodeDiffDeny',
-    -- },
+    cmd = {
+      'ClaudeCode',
+      'ClaudeCodeFocus',
+      'ClaudeCodeSelectModel',
+      'ClaudeCodeAdd',
+      'ClaudeCodeSend',
+      'ClaudeCodeTreeAdd',
+      'ClaudeCodeDiffAccept',
+      'ClaudeCodeDiffDeny',
+    },
     config = true,
     opts = {
       terminal = {
