@@ -24,6 +24,9 @@ return {
             auto_quoting = true,
             mappings = {
               i = {
+                ['<Tab>'] = actions.toggle_selection + actions.move_selection_worse,
+                ['<S-Tab>'] = actions.toggle_selection + actions.move_selection_better,
+                ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
                 ['<C-k>'] = lga_actions.quote_prompt(),
                 ['<C-i>'] = lga_actions.quote_prompt({ postfix = ' --iglob ' }),
                 ['<C-space>'] = actions.to_fuzzy_refine,
