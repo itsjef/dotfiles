@@ -18,9 +18,9 @@ return {
   },
   {
     'rachartier/tiny-cmdline.nvim',
-    event = 'CmdlineEnter',
     config = function()
-      tc = require('tiny-cmdline')
+      vim.o.cmdheight = 0
+      local tc = require('tiny-cmdline')
       tc.setup {
         on_reposition = tc.adapters.blink,
       }

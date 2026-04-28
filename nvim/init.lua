@@ -24,7 +24,6 @@ vim.g.loaded_rplugin = 1
 vim.g.loaded_spellfile_plugin = 1
 
 -- enable ui2
-vim.o.cmdheight = 0
 require('vim._core.ui2').enable({})
 
 -- plugins with lazy.nvim
