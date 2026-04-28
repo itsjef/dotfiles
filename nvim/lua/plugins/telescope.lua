@@ -11,6 +11,7 @@ return {
     config = function()
       local telescope = require('telescope')
       local lga_actions = require('telescope-live-grep-args.actions')
+      local actions = require('telescope.actions')
       telescope.setup {
         defaults = require('telescope.themes').get_ivy({
           layout_config = {
@@ -25,7 +26,7 @@ return {
               i = {
                 ['<C-k>'] = lga_actions.quote_prompt(),
                 ['<C-i>'] = lga_actions.quote_prompt({ postfix = ' --iglob ' }),
-                ['<C-space>'] = lga_actions.to_fuzzy_refine,
+                ['<C-space>'] = actions.to_fuzzy_refine,
               },
             },
           },
