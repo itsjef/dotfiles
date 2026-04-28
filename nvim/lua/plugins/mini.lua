@@ -28,6 +28,41 @@ return {
           require('mini.' .. module).setup()
         end
 
+        local mc = require('mini.clue')
+        mc.setup({
+          triggers = {
+            { mode = 'n',       keys = '<Leader>' },
+            { mode = 'v',       keys = '<Leader>' },
+            { mode = 'n',       keys = 'g' },
+            { mode = 'x',       keys = 'g' },
+            { mode = 'n',       keys = ']' },
+            { mode = 'x',       keys = ']' },
+            { mode = 'o',       keys = ']' },
+            { mode = 'n',       keys = '[' },
+            { mode = 'x',       keys = '[' },
+            { mode = 'o',       keys = '[' },
+            { mode = 'o',       keys = 'a' },
+            { mode = 'x',       keys = 'a' },
+            { mode = 'o',       keys = 'i' },
+            { mode = 'x',       keys = 'i' },
+          },
+          clues = {
+            { mode = 'n', keys = '<Leader>a', desc = '+AI/Claude Code' },
+            { mode = 'n', keys = '<Leader>f', desc = '+Telescope' },
+            { mode = 'n', keys = '<Leader>g', desc = '+Neogit' },
+            { mode = 'n', keys = '<Leader>h', desc = '+Gitsigns' },
+            { mode = 'n', keys = '<Leader>m', desc = '+Markdown' },
+            mc.gen_clues.g(),
+            mc.gen_clues.z(),
+            mc.gen_clues.windows(),
+            mc.gen_clues.marks(),
+            mc.gen_clues.registers(),
+          },
+          window = {
+            delay = 500,
+          },
+        })
+
         local formatAugroup = vim.api.nvim_create_augroup('FormatAutogroup', { clear = true })
         vim.api.nvim_create_autocmd('BufWritePre', {
           group = formatAugroup,

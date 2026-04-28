@@ -2,6 +2,16 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Rules
+
+**Always:**
+- Update this file when changing plugins, keymaps, architecture, or load order — before committing.
+
+**Never:**
+- Move keymap registration before `VeryLazy` — plugins must be loaded first.
+- Use `lazy = false` for new plugins unless there is a concrete startup-time reason.
+- Reference `require('plugin').fn` directly in keymap definitions — use `lazy(mod, fn)` or a `function()` wrapper to avoid defeating lazy-loading.
+
 ## Repository
 
 Personal Neovim configuration. The directory is symlinked (or sourced) as `~/.config/nvim`. There is no build/test/lint pipeline — changes are validated by reloading Neovim.
@@ -24,7 +34,7 @@ Entry point is `init.lua`. Load order matters and is roughly:
 4. Enable experimental `vim._core.ui2` with `cmdheight = 0`.
 5. `lazy.nvim` bootstraps and imports everything under `lua/plugins/` (see `init.lua:48-51`).
 6. `require('general')` — global options, persistent undo dir (`temp_dir/undo`), relative-number toggle by mode, treesitter highlighting/indent autocmds for a curated filetype list.
-7. **Keymaps are deferred** until the `User VeryLazy` autocmd fires, so `which-key` is loaded before `keymappings.setup()` runs (`init.lua:57-61`). Don't move keymap registration earlier — it depends on which-key.
+7. **Keymaps are deferred** until the `User VeryLazy` autocmd fires (`init.lua:57-61`). Don't move keymap registration earlier — plugins must be loaded before their functions are referenced in keymaps.
 
 ### Plugin layout (`lua/plugins/`)
 
@@ -36,10 +46,10 @@ Plugins are aggressively lazy-loaded via `event`, `cmd`, `ft`, or `keys`. When a
 
 ### Keymaps (`lua/keymappings.lua`)
 
-All keymaps are registered through `which-key.add`. Three entry points on module `M`:
+All keymaps are registered through `vim.keymap.set`. Hint popups are provided by `mini.clue` (configured in `lua/plugins/mini.lua`). Three entry points on module `M`:
 - `M:setup()` — global maps; called from `init.lua` on `VeryLazy`.
-- `M:lsp_keys(bufnr)` — buffer-local LSP maps; called from the `LspAttach` autocmd in `lua/plugins/z-lsp.lua` (and from nvim-metals `on_attach`).
-- `M:gitsigns_keys(bufnr)` — buffer-local gitsigns maps; called from gitsigns `on_attach` in `lua/plugins/editor.lua`.
+- `M:lsp_keys(bufnr)` — LSP maps; called from the `LspAttach` autocmd in `lua/plugins/z-lsp.lua` (and from nvim-metals `on_attach`).
+- `M:gitsigns_keys(bufnr)` — gitsigns maps; called from gitsigns `on_attach` in `lua/plugins/editor.lua`.
 
 The `lazy(mod, fn)` helper at the top of the file returns a thunk that `require`s the plugin only when the key is pressed. **Use `lazy()` (or `function() require(...).fn() end`) for plugin keymaps** — referencing `require('plugin').fn` directly at module load defeats lazy.nvim's `event/cmd/keys` triggers.
 

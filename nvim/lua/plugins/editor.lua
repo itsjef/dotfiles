@@ -12,16 +12,6 @@ return {
   --   end
   -- },
   {
-    'folke/which-key.nvim',
-    event = 'VeryLazy',
-    opts = {
-      preset = 'helix',
-      delay = function(ctx)
-        return ctx.plugin and 0 or 500
-      end,
-    },
-  },
-  {
     'nvim-zh/colorful-winsep.nvim',
     event = 'WinLeave',
     config = true,
