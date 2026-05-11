@@ -82,8 +82,8 @@ plugins=(
   git
   aws
   kubectl
-  poetry
-  poetry-env
+  # poetry
+  # poetry-env
   z
   zsh-autosuggestions
   zsh-syntax-highlighting

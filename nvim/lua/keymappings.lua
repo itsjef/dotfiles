@@ -45,7 +45,7 @@ function M:setup()
 
   -- Telescope
   set('n', '<C-\\>',      lazy('telescope.builtin', 'buffers'))
-  set('n', '<C-p>',       lazy('telescope.builtin', 'find_files'))
+  -- set('n', '<C-p>',       lazy('telescope.builtin', 'find_files'))
   set('n', '<leader>/',   function() require('telescope').extensions.live_grep_args.live_grep_args() end,                                          { desc = 'Grep' })
   set('n', "<leader>'",   function() require('telescope').extensions.live_grep_args.live_grep_args({ grep_open_files = true }) end,                { desc = 'Grep open buffers' })
   set({'n','x'}, '<leader>*', function() require('telescope-live-grep-args.shortcuts').grep_word_under_cursor() end,                               { desc = 'Grep word under cursor' })
