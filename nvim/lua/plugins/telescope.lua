@@ -16,9 +16,12 @@ return {
         defaults = require('telescope.themes').get_ivy({
           layout_config = {
             preview_cutoff = 100,
-            preview_width = 0.6,
+            bottom_pane = { preview_width = 0.6 },
           },
         }),
+        pickers = {
+          find_files = require('telescope.themes').get_dropdown(),
+        },
         extensions = {
           live_grep_args = {
             auto_quoting = true,
