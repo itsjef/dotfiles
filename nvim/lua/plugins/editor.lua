@@ -171,7 +171,7 @@ return {
     },
   },
   {
-    'dlyongemallo/diffview.nvim',
+    'dlyongemallo/diffview-plus.nvim',
     version = '*',
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewRefresh' },
   },
