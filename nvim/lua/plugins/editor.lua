@@ -4,13 +4,13 @@ return {
   -- ==========================================================================
   -- UI & Interface
   -- ==========================================================================
-  -- {
-  --   'goolord/alpha-nvim',
-  --   config = function()
-  --     local startify = require('alpha.themes.startify')
-  --     require('alpha').setup(startify.config)
-  --   end
-  -- },
+  {
+    'goolord/alpha-nvim',
+    config = function()
+      local startify = require('alpha.themes.startify')
+      require('alpha').setup(startify.config)
+    end
+  },
   {
     'nvim-zh/colorful-winsep.nvim',
     event = 'WinLeave',
