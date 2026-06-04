@@ -156,7 +156,12 @@ return {
   {
     'NeogitOrg/neogit',
     lazy = true,
-    cmd = 'Neogit'
+    cmd = 'Neogit',
+    config = function()
+      require('neogit').setup {
+        integrations = { diffview = true },
+      }
+    end,
   },
   {
     url = 'https://codeberg.org/trevorhauter/gitportal.nvim',
