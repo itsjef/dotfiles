@@ -40,7 +40,7 @@ return {
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_b = { 'branch' },
+        lualine_b = { 'branch', { require('lualine.components.macro_recording'), color = { fg = '#f38ba8' } } },
         lualine_c = {
           { 'filename', path = 1 },
           {
