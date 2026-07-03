@@ -11,6 +11,7 @@ Personal dotfiles for macOS, organized by tool. Each subdirectory has its own `C
 - `ghostty/` — Ghostty terminal config. See `ghostty/CLAUDE.md`.
 - `wezterm/` — WezTerm config (`wezterm.lua`, Lua).
 - `kitty/` — Kitty terminal config (`kitty.conf`).
+- `rtk/` — RTK (Rust Token Killer) config for Claude Code. See `rtk/CLAUDE.md`.
 - `.zshrc` / `.zsh_env_vars` — Zsh shell config (oh-my-zsh + Powerlevel10k).
 - `.tmux.conf` — Legacy root-level tmux config (old/minimal; the active config is `tmux/tmux.conf`).
 
@@ -24,6 +25,8 @@ There is no install script. Configs are applied by symlinking (or copying) each 
 | `tmux/tmux.conf` | `~/.config/tmux/tmux.conf` |
 | `ghostty/config.ghostty` | `~/.config/ghostty/config` |
 | `wezterm/wezterm.lua` | `~/.config/wezterm/wezterm.lua` |
+| `rtk/config.toml` | `~/Library/Application Support/rtk/config.toml` (symlinked) |
+| `rtk/filters.toml` | `~/Library/Application Support/rtk/filters.toml` (symlinked) |
 | `.zshrc` | `~/.zshrc` |
 | `.zsh_env_vars` | `~/.zsh_env_vars` (gitignored — contains secrets/machine-local vars) |
 
