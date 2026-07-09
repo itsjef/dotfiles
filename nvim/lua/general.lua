@@ -21,10 +21,6 @@ vim.opt.listchars = { eol = '¬', nbsp = '+', tab = '> ', trail = '-' }
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- 'Natural' splitting
-vim.o.splitbelow = true
-vim.o.splitright = true
-
 -- Persistent undo - You can undo even after closing a buffer or Vim itself
 vim.api.nvim_exec([[
   try
