@@ -12,6 +12,7 @@ Personal dotfiles for macOS, organized by tool. Each subdirectory has its own `C
 - `wezterm/` — WezTerm config (`wezterm.lua`, Lua).
 - `kitty/` — Kitty terminal config (`kitty.conf`).
 - `rtk/` — RTK (Rust Token Killer) config for Claude Code. See `rtk/CLAUDE.md`.
+- `claude/` — Personal Claude Code hook scripts. See `claude/CLAUDE.md`.
 - `.zshrc` / `.zsh_env_vars` — Zsh shell config (oh-my-zsh + Powerlevel10k).
 - `.tmux.conf` — Legacy root-level tmux config (old/minimal; the active config is `tmux/tmux.conf`).
 
@@ -27,6 +28,7 @@ There is no install script. Configs are applied by symlinking (or copying) each 
 | `wezterm/wezterm.lua` | `~/.config/wezterm/wezterm.lua` |
 | `rtk/config.toml` | `~/Library/Application Support/rtk/config.toml` (symlinked) |
 | `rtk/filters.toml` | `~/Library/Application Support/rtk/filters.toml` (symlinked) |
+| `claude/hooks/subagent-notify.js` | `~/.claude/hooks/subagent-notify.js` (symlinked) |
 | `.zshrc` | `~/.zshrc` |
 | `.zsh_env_vars` | `~/.zsh_env_vars` (gitignored — contains secrets/machine-local vars) |
 
