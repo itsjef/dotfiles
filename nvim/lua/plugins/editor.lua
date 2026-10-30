@@ -45,6 +45,9 @@ return {
       },
       keymaps = {
         ['q'] = { 'actions.close', mode = 'n' },
+        -- tmux prefix is C-s, so oil's default vertical-split key never reaches nvim
+        ['<C-s>'] = false,
+        ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
       },
     },
   },
