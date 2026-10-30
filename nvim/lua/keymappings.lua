@@ -75,6 +75,16 @@ function M:setup()
   set('n', '<leader>gB', '<cmd>Gitsign blame<cr>',         { desc = 'Blame' })
   set({'n','v'}, '<leader>gO', lazy('gitportal', 'to_remote'), { desc = 'Open in Browser' })
 
+  -- Markdown
+  local function md_keys(buf)
+    set('n', '<leader>mo', function() vim.system({ 'open', '-a', 'Firefox', vim.api.nvim_buf_get_name(buf) }) end, { buffer = buf, desc = 'Open in Firefox' })
+  end
+  vim.api.nvim_create_autocmd('FileType', { pattern = 'markdown', callback = function(ev) md_keys(ev.buf) end })
+  -- keymaps are set on VeryLazy, so markdown buffers opened at startup already fired FileType
+  for _, b in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.bo[b].filetype == 'markdown' then md_keys(b) end
+  end
+
   -- AI / Claude Code
   set('n', '<leader>ac', '<cmd>ClaudeCode<cr>',            { desc = 'Toggle Claude' })
   set('n', '<leader>af', '<cmd>ClaudeCodeFocus<cr>',       { desc = 'Focus Claude' })
