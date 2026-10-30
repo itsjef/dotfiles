@@ -75,14 +75,28 @@ function M:setup()
   set('n', '<leader>gB', '<cmd>Gitsign blame<cr>',         { desc = 'Blame' })
   set({'n','v'}, '<leader>gO', lazy('gitportal', 'to_remote'), { desc = 'Open in Browser' })
 
-  -- Markdown
-  local function md_keys(buf)
-    set('n', '<leader>mo', function() vim.system({ 'open', '-a', 'Firefox', vim.api.nvim_buf_get_name(buf) }) end, { buffer = buf, desc = 'Open in Firefox' })
-  end
-  vim.api.nvim_create_autocmd('FileType', { pattern = 'markdown', callback = function(ev) md_keys(ev.buf) end })
-  -- keymaps are set on VeryLazy, so markdown buffers opened at startup already fired FileType
+  -- Open in Firefox (buffer-local: markdown = this file, oil = entry under cursor)
+  local function firefox(path) vim.system({ 'open', '-a', 'Firefox', path }) end
+  local ft_keys = {
+    markdown = function(buf)
+      set('n', '<leader>mo', function() firefox(vim.api.nvim_buf_get_name(buf)) end, { buffer = buf, desc = 'Open in Firefox' })
+    end,
+    oil = function(buf)
+      set('n', '<leader>mo', function()
+        local oil = require('oil')
+        local entry = oil.get_cursor_entry()
+        if entry then firefox(oil.get_current_dir() .. entry.name) end
+      end, { buffer = buf, desc = 'Open in Firefox' })
+    end,
+  }
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = vim.tbl_keys(ft_keys),
+    callback = function(ev) ft_keys[ev.match](ev.buf) end,
+  })
+  -- keymaps are set on VeryLazy, so buffers opened at startup already fired FileType
   for _, b in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.bo[b].filetype == 'markdown' then md_keys(b) end
+    local setup_buf = ft_keys[vim.bo[b].filetype]
+    if setup_buf then setup_buf(b) end
   end
 
   -- AI / Claude Code
