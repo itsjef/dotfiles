@@ -14,6 +14,9 @@ model=$(j '.model.display_name')
 effort=$(j '.effort.level')
 [ -n "$effort" ] && add1 "$(printf '\033[36m%s\033[0m' "$effort")"
 
+pf="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/.ponytail-active"
+[ -f "$pf" ] && add1 "$(printf '\033[38;5;108mponytail:%s\033[0m' "$(head -n1 "$pf" | tr -d '[:space:]' | sed 's/^$/full/')")"
+
 if [ -n "$cwd" ]; then
   d=${cwd/#$HOME/~}
   n=$(printf '%s' "$d" | awk -F/ '{print NF}')
