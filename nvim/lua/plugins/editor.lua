@@ -205,6 +205,8 @@ return {
   -- ==========================================================================
   {
     'coder/claudecode.nvim',
+    -- Must load at startup so its server/lockfile exist for `/ide` to detect.
+    event = 'VeryLazy',
     cmd = {
       'ClaudeCode',
       'ClaudeCodeFocus',
